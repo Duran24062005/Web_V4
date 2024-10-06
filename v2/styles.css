@@ -1,0 +1,129 @@
+:root {
+    --color-primary: #2a4365;
+    --color-primary-light: #3c5c8e;
+    --color-primary-dark: #1a365d;
+    --color-accent: #ed8936;
+    --color-accent-dark: #dd6b20;
+    --color-light: #f7fafc;
+    --color-dark: #1a202c;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--color-dark);
+    line-height: 1.6;
+}
+
+.bg-primary {
+    background-color: var(--color-primary);
+}
+
+.bg-primary-light {
+    background-color: var(--color-primary-light);
+}
+
+.bg-primary-dark {
+    background-color: var(--color-primary-dark);
+}
+
+.bg-accent {
+    background-color: var(--color-accent);
+}
+
+.bg-light {
+    background-color: var(--color-light);
+}
+
+.text-accent {
+    color: var(--color-accent);
+}
+
+.hover\:bg-primary-light:hover {
+    background-color: var(--color-primary-light);
+}
+
+.hover\:bg-accent-dark:hover {
+    background-color: var(--color-accent-dark);
+}
+
+.hover\:text-accent-dark:hover {
+    color: var(--color-accent-dark);
+}
+
+.bg-gradient {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+}
+
+.custom-shape-divider-bottom-1635789673 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-bottom-1635789673 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 150px;
+}
+
+.custom-shape-divider-bottom-1635789673 .shape-fill {
+    fill: var(--color-light);
+}
+
+.animate-fade-in-down {
+    animation: fadeInDown 1s ease-out;
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 1s ease-out;
+}
+
+.animate-fade-in {
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
