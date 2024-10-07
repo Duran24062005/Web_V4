@@ -59,17 +59,20 @@
 
 
   // Agrega el evento submit al formulario
-  const btn = document.getElementById('btn');
   document.getElementById('contact-form').addEventListener('submit', function(event) {
     event.preventDefault();  // Evita la recarga de la página
 
+    const btn = document.getElementById('btn');
+    const success = document.getElementById('success');
     const serviceID = 'default_service';
-   const templateID = 'template_jxzogjv';
+    const templateID = 'template_jxzogjv';
+
+    success.innerText = "Por favor esperé, el mesaje tarda en eviarse ¡Gacias!";
 
     // Envía el formulario usando EmailJS
     emailjs.sendForm(serviceID, templateID, this)
       .then(function() {
-        btn.value = 'Send Email';
+        btn.innerText = 'Send Email';
         alert('Correo enviado con éxito!');
       }, function(error) {
         alert('Hubo un error al enviar el correo: ' + JSON.stringify(error));
