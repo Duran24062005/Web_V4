@@ -67,13 +67,15 @@
     const serviceID = 'default_service';
     const templateID = 'template_jxzogjv';
 
-    success.innerText = "Por favor esperé, el mesaje tarda en eviarse ¡Gacias!";
+    success.innerText = "Por favor espere, el mesaje tarda en eviarse ¡Gacias!";
 
     // Envía el formulario usando EmailJS
     emailjs.sendForm(serviceID, templateID, this)
       .then(function() {
-        btn.innerText = 'Send Email';
-        alert('Correo enviado con éxito!');
+        let btn = btn.innerText = 'Send Email';
+        if (btn.ok) { 
+            alert('Correo enviado con éxito!');
+        }
       }, function(error) {
         alert('Hubo un error al enviar el correo: ' + JSON.stringify(error));
       });
