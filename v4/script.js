@@ -16,67 +16,67 @@
                 retina_detect: true
             });
 
-            // Menú móvil
-                const mobileMenuButton = document.getElementById('mobile-menu-button');
+// Menú móvil
+const mobileMenuButton = document.getElementById('mobile-menu-button');
                 const mobileMenu = document.getElementById('mobile-menu');
 
-                mobileMenuButton.addEventListener('click', () => {
-                    mobileMenu.classList.toggle('hidden');
-                });
+mobileMenuButton.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+});
 
-                // Cerrar menú móvil al hacer clic en un enlace
-                const mobileLinks = document.querySelectorAll('.mobile-nav-link');
-                mobileLinks.forEach(link => {
-                    link.addEventListener('click', () => {
-                        mobileMenu.classList.add('hidden');
-                    });
-                });
+// Cerrar menú móvil al hacer clic en un enlace
+const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+    });
+});
 
-                // Scroll suave para enlaces de navegación
-                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                    anchor.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        document.querySelector(this.getAttribute('href')).scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    });
-                });
+// Scroll suave para enlaces de navegación
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
 
-                // Animación de entrada para elementos
-                const animateOnScroll = () => {
-                    const elements = document.querySelectorAll('.animate-on-scroll');
-                    elements.forEach(element => {
-                        const elementTop = element.getBoundingClientRect().top;
-                        const windowHeight = window.innerHeight;
-                        if (elementTop < windowHeight - 100) {
-                            element.classList.add('animate-fadeIn');
-                        }
-                    });
-                };
-
-                window.addEventListener('scroll', animateOnScroll);
-                window.addEventListener('load', animateOnScroll);
-
-
-  // Agrega el evento submit al formulario
-  document.getElementById('contact-form').addEventListener('submit', function(event) {
-    event.preventDefault();  // Evita la recarga de la página
-
-    const btn = document.getElementById('btn');
-    const success = document.getElementById('success');
-    const serviceID = 'default_service';
-    const templateID = 'template_jxzogjv';
-
-    success.innerText = "Por favor espere, el mesaje tarda en eviarse ¡Gacias!";
-
-    // Envía el formulario usando EmailJS
-    emailjs.sendForm(serviceID, templateID, this)
-      .then(function() {
-        let btn = btn.innerText = 'Send Email';
-        if (btn.ok) { 
-            alert('Correo enviado con éxito!');
+// Animación de entrada para elementos
+const animateOnScroll = () => {
+    const elements = document.querySelectorAll('.animate-on-scroll');
+    elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        if (elementTop < windowHeight - 100) {
+            element.classList.add('animate-fadeIn');
         }
-      }, function(error) {
-        alert('Hubo un error al enviar el correo: ' + JSON.stringify(error));
-      });
-  });
+    });
+};
+
+window.addEventListener('scroll', animateOnScroll);
+window.addEventListener('load', animateOnScroll);
+
+
+// Agrega el evento submit al formulario
+document.getElementById('contact-form').addEventListener('submit', function(event) {
+event.preventDefault();  // Evita la recarga de la página
+
+const btn = document.getElementById('btn');
+const success = document.getElementById('success');
+const serviceID = 'default_service';
+const templateID = 'template_jxzogjv';
+
+success.innerText = "Por favor espere, el mesaje tarda en eviarse ¡Gacias!";
+
+// Envía el formulario usando EmailJS
+emailjs.sendForm(serviceID, templateID, this)
+    .then(function() {
+    let btn = btn.innerText = 'Send Email';
+    if (btn.ok) { 
+        alert('Correo enviado con éxito!');
+    }
+    }, function(error) {
+    alert('Hubo un error al enviar el correo: ' + JSON.stringify(error));
+    });
+});
