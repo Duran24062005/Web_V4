@@ -8,11 +8,18 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(45deg, #8a2be2, #ff69b4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-blue-950">
     <div class="container mx-auto px-4 py-8">
-        <h1 class="text-4xl font-bold text-center mb-8">Pokemon App</h1>
+        <h1 class="text-4xl font-bold gradient-text text-center mb-8">Pokemon App</h1>
         <div class="mb-4">
             <input type="text" id="searchInput" placeholder="Search by name or ID"
                 class="w-18 p-2 border border-gray-300 rounded">
@@ -35,7 +42,7 @@
                     <h5 class="modal-title" id="pokemonModalLabel">Pokemon Details</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" id="pokemonDetails"></div>
+                <div class="modal-body bg-blue-600" id="pokemonDetails"></div>
             </div>
         </div>
     </div>
@@ -89,11 +96,11 @@
             for (const p of pokemonToDisplay) {
                 const data = await fetchPokemonDetails(p.url);
                 const card = document.createElement('div');
-                card.className = 'bg-white rounded-lg shadow-md p-4 cursor-pointer transform transition-transform hover:scale-105';
+                card.className = 'bg-blue-600 rounded-lg shadow-md p-4 cursor-pointer transform transition-transform hover:scale-105';
                 card.innerHTML = `
                     <img src="${data.sprites.front_default}" alt="${p.name}" class="w-32 h-32 mx-auto">
-                    <h2 class="text-xl font-semibold text-center mt-2 capitalize">${p.name}</h2>
-                    <p class="text-center text-gray-500">ID: ${data.id}</p>
+                    <h2 class="text-xl font-semibold gradient-text text-center mt-2 capitalize">${p.name}</h2>
+                    <p class="text-center text-black">ID: ${data.id}</p>
                 `;
                 card.addEventListener('click', () => showPokemonDetails(data));
                 pokemonList.appendChild(card);
@@ -105,9 +112,9 @@
 
         function showPokemonDetails(pokemon) {
             pokemonDetails.innerHTML = `
-                <div class="text-center">
+                <div class="text-center bg-blue-600">
                     <img src="${pokemon.sprites.front_default}" alt="${pokemon.name}" class="w-48 h-48 mx-auto">
-                    <h2 class="text-2xl font-bold mt-4 capitalize">${pokemon.name}</h2>
+                    <h2 class="text-2xl font-bold gradient-text mt-4 capitalize">${pokemon.name}</h2>
                     <p class="mt-2">ID: ${pokemon.id}</p>
                     <p class="mt-2">Height: ${pokemon.height / 10}m</p>
                     <p>Weight: ${pokemon.weight / 10}kg</p>
