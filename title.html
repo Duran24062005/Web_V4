@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +7,15 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
+            display: flex;
+            justify-items: center;
+            justify-content: center;
+            padding-top: 15rem;
             font-family: Arial, sans-serif;
             background-color: white;
-            /* background-image: url('/Alexi_Dg/image/setup.jpg'); 
+            background-image: url('/Alexi_Dg/image/setup.jpg'); 
             background-size: cover;
-            background-repeat: no-repeat; */
+            background-repeat: no-repeat;
         }
         .bg-gradient-text {
             background-image: url('/Alexi_Dg/image/setup.jpg');
@@ -41,35 +45,68 @@
         <div class="conatiner flex justify-center items-center w-52 h-32 border border-blue bg-gradient-to-r from-cyan-500 to-slate-100 rounded-lg -rotate-45"></div>
         <div class="fixed conatiner flex justify-center items-center w-52 h-32 border border-blue bg-gradient-to-r from-cyan-500 to-slate-200 rounded-lg -rotate-12"></div>
         <div class="fixed conatiner flex justify-center items-center w-52 h-32 border border-blue bg-gradient-to-b from-cyan-500 to-blue-200 rounded-lg">
-            <div class="items-center">
-                <div class="flex ">
+            <div class="p-2 m-2">
+                <div class="flex justify-center items-center">
                     <h1 id="clock" class="text-3xl text-bold"></h1>
                     <p id="ampm"></p>
                 </div>
-                <p id="date"></p>
+                <p id="date" class="text-gradient-to-t from-slate-900 to-slate-300"></p>
             </div>
         </div>
     </div>
     <!-- Scripts for the creation of de clock whith dates -->
     <script>
-        const div = document.getElementById("clock");
-        const amp = document.getElementById("ampm");
-        const div2 = document.getElementById("date");
-        const date = new Date();
-        const hours = date.getHours();
-        const minutes = date.getMinutes();
-        const seconds = date.getSeconds();
-        const days = date.getDate();
-        const months = date.getMonth() + 1;
-        const year = date.getFullYear();
-        const ampm = hours >= 12 ? 'PM' : 'AM';
-        const monthsName = ["January", "February", "March", "April", "May",
-        "June", "July", "August", "September", "October", "November", "December"];
-        const daysName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday", "Saturday"];
-        div.innerHTML = `${hours}:${minutes}:${seconds}`;
-        amp.innerHTML = ampm;
-        // div2.innerHTML = `${daysName[0]} ${monthsName[months-1]} ${year}`;
-        div2.innerHTML = `${days} - ${months} - ${year}`;
+        // References to DOM elements.
+        const clockDiv = document.getElementById("clock");
+        const ampmDiv = document.getElementById("ampm");
+        const dateDiv = document.getElementById("date");
+
+        // Month and days in english
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+        // Format numbers so they always have two digits.
+        function formatNumber(number) {
+            return number.toString().padStart(2 , "0");
+        }
+
+        function pad(num) {
+            return (num < 10 ? '0' : '') + num;
+        }
+
+        // Update clock
+        function updateClock() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();   
+            const seconds = now.getSeconds();
+            const ampm = hours < 12 ? "AM" : "PM";
+
+            // Updeting the watch content
+            clockDiv.textContent = `${formatNumber(hours % 12 || 12)}:${formatNumber(minutes)}:${formatNumber(seconds)}`;
+            ampmDiv.textContent = ampm;
+        }
+
+        // Update the date
+        function updateDate() {
+            const now = new Date();
+            const day = now.getDate();
+            const month = now.getMonth();
+            const year = now.getFullYear();
+            const weekDay = now.getDay();
+
+            // Update the content of the date
+            dateDiv.textContent = `${dayNames[weekDay]} ${monthNames[month]} ${day} ${year}`;
+        }
+
+        // Initialized the clock and the date
+        function initializeClock() {
+            updateClock();
+            updateDate();
+            setInterval(updateClock, 1000); // Updates every second
+        }
+
+        initializeClock();
     </script>
 </body>
 </html>
