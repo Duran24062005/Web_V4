@@ -8,6 +8,6 @@ export interface Blog {
     imageUrl:  string;
     published: boolean;
     views:     number;
-    createdAt: string;
-    updatedAt: string;
+    createdAt: string | Date;
+    updatedAt: string | Date;
 }

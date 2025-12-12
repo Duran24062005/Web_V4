@@ -1,8 +1,7 @@
-import type { Project } from '../interfaces/Project.interfaces'
+import type { Blog } from '../interfaces/blog.interface';
 
 
-
-export const data: Project[] = [
+export const data: Blog[] = [
   {
     id: "693a0083b549aa61123d166b",
     title: "Implementando SOLID en Node.js: Guía Práctica",

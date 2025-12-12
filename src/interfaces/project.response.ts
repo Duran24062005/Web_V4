@@ -15,6 +15,6 @@ export interface Datum {
     demoUrl:      string;
     repoUrl:      string;
     featured:     boolean;
-    createdAt:    Date;
-    updatedAt:    Date;
+    createdAt:    Date | string;
+    updatedAt:    Date | string;
 }
