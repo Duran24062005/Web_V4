@@ -5,13 +5,14 @@ import { Header } from './components/Header'
 import { MySkills } from './components/MySkills'
 import { MySperience } from './components/MySperience'
 import { TopProjects } from './components/TopProjects'
+import { navBarItems } from '../mock/data/navBarItems'
 
-function Index() {
+function Home() {
 
   return (
     <>
-    <NavBar/>
     <main className='relative z-10'>
+    <NavBar items={navBarItems}/>
       {/* Other components and content would go here */}
       <Header title='Alexi Dg' subtitle='Junior Full Stack Web Developer'/>
       <AboutMe />
@@ -24,5 +25,5 @@ function Index() {
   )
 }
 
-export default Index
+export default Home
 

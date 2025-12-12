@@ -30,14 +30,23 @@ body {
   transform: scaleX(1);
 }
 
-#particles-js {
-  position: absolute;
-  width: 100vh;
-  height: 100vw;
-  background-color: transparent;
-}
-
 .Alexi {
   color: yellow;
   font-family: cursive;
+}
+
+/* Asegurar que las partículas solo estén en la sección hero */
+#hero {
+  position: relative;
+  isolation: isolate;
+}
+
+#tsparticles {
+  pointer-events: none !important;
+}
+
+/* Asegurar que el navbar esté sobre todo */
+header {
+  background-color: rgba(31, 41, 55, 0.5);
+  backdrop-filter: blur(12px);
 }
