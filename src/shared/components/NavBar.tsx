@@ -6,6 +6,7 @@ export const NavBar = () => {
             <div className="flex justify-between items-center">
                 <a href="#" className="text-2xl font-bold gradient-text">Alexi Dg</a>
                 <div className="hidden md:flex space-x-6">
+                    <a href="/" className="nav-link">Inicio</a>
                     <a href="#about-me" className="nav-link">Sobre mi</a>
                     <a href="#skills" className="nav-link">Habilidades</a>
                     {/* <a href="#experiencia" className="nav-link">Experiencia</a> */}

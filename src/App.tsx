@@ -1,8 +1,9 @@
 import { Route, Routes } from 'react-router-dom'
-import { Blogs } from './Blogs'
-import { Contact } from './Contact'
-import Index from './Index'
-import { Projects } from './Projects'
+import { Blogs } from './blog/Blogs'
+import { Contact } from './contact/Contact'
+import Index from './home/Index'
+import { Projects } from './projects/Projects'
+
 
 function App() {
 

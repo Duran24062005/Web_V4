@@ -1,10 +1,11 @@
-import { Footer } from "./components/Footer"
-import { NavBar } from "./components/NavBar"
+import { Footer } from "../shared/components/Footer"
+import { NavBar } from "../shared/components/NavBar"
 
 export const Blogs = () => {
   return (
+    <>
+    <NavBar />
     <section id="blog" className="py-20">
-        <NavBar />
             <div className="container mx-auto px-6">
                 <h2 className="text-4xl font-bold mb-8 text-center gradient-text">Blog</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -50,5 +51,6 @@ export const Blogs = () => {
             </div>
             <Footer/>
         </section>
+    </>
   )
 }
