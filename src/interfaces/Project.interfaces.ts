@@ -9,6 +9,6 @@ export interface Project {
     demoUrl:      string;
     repoUrl:      string;
     featured:     boolean;
-    createdAt:    Date;
-    updatedAt:    Date;
+    createdAt:    string | Date;
+    updatedAt:    string | Date;
 }

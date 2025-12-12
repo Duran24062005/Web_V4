@@ -1,10 +1,11 @@
+import { navBarItems } from "../mock/data/navBarItems"
 import { Footer } from "../shared/components/Footer"
 import { NavBar } from "../shared/components/NavBar"
 
 export const Contact = () => {
   return (
     <>
-    <NavBar />
+    <NavBar items={navBarItems} />
    <section id="contact" className="py-20">
             <div className="container mx-auto px-6 ">
                 <h2 className="text-4xl font-bold mb-8 text-center gradient-text">Contáctame</h2>
