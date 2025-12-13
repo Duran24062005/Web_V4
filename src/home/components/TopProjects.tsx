@@ -1,4 +1,5 @@
 import type { Project } from "../../interfaces/Project.interfaces"
+import { ProjectCardSkeletonGrid } from "../../shared/skeletons/ProjectsSkeleton";
 
 interface TopProjectsProps {
     projects: Project[];
@@ -21,7 +22,9 @@ export const TopProjects = ({ projects, state }: TopProjectsProps) => {
                 <h2 className="text-4xl font-bold mb-8 text-center gradient-text">Proyectos Destacados</h2>
                 {
                     state ? (
-                        <p className="text-center text-gray-400">Cargando proyectos...</p>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <ProjectCardSkeletonGrid quantity={3} />
+                        </div>
                     ) :
                     projects.length > 0 ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

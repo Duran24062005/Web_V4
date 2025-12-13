@@ -20,8 +20,8 @@ export function ProjectCardSkeleton() {
 
         {/* Technologies skeleton */}
         <div className="flex gap-2 mb-4">
-          <Skeleton width={60} height={24} />
-          <Skeleton width={80} height={24} />
+          <Skeleton width={100} height={24} />
+          <Skeleton width={100} height={24} />
           <Skeleton width={70} height={24} />
         </div>
 
@@ -43,11 +43,9 @@ interface SkeletonProps {
 export function ProjectCardSkeletonGrid({ quantity }: SkeletonProps) {
   return (
     <SkeletonTheme baseColor="#1f2937" highlightColor="#374151">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {Array.from({ length: quantity }).map((_, index) => (
           <ProjectCardSkeleton key={index} />
         ))}
-      </div>
     </SkeletonTheme>
   )
 }

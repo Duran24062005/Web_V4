@@ -1,5 +1,5 @@
 import type { Project } from "../../interfaces/Project.interfaces"
-import { ProjectCardSkeletonGrid } from "../skeletons/ProjectsSkeleton";
+import { ProjectCardSkeletonGrid } from "../../shared/skeletons/ProjectsSkeleton";
 // import ReactMarkdown from 'react-markdown';
 
 interface ProjectsProps {
