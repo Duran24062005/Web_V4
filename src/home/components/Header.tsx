@@ -8,8 +8,7 @@ interface HeaderProps {
 export const Header = ({ title, subtitle }: HeaderProps) => {
   return (
     <section id="hero" className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Partículas en el fondo - solo en esta sección */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
+      <div className="absolute inset-0">
         <AnimateBackground />
       </div>
       

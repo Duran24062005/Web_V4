@@ -53,11 +53,22 @@ export const NavBar = ({ items }: NavBarProps) => {
     return () => anchors.forEach(a => a.removeEventListener('click', handler));
   }, []);
 
+
+
   // Filtrar items para no mostrar el actual (solo si es ruta /)
-  const visibleItems = items.filter(item => {
-    const isRoute = item.href.startsWith("/");
-    return !(isRoute && item.href === currentPath);
+    const visibleItems = items.filter(item => {
+    // Si NO estamos en inicio
+    if (currentPath !== "/") {
+      // Ocultar estos items
+      if (item.href === "#about-me" || item.href === "#skills") {
+        return false;
+      }
+    }
+
+    return true;
   });
+
+
 
   return (
     <header className="relative z-10">
@@ -69,7 +80,7 @@ export const NavBar = ({ items }: NavBarProps) => {
           {/* Desktop menu */}
           <div className="hidden md:flex space-x-6">
             {visibleItems.map(item => (
-              <a key={item.href} href={item.href} className="nav-link">
+              <a key={item.href} href={item.href} className={`nav-link ${item.href === currentPath  ? "nav-link-active" : ""}`}>
                 {item.label}
               </a>
             ))}

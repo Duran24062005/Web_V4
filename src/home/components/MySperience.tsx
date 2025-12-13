@@ -1,7 +1,7 @@
 
 export const MySperience = () => {
   return (
-    <section id="experiencia" className="py-20">
+    <section id="experiencia" className="py-20 z-20 relative">
             <div className="container mx-auto px-6">
                 <h2 className="text-4xl font-bold mb-8 text-center gradient-text">Experiencia Laboral</h2>
                 <div className="space-y-12">

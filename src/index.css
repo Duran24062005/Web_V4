@@ -30,6 +30,16 @@ body {
   transform: scaleX(1);
 }
 
+.nav-link:hover {
+  color: rgb(161, 97, 221);
+  /* amarillo */
+}
+
+.nav-link-active {
+  color: blueviolet
+    /* amarillo activo */
+}
+
 .Alexi {
   color: yellow;
   font-family: cursive;
@@ -39,6 +49,9 @@ body {
 #hero {
   position: relative;
   isolation: isolate;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
 }
 
 #tsparticles {

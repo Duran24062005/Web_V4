@@ -1,17 +1,22 @@
 import type { Project } from "../../interfaces/Project.interfaces"
+import { ProjectCardSkeletonGrid } from "../skeletons/ProjectsSkeleton";
 // import ReactMarkdown from 'react-markdown';
 
 interface ProjectsProps {
-  projects: Project[]
+  projects: Project[];
+  state?: boolean;
 }
 
-export const ProjectLists = ({ projects }: ProjectsProps) => {
-    if (projects.length === 0) {
-        return (<div className="text-center text-gray-400">No se encontraron proyectos</div>)
-    }
+export const ProjectLists = ({ projects, state }: ProjectsProps) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {
+        state ? (
+            <ProjectCardSkeletonGrid quantity={6} />
+        ) :
+        projects.length == 0 && (
+            <div className="text-center text-gray-400">No se encontraron proyectos</div>
+        )||
         projects.map(e => (
           <div className="bg-gray-800 rounded-lg overflow-hidden" key={e.id}>
                 <img src={e.imageUrl} alt={e.title}

@@ -1,0 +1,15 @@
+export const techNames: string[] = [
+  "Html",
+  "Css",
+  "JavaScript",
+  "React.js",
+  "Tailwind CSS",
+  "Bootstrap",
+  "Node.js",
+  "Express.js",
+  "Python",
+  "FastAPI",
+  "MongoDB",
+  "PostgreSQL",
+  "Docker",
+];

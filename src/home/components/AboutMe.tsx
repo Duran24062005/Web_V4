@@ -1,14 +1,14 @@
 
 export const AboutMe = () => {
   return (
-     <section id="about-me" className="py-20">
+     <section id="about-me" className="py-20 z-20 relative">
             <div className="container mx-auto px-6">
-                <h2 className="text-4xl font-bold mb-8 text-center gradient-text">Sobre mi</h2>
-                <div className="flex flex-col md:flex-row items-center">
-                    <div className="md:w-1/2 mb-8 md:mb-0">
+                <div className="flex flex-col md:flex-row items-center justify-center">
+                    <div className="md:w-1/2 lg:w-2/6 mb-8 md:mb-0">
                         <img src="/image/Alexi_foto_perfil.jpeg" alt="Alexi Dg" className="rounded-full mx-auto border-4 border-purple-500 shadow-lg" />
                     </div>
                     <div className="md:w-1/2 md:pl-8">
+                        <h2 className="text-4xl font-bold mb-8 text-center gradient-text">Sobre mi</h2>
                         <p className="mb-4">
                             ¡Bienvenidos a mi sitio web! Estoy encantado de que estés aquí. Este es el espacio donde comparto mi pasión y dedicación
                             a todos los ámbitos que verás. Aquí encontrarás una muestra de mis proyectos, ideas y experiencias a lo largo de mi

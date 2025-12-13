@@ -125,10 +125,8 @@ export const AnimateBackground = () => {
         particlesLoaded={particlesLoaded}
         options={options}
         style={{
-          position: "absolute",
           width: "100%",
-          height: "100%",
-          backgroundColor: "transparent"
+          height: "10%"
         }}
       />
     );
