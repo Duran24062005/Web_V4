@@ -1,43 +1,111 @@
+import { Calendar, Eye, User } from "lucide-react";
 import type { BlogPost } from "../../interfaces/blog.response"
 
 interface BlogListProps {
-    blogs: BlogPost[]
+    blogs: BlogPost[];
+    state: boolean;
 }
 
-export const BlogsList = ({ blogs }: BlogListProps) => {
+export const BlogsList = ({ blogs, state }: BlogListProps) => {
   return (
     <>
         {
-            blogs.map((e)=>(
-                <article key={e.id} className="max-w-2xl mx-4 bg-black shadow-lg rounded-lg overflow-hidden">
-                        <img src={e.imageUrl ? e.imageUrl : "/image/Fondo2.jpg"} alt="AI generated city" className="w-full h-64 object-cover"/>
-                        <div className="p-6">
-                            <h2 className="text-2xl font-bold mb-2">{e.title}</h2>
-                            <p className="text-gray-400 mb-4">
-                                {e.excerpt}
-                            </p>
-                            <ul>
-                                {e.tags.map((tag, index)=>(
-                                    <li key={index} className="inline-block bg-purple-600 text-white text-xs px-2 py-1 rounded mr-2 my-1">
-                                        {tag}
-                                    </li>
-                                ))
-                                }
-                            </ul>
-                            <ul className="flex mt-4 justify-between">
-                                <li>{new Date(e.createdAt).toISOString().split("T")[0]}</li>
-                                <li>{new Date(e.updatedAt).toISOString().split("T")[0]}</li>
-                            </ul>
-                        </div>
-                        <a href={`/blog/${e.id}`} className="text-purple-400 hover:text-purple-300 p-4 block">
-                            Leer más
-                        </a>
+            state  ? (
+                <div className="text-center text-green-400">Cargando...</div>
+            ) : 
+            blogs.length === 0 && (
+                <div className="text-center text-red-400">No se encontraron blogs.</div>
+            ) ||
+            blogs.map((blog) => (
+                <article
+                key={blog.id}
+                className="group bg-black rounded-xl overflow-hidden border border-purple-800 hover:border-purple-700 transition-all duration-300 hover:shadow-xl hover:shadow-zinc-900/50 flex flex-col"
+                >
+                {/* Image */}
+                <div className="relative h-48 overflow-hidden bg-zinc-800">
+                    <img
+                    src={blog.imageUrl || "/placeholder.svg?height=400&width=600&query=blog+post"}
+                    alt={blog.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+
+                {/* Content */}
+                <div className="p-6 flex-1 flex flex-col">
+                    {/* Title */}
+                    <h2 className="text-xl font-bold text-zinc-100 mb-3 line-clamp-2 group-hover:text-white transition-colors leading-snug">
+                    {blog.title}
+                    </h2>
+
+                    {/* Excerpt */}
+                    <p className="text-zinc-400 text-sm mb-4 line-clamp-3 leading-relaxed flex-1">{blog.excerpt}</p>
+
+                    {/* Tags */}
+                    {blog.tags?.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mb-4">
+                        {blog.tags.slice(0, 3).map((tag, index) => (
+                        <span
+                            key={index}
+                            className="inline-flex items-center px-2.5 py-1 rounded-md bg-zinc-800 text-zinc-300 text-xs font-medium border border-zinc-700 hover:bg-zinc-750 transition-colors"
+                        >
+                            {tag}
+                        </span>
+                        ))}
+                        {blog.tags.length > 3 && (
+                        <span className="inline-flex items-center px-2.5 py-1 rounded-md bg-zinc-800 text-zinc-400 text-xs">
+                            +{blog.tags.length - 3}
+                        </span>
+                        )}
+                    </div>
+                    )}
+
+                    {/* Meta Information */}
+                    <div className="flex items-center justify-between text-xs text-zinc-500 mb-4 pb-4 border-b border-zinc-800">
+                    <div className="flex items-center gap-4">
+                        <span className="flex items-center gap-1.5" title="Fecha de creación">
+                        <Calendar className="h-3.5 w-3.5" />
+                        {new Date(blog.createdAt).toLocaleDateString("es-ES", {
+                            day: "2-digit",
+                            month: "short",
+                            year: "numeric",
+                        })}
+                        </span>
+                        <span className="flex items-center gap-1.5" title="Vistas">
+                        <Eye className="h-3.5 w-3.5" />
+                        {blog.views}
+                        </span>
+                    </div>
+                    </div>
+
+                    {/* Author & CTA */}
+                    <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-xs text-zinc-400">
+                        <User className="h-3.5 w-3.5" />
+                        <span className="font-medium">{blog.author}</span>
+                    </div>
+                    <a
+                        href={`/blog/${blog.id}`}
+                        className="inline-flex items-center gap-1.5 text-sm font-medium text-zinc-300 hover:text-white transition-colors group/link"
+                    >
+                        Leer más
+                        <svg
+                        className="h-4 w-4 transition-transform group-hover/link:translate-x-1"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                    </div>
+                </div>
                 </article>
             ))
         }
     </>
   )
-}
+} 
 
 
 {/*

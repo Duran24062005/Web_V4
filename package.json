@@ -14,6 +14,7 @@
         "@tsparticles/react": "^3.0.0",
         "@tsparticles/slim": "^3.9.1",
         "axios": "^1.13.2",
+        "lucide-react": "^0.561.0",
         "react": "^19.2.0",
         "react-dom": "^19.2.0",
         "react-loading-skeleton": "^3.5.0",

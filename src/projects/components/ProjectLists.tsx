@@ -15,7 +15,7 @@ export const ProjectLists = ({ projects, state }: ProjectsProps) => {
             <ProjectCardSkeletonGrid quantity={6} />
         ) :
         projects.length == 0 && (
-            <div className="text-center text-gray-400">No se encontraron proyectos</div>
+            <div className="text-center text-red-400">No se encontraron proyectos</div>
         )||
         projects.map(e => (
           <div className="bg-gray-800 rounded-lg overflow-hidden" key={e.id}>

@@ -8,13 +8,15 @@ export const useProjects = () => {
       const [loading, setLoading] = useState<boolean>(true);
     
         useEffect(() => {
-          const setProjectsList = async () => {
-              const dat = await getProjects("all");
-              setProjects(dat);
-              setAllProjects(dat);
-              setLoading(false);
-          }
-            setProjectsList();
+          setTimeout(()=>{
+            const setProjectsList = async () => {
+                const dat = await getProjects("all");
+                setProjects(dat);
+                setAllProjects(dat);
+                setLoading(false);
+            }
+              setProjectsList();
+          }, 5000)
         }, []);
     
     
