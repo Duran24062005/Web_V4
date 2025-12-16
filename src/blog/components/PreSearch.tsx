@@ -2,6 +2,8 @@ interface PreSearchProps {
   paramSearch: string[];
   onLabelClick: (param: string)=>void;
 }
+
+
 export const PreSearch = ({ paramSearch, onLabelClick }: PreSearchProps) => {
   return (
     <div className="mb-8 flex flex-wrap justify-center gap-4">

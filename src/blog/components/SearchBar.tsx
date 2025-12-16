@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface Props {
     placeholder?: string;
@@ -12,7 +12,7 @@ export const SearchBar = ({ placeholder, btnDescription, onQuery }: Props) => {
   const [ query, setQuery ] = useState('');
 
   
-  useEffect(()=>{
+  /*useEffect(()=>{
     // console.log('Hola desde el efecto');
     const timeoutId = setTimeout(()=>{
       onQuery(query);
@@ -24,7 +24,7 @@ export const SearchBar = ({ placeholder, btnDescription, onQuery }: Props) => {
       clearTimeout(timeoutId);
     }
     
-  }, [query, onQuery]);
+  }, [query, onQuery]);*/
 
   const handlerSearch = () => {
     onQuery(query);
@@ -44,7 +44,7 @@ export const SearchBar = ({ placeholder, btnDescription, onQuery }: Props) => {
     <div className="my-4">
       <div className="search-container flex justify-end border-2 border-purple-800 rounded-md">
           <input 
-            className="text-black pl-2 border border-sky-600 rounded-tl-md rounded-bl-md"
+            className="text-gray-200 pl-2 border-sky-600 rounded-tl-md rounded-bl-md focus:outline-none focus:ring-0 focus:border-transparent"
             type="text" 
             placeholder={ placeholder ? placeholder : 'Busca lo que quiera' } 
             value={query}

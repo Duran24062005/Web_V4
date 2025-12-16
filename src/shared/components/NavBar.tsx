@@ -1,3 +1,4 @@
+import { Atom } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 interface NavItem {
@@ -71,11 +72,14 @@ export const NavBar = ({ items }: NavBarProps) => {
 
 
   return (
-    <header className="relative z-10">
-      <nav className="container mx-auto px-6 py-3 bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-lg">
+    <header className="relative z-10 bg-black">
+      <nav className="container mx-auto px-6 py-3">
         <div className="flex justify-between items-center">
           
-          <a href="/" className="text-2xl font-bold gradient-text">Alexi Dg</a>
+          <a href="/" className="flex gap-2 text-2xl font-bold gradient-text">
+            <Atom />
+             Alexi Dg
+          </a>
 
           {/* Desktop menu */}
           <div className="hidden md:flex space-x-6">

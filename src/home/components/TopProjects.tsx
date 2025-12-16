@@ -1,3 +1,4 @@
+import { ChevronRight, Github } from "lucide-react";
 import type { Project } from "../../interfaces/Project.interfaces"
 import { ProjectCardSkeletonGrid } from "../../shared/skeletons/ProjectsSkeleton";
 
@@ -17,7 +18,7 @@ const TOP_PROJECT_TITLES = [
 
 export const TopProjects = ({ projects, state }: TopProjectsProps) => {
   return (
-     <section id="projects" className="py-20 bg-gray-900 z-20 relative">
+     <section id="projects" className="py-20 z-20 relative">
             <div className="container mx-auto px-6">
                 <h2 className="text-4xl font-bold mb-8 text-center gradient-text">Proyectos Destacados</h2>
                 {
@@ -45,8 +46,12 @@ export const TopProjects = ({ projects, state }: TopProjectsProps) => {
                                             ))}
                                         </div>
                                         <div className="flex justify-between mt-4">
-                                            <a href={project.repoUrl} className="text-purple-400 hover:text-purple-300">GitHub</a>
-                                            <a href={project.demoUrl} className="text-purple-400 hover:text-purple-300">Ver más</a>
+                                            <a href={project.repoUrl} className="flex text-purple-400 hover:text-purple-300">
+                                                <Github />
+                                            </a>
+                                            <a href={project.demoUrl} className="flex text-purple-400 hover:text-purple-300">
+                                                Ver más <ChevronRight />
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

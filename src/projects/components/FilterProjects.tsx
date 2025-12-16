@@ -10,7 +10,7 @@ export const FilterProjects = ({ techList, onLabelClick }: FilterProjectsProps) 
     <>
     <div className="mb-8 flex flex-wrap justify-center gap-4">
       <button
-        className="px-4 py-2 bg-pink-600 text-white rounded hover:bg-pink-500 transition"
+        className="px-4 py-2 bg-red-400 text-white rounded hover:bg-pink-500 transition"
         onClick={()=>onLabelClick("all")}
       >
         Todos
@@ -18,7 +18,7 @@ export const FilterProjects = ({ techList, onLabelClick }: FilterProjectsProps) 
       {techList.map((tech) => (
         <button
           key={tech}
-          className="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-500 transition"
+          className="px-4 py-2 bg-red-900 text-white rounded hover:bg-purple-500 transition"
           onClick={()=>onLabelClick(tech.toLocaleLowerCase())}
         >
           {tech}
