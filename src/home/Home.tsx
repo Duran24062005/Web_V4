@@ -14,11 +14,11 @@ function Home() {
 
   return (
     <>
-      <NavBar items={navBarItems} />
     <main className="min-h-screen flex flex-col bg-black">
+      <NavBar items={navBarItems} />
       {/* Other components and content would go here */}
-      <div className="flex-grow h-screen">
-        <Header title={`Hi there! \n\n I'm Alexi Duran G`} subtitle='Junior Full Stack Web Developer'/>
+      <div className="flex h-screen">
+        <Header title={`I'm Alexi Duran G`} subtitle='Junior Full Stack Web Developer'/>
       </div>
       <AboutMe />
       <MySkills />
