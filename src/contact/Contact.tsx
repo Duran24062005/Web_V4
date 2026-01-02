@@ -1,14 +1,21 @@
 import { navBarItems } from "../mock/data/navBarItems"
 import { Footer } from "../shared/components/Footer"
 import { NavBar } from "../shared/components/NavBar"
+import handleWhatsAppContact from "./hook/useWhats"
 
 export const Contact = () => {
+    
   return (
     <>
     <NavBar items={navBarItems} />
    <section id="contact" className="py-20">
             <div className="container mx-auto px-6 ">
                 <h2 className="text-4xl font-bold mb-8 text-center gradient-text">Contáctame</h2>
+                    <button type="submit" id="btn"
+                        onClick={handleWhatsAppContact}
+                        className="w-50 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full transition duration-300">Enviar
+                        WhatsApp
+                    </button>
                 <form className="max-w-lg mx-auto border-purple-800 border-4 p-4 rounded" id="contact-form">
                     <div className="mb-4 flex justify-center">
                         <p className="text-white px-4 bg-green-800 rounded-lg" id="success"></p>
