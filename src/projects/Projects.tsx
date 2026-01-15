@@ -19,7 +19,7 @@ export const Projects = () => {
   return (
     <>
     <NavBar items={navBarItems} />
-    <section id="projects" className="py-20 bg-black text-white">
+    <section id="projects" className="py-20 bg-black text-white mb-20">
             <div className="container mx-auto px-6">
                 <h2 className="text-4xl font-bold mb-8 text-center gradient-text">Mis Proyectos</h2>
                 {/* Lista de Proyectos */}

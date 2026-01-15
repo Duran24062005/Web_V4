@@ -63,7 +63,7 @@ export const Blogs = () => {
     {/* Navbar = Barra de navegación */}
     <NavBar items={navBarItems} />
 
-    <section id="blog" className="pt-2">
+    <section id="blog" className="pt-2 mb-50">
             <div className="container mx-auto px-6">
                 <h2 className="text-4xl font-bold my-8 text-center gradient-text">Blog</h2>
 

@@ -14,7 +14,7 @@ function Home() {
 
   return (
     <>
-    <main className="min-h-screen flex flex-col bg-black">
+    <main className="min-h-screen flex flex-col bg-black mb-12">
       <NavBar items={navBarItems} />
       {/* Other components and content would go here */}
       <div className="flex h-screen">

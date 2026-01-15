@@ -28,6 +28,7 @@ export const TopProjects = ({ projects, state }: TopProjectsProps) => {
                         </div>
                     ) :
                     projects.length > 0 ? (
+                        <>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {projects.filter(project => TOP_PROJECT_TITLES.includes(project.title))
                             .slice(0, 3)
@@ -57,6 +58,14 @@ export const TopProjects = ({ projects, state }: TopProjectsProps) => {
                                 </div>
                             ))}
                         </div>
+                        <div className="container text-center mt-6">
+                            <button
+                            className="group inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-4 sm:px-8 py-2 sm:py-2 rounded-full transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-105 text-center"
+                            >
+                                <a href="/projects">Ver más...</a>
+                            </button>
+                        </div>
+                        </>
                     ) : (
                         <p className="text-center text-gray-400">No hay proyectos destacados disponibles en este momento.</p>
                     )
