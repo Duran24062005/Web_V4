@@ -12,8 +12,9 @@ export const Footer = () => {
             </p>
           </div>
           <div className="flex justify-center space-x-4 mt-4">
-            <a href="https://www.facebook.com/alexis.duran.54772728" className="text-gray-400 hover:text-blue-600">
-              <Facebook />
+            <a href="https://www.facebook.com/profile.php?id=61573188309392" className="text-gray-400 hover:text-blue-600">
+            <Facebook />
+            {/*<a href="https://www.facebook.com/alexis.duran.54772728" className="text-gray-400 hover:text-blue-600"></a>/*}
               {/* <i className="fab fa-facebook"></i> */}
             </a>
             <a href="https://github.com/Duran24062005" className="text-gray-400 hover:text-white">
