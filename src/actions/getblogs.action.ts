@@ -5,6 +5,7 @@ import type { BlogResponse } from "../interfaces/blog.response";
 export default async function getBlogs(path: string): Promise<Blog[]> {
   try {
     const response = await api.get<BlogResponse>(`api/blogs/${path}`);
+    console.log(response);
 
     /*
         Parsear los datos a un array de tipo Blog
