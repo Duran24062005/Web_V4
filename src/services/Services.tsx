@@ -104,8 +104,9 @@ export const Services = () => {
   ];
 
   return (
+    <>
+    <NavBar items={navBarItems}/>
     <div className="min-h-screen bg-black text-white py-20">
-      <NavBar items={navBarItems}/>
       <section className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
@@ -203,15 +204,16 @@ export const Services = () => {
           </div>
         </div>
       </section>
-      <Footer/>
 
       <style>{`
         .gradient-text {
           background: linear-gradient(45deg, #8a2be2, #ff69b4);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
-        }
-      `}</style>
+          }
+          `}</style>
     </div>
+    <Footer/>
+    </>
   );
 };
