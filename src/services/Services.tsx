@@ -204,14 +204,6 @@ export const Services = () => {
           </div>
         </div>
       </section>
-
-      <style>{`
-        .gradient-text {
-          background: linear-gradient(45deg, #8a2be2, #ff69b4);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          }
-          `}</style>
     </div>
     <Footer/>
     </>
