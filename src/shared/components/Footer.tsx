@@ -7,7 +7,7 @@ export const Footer = () => {
         <div className="flex flex-col md:flex-row lg:justify-between md:w-[60vh]">
           <div className="flex justify-center space-x-4 mt-4">
             <p className="text-[0.2vh] md:text-sm">
-              Copyright &copy; 2024{" "}
+              Copyright &copy; {new Date().getFullYear() + " "}
               <span className="Alexi md:text-lg">Alexi Dg</span>.
             </p>
           </div>
