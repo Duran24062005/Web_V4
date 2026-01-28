@@ -24,7 +24,7 @@ export const Header = ({ title, subtitle }: HeaderProps) => {
             <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96">
               <div className="absolute -inset-4 bg-yellow-500/10 rounded-full blur-3xl"></div>
               <img
-                src="/public/image/image_94f2750b.png"
+                src="https://raw.githubusercontent.com/Duran24062005/Web_V4/refs/heads/main/public/image/image_94f2750b.png"
                 alt="Perfil"
                 className="relative w-full h-full object-cover rounded-full shadow-2xl ring-4 ring-white/20"
               />
@@ -33,14 +33,14 @@ export const Header = ({ title, subtitle }: HeaderProps) => {
 
           <div className="relative flex items-center">
             {/* Imagen desktop */}
-            <div className="hidden lg:block absolute -left-10 top-1/2 -translate-y-1/2 w-[45%] xl:w-[50%] z-10">
+            <div className="hidden lg:block absolute left-40 top-1/2 -translate-y-1/2 w-[45%] xl:w-[50%] z-10">
               <div className="relative">
                 <div className="absolute -inset-8 bg-yellow-500/10 rounded-full blur-3xl"></div>
                 <div className="relative">
                   <img
-                    src="/public/image/image_94f2750b.png"
+                    src="https://raw.githubusercontent.com/Duran24062005/Web_V4/refs/heads/main/public/image/image_94f2750b.png"
                     alt="Perfil"
-                    className="relative w-[400px] h-[400px] xl:w-[600px] xl:h-[600px] object-cover rounded-full shadow-2xl ring-4 ring-white/20 hover:ring-yellow-500/50 transition-all duration-500 hover:scale-105 mr-auto"
+                    className="relative w-[100px] h-[200px] xl:w-[400px] xl:h-[400px] object-cover rounded-full shadow-2xl ring-4 ring-white/20 hover:ring-yellow-500/50 transition-all duration-500 hover:scale-105 mr-auto"
                   />
                 </div>
               </div>
@@ -54,13 +54,13 @@ export const Header = ({ title, subtitle }: HeaderProps) => {
                 </h1>
               </div>
 
-              <p className="text-red-500">Live to learn and learn to grow</p>
-
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl leading-relaxed text-pretty text-white/90">
                 {subtitle}
               </p>
 
-              <div className="flex flex-col sm:flex-row sm:flex-wrap gap-4 sm:gap-6 pb-8">
+              <p className="text-red-500 text-xl">Live to learn and learn to grow</p>
+
+              <div className="flex flex-col sm:flex-row sm:flex-wrap gap-4 sm:gap-6 ml-50">
                 <a
                   href="#about-me"
                   className="group inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-8 sm:px-10 py-3 sm:py-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-105 text-center"

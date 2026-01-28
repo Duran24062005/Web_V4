@@ -5,7 +5,7 @@ export const AboutMe = () => {
             <div className="container mx-auto px-6">
                 <div className="flex flex-col md:flex-row items-center justify-center">
                     <div className="md:w-1/2 lg:w-2/6 mb-8 md:mb-0">
-                        <img src="/public/image/image_e713f47e.png" alt="Alexi Dg" className="rounded-full mx-auto border-4 border-purple-500 shadow-lg" />
+                        <img src="https://raw.githubusercontent.com/Duran24062005/Web_V4/refs/heads/main/public/image/image_e713f47e.png" alt="Alexi Dg" className="rounded-full mx-auto border-4 border-purple-500 shadow-lg" />
                     </div>
                     <div className="md:w-1/2 md:pl-8">
                         <h2 className="text-4xl font-bold mb-8 text-center gradient-text">Sobre mi</h2>
