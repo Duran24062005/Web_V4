@@ -20,7 +20,7 @@ function Home() {
       <NavBar items={navBarItems} />
       {/* Other components and content would go here */}
       <div className="flex h-screen">
-        <Header title={`I'm Alexi Duran G`} subtitle='Junior Full Stack Web Developer'/>
+        <Header title={`Alexi Duran G`} subtitle='Junior Full Stack Web Developer'/>
       </div>
       <AboutMe />
       <MySkills />

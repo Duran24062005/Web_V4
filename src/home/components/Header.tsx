@@ -16,7 +16,7 @@ export const Header = ({ title, subtitle }: HeaderProps) => {
         <AnimateBackground />
       </div>
 
-      <div className="relative z-10 w-full h-full flex items-center py-20 lg:py-0">
+      <div className="relative z-10 w-full h-full flex items-center text-center py-20 lg:py-0">
         <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
           
           {/* Imagen - visible en móvil arriba, desktop a la izquierda */}
@@ -24,7 +24,7 @@ export const Header = ({ title, subtitle }: HeaderProps) => {
             <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96">
               <div className="absolute -inset-4 bg-yellow-500/10 rounded-full blur-3xl"></div>
               <img
-                src="https://st4.depositphotos.com/20933590/24070/i/450/depositphotos_240700866-stock-photo-japan-traditional-sumi-e-painting.jpg"
+                src="/public/image/image_94f2750b.png"
                 alt="Perfil"
                 className="relative w-full h-full object-cover rounded-full shadow-2xl ring-4 ring-white/20"
               />
@@ -33,12 +33,12 @@ export const Header = ({ title, subtitle }: HeaderProps) => {
 
           <div className="relative flex items-center">
             {/* Imagen desktop */}
-            <div className="hidden lg:block absolute -left-25 top-1/2 -translate-y-1/2 w-[45%] xl:w-[50%] z-10">
+            <div className="hidden lg:block absolute -left-10 top-1/2 -translate-y-1/2 w-[45%] xl:w-[50%] z-10">
               <div className="relative">
                 <div className="absolute -inset-8 bg-yellow-500/10 rounded-full blur-3xl"></div>
                 <div className="relative">
                   <img
-                    src="https://st4.depositphotos.com/20933590/24070/i/450/depositphotos_240700866-stock-photo-japan-traditional-sumi-e-painting.jpg"
+                    src="/public/image/image_94f2750b.png"
                     alt="Perfil"
                     className="relative w-[400px] h-[400px] xl:w-[600px] xl:h-[600px] object-cover rounded-full shadow-2xl ring-4 ring-white/20 hover:ring-yellow-500/50 transition-all duration-500 hover:scale-105 mr-auto"
                   />
@@ -53,6 +53,8 @@ export const Header = ({ title, subtitle }: HeaderProps) => {
                   <span className="gradient-text" id="title">{title}</span>
                 </h1>
               </div>
+
+              <p className="text-red-500">Live to learn and learn to grow</p>
 
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl leading-relaxed text-pretty text-white/90">
                 {subtitle}
