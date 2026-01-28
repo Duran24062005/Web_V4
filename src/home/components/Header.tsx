@@ -49,7 +49,7 @@ export const Header = ({ title, subtitle }: HeaderProps) => {
             {/* Contenido de texto */}
             <div className="relative z-20 w-full lg:w-[55%] xl:w-[50%] lg:ml-100 space-y-6 sm:space-y-8">
               <div className="space-y-4">
-                <h1 className="home-header text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-bold">
+                <h1 className="home-header text-3xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-bold">
                   <span className="gradient-text" id="title">{title}</span>
                 </h1>
               </div>
@@ -60,7 +60,7 @@ export const Header = ({ title, subtitle }: HeaderProps) => {
 
               <p className="text-red-500 text-xl">Live to learn and learn to grow</p>
 
-              <div className="flex flex-col sm:flex-row sm:flex-wrap gap-4 sm:gap-6 ml-50">
+              <div className="flex flex-col sm:flex-row sm:flex-wrap gap-4 sm:gap-6 lg:ml-50">
                 <a
                   href="#about-me"
                   className="group inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-8 sm:px-10 py-3 sm:py-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-105 text-center"
