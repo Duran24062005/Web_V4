@@ -64,7 +64,7 @@ export const AboutMe = () => {
                 </div>
                 <div className="flex justify-center items-center md:w-1/2 lg:w-1/80 mb-8 md:mb-0">
                     <video  className="lg:w-screen h-50 rounded-md mx-auto border-4 border-purple-500 shadow-lg" controls>
-                    <source src="" type="video/mp4" />
+                    <source src="https://duran24062005.github.io/Web_V4/public/video/WhatsApp%20Video%202026-02-14%20at%2012.45.45%20PM.mp4" type="video/mp4" />
                     </video>
                 </div>
             </div>
