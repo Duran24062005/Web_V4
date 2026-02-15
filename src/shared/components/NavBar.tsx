@@ -56,26 +56,29 @@ export const NavBar = ({ items }: NavBarProps) => {
 
 
 
-  // Filtrar items para no mostrar el actual (solo si es ruta /)
-    const visibleItems = items.filter(item => {
-    // Si NO estamos en inicio
-    if (currentPath !== "/") {
-      // Ocultar estos items
-      if (item.href === "#about-me" || item.href === "#skills") {
-        return false;
-      }
+  const visibleItems = items.filter(item => {
+
+  // Ocultar anchors si no estamos en home
+  if (currentPath !== "/") {
+    if (item.href === "#about-me" || item.href === "#skills") {
+      return false;
     }
+  }
 
-    if (currentPath !== "/regiter") {
-      // Ocultar estos items
-      if (item.href === "login") {
-        return false;
-      }
-    }
+  const token = localStorage.getItem("token");
 
+  // Si hay token, ocultar login
+  if (token && item.href === "/login") {
+    return false;
+  }
 
-    return true;
-  });
+  // Si NO hay token, ocultar zona privada
+  if (!token && item.href === "/private-zona") {
+    return false;
+  }
+
+  return true;
+});
 
 
 

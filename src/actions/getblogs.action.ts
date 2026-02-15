@@ -1,10 +1,10 @@
-import { api } from "../api/base.api";
+import { apiBase } from "../api/base.api";
 import type { Blog } from "../interfaces/blog.interface";
 import type { BlogResponse } from "../interfaces/blog.response";
 
 export default async function getBlogs(path: string): Promise<Blog[]> {
   try {
-    const response = await api.get<BlogResponse>(`api/blogs/${path}`);
+    const response = await apiBase.get<BlogResponse>(`api/blogs/${path}`);
     console.log(response);
 
     /*

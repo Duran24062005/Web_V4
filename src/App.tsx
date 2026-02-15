@@ -6,8 +6,9 @@ import Home from './home/Home'
 import { Projects } from './projects/Projects'
 import { Index } from './dashboard/Index'
 import { Services } from './services/Services'
-import Login from './auth/Login'
+import { Login } from './auth/pages/login/Login'
 import { Recruiter } from './recruiter/Recruiter'
+import { PrivateZona } from './recruiter/PrivateZona'
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/dashboard' element={<Index />} />
           <Route path='/recruiter' element={<Recruiter />} />
+          <Route path='/privated-zone' element={<PrivateZona />} />
     </Routes>
   )
 }
