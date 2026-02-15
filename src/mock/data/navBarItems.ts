@@ -9,3 +9,13 @@ export const navBarItems = [
   { label: "Login", href: "/login" },
   { label: "Protected", href: "/privated-zone" },
 ];
+
+export const navBarItemsHome = [
+  { label: "Inicio", href: "/" },
+  { label: "Sobre mi", href: "#about-me" },
+  { label: "Habilidades", href: "#skills" },
+  { label: "Servicios", href: "/services" },
+  { label: "Proyectos", href: "/projects" },
+  { label: "Blog", href: "/blog" },
+  { label: "Contacto", href: "/contact" },
+];
