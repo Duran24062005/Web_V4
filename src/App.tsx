@@ -6,7 +6,7 @@ import Home from './home/Home'
 import { Projects } from './projects/Projects'
 import { Index } from './dashboard/Index'
 import { Services } from './services/Services'
-import { Login } from './auth/Login'
+import Login from './auth/Login'
 import { Recruiter } from './recruiter/Recruiter'
 
 

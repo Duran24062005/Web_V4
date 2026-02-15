@@ -6,4 +6,5 @@ export const navBarItems = [
   { label: "Proyectos", href: "/projects" },
   { label: "Blog", href: "/blog" },
   { label: "Contacto", href: "/contact" },
+  { label: "Login", href: "/login" },
 ];

@@ -66,6 +66,14 @@ export const NavBar = ({ items }: NavBarProps) => {
       }
     }
 
+    if (currentPath !== "/regiter") {
+      // Ocultar estos items
+      if (item.href === "login") {
+        return false;
+      }
+    }
+
+
     return true;
   });
 
@@ -82,9 +90,9 @@ export const NavBar = ({ items }: NavBarProps) => {
           </a>
 
           {/* Desktop menu */}
-          <div className="hidden md:flex space-x-6">
+          <div className="hidden md:flex space-x-6 items-center">
             {visibleItems.map(item => (
-              <a key={item.href} href={item.href} className={`nav-link ${item.href === currentPath  ? "nav-link-active" : ""}`}>
+              <a key={item.href} href={item.href} className={`nav-link ${item.href === currentPath  ? "nav-link-active" : ""} ${item.href === '/login' ? 'bg-violet-800 p-2 rounded-lg border-2 border-green-400' : ''}`}>
                 {item.label}
               </a>
             ))}

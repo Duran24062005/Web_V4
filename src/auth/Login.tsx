@@ -1,117 +1,255 @@
-import { useState } from "react"
-import { Eye, EyeOff, Mail, Lock, Loader2 } from "lucide-react"
+import { useState } from 'react';
 
-export function Login() {
-  const [showPassword, setShowPassword] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+const Login = () => {
+  const [openSection, setOpenSection] = useState<number | null>(null);
+  const [showRegister, setShowRegister] = useState(true);
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  })
-  const [errors, setErrors] = useState<Record<string, string>>({})
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    userType: '',
+    birthDate: '',
+    termsAccepted: false,
+  });
 
-  const validate = () => {
-    const newErrors: Record<string, string> = {}
-    if (!formData.email) {
-      newErrors.email = "El email es requerido"
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "El email no es valido"
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value, type, checked } = event.target as HTMLInputElement;
+    setFormData({
+      ...formData,
+      [name]: type === 'checkbox' ? checked : value,
+    });
+  };
+
+  /*const handleSubmit2 = (event: FormEvent): void => {
+    event.preventDefault();
+    console.log('Datos del formulario:', formData);
+  };
+
+  const handleSubmit = (event: FormEvent): void => {
+    event.preventDefault();
+    console.log('Formulario enviado');
+  };*/
+
+  const toggleSection = (index: number) => {
+    setOpenSection(openSection === index ? null : index);
+  };
+
+  const terms = [
+    {
+      title: "1. Aceptación de los Términos",
+      content: "Al utilizar nuestro servicio, usted acepta estar sujeto a estos términos y condiciones. Si no está de acuerdo con alguna parte de los términos, no podrá utilizar nuestro servicio."
+    },
+    {
+      title: "2. Uso del Servicio",
+      content: "Nuestro servicio está destinado únicamente para uso personal y no comercial. Usted se compromete a no utilizar el servicio para fines ilegales o no autorizados."
+    },
+    {
+      title: "3. Cuenta de Usuario",
+      content: "Para acceder a ciertas funciones del servicio, es posible que deba crear una cuenta. Usted es responsable de mantener la confidencialidad de su cuenta y contraseña."
+    },
+    {
+      title: "4. Propiedad Intelectual",
+      content: "El contenido del servicio, incluyendo textos, gráficos, logotipos, y software, está protegido por derechos de autor y otras leyes de propiedad intelectual."
+    },
+    {
+      title: "5. Limitación de Responsabilidad",
+      content: "En ningún caso seremos responsables por daños indirectos, incidentales, especiales o consecuentes que resulten del uso o la imposibilidad de usar nuestro servicio."
     }
-    if (!formData.password) {
-      newErrors.password = "La contrasena es requerida"
-    } else if (formData.password.length < 6) {
-      newErrors.password = "Minimo 6 caracteres"
-    }
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!validate()) return
-
-    setIsLoading(true)
-
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-
-    console.log("[v0] Login payload:", JSON.stringify(formData, null, 2))
-    alert("Login enviado! Revisa la consola para ver el payload.")
-    setIsLoading(false)
-  }
+  ];
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-      <div className="flex flex-col gap-2">
-        <label htmlFor="login-email" className="text-foreground/80">
-          Email
-        </label>
-        <div className="relative">
-          <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-          <input
-            id="login-email"
-            type="email"
-            placeholder="tu@email.com"
-            className="pl-10 bg-secondary border-border text-foreground placeholder:text-muted-foreground focus-visible:ring-primary"
-            value={formData.email}
-            onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
-            }
-          />
+    <div className="min-h-screen bg-gray-100 bg-cover bg-center flex items-center justify-center p-4" 
+         style={{ backgroundImage: "url('/assets/img/Fondo2.jpg')" }}>
+      <div className={`flex ${!showRegister ? 'gap-6 w-full max-w-6xl' : 'w-full max-w-sm'}`}>
+        {/* Login/Register Form */}
+        <div className={`${showRegister ? 'w-full' : 'w-1/2'} bg-white/20 backdrop-blur-md rounded-lg shadow-2xl p-8`}>
+          {showRegister ? (
+            <>
+              <h1 className="text-2xl font-bold text-center text-gray-100">EduConnect</h1>
+              <p className='text-center text-slate-300'>Conexión Educativa</p>
+              <p className='text-center text-slate-400 mb-6'>Inicie sesión para continuar</p>
+              <form className="mt-6 space-y-4" onSubmit={()=>{}}>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-slate-200">Correo electrónico</label>
+                  <input
+                    type="email"
+                    id="email"
+                    className="w-full px-3 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Ingrese su correo electrónico"
+                    required
+                  />
+                </div>
+                <div>
+                  <label htmlFor="password" className="block text-sm font-medium text-slate-200">Contraseña</label>
+                  <input
+                    type="password"
+                    id="password"
+                    className="w-full px-3 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Ingrese su contraseña"
+                    required
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="w-full px-4 py-2 mt-6 text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                >
+                  Iniciar Sesión
+                </button>
+              </form>
+              <div className="mt-4 text-center text-sm">
+                <a href="#" className="text-blue-500 hover:underline">¿Olvidó su contraseña?</a>
+                <p>¿No tienes una cuenta? <a href="#" className="text-blue-600 hover:underline" onClick={() => setShowRegister(false)}>Registrate aquí</a></p>
+              </div>
+            </>
+          ) : (
+            <>
+              <h1 className="text-2xl font-bold text-center text-slate-100">Registro en EduConnect</h1>
+              <p className='text-center text-slate-400'>Haz parte de nuestra comunidad Educativa.</p>
+              <form className="mt-6 space-y-4" onSubmit={()=>{}}>
+                <div className="space-y-4">
+                  <div>
+                    <label htmlFor="first_name" className="block text-sm font-medium text-slate-200">Nombres</label>
+                    <input
+                      type="text"
+                      id="first_name"
+                      name="first_name"
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparen text-blackt"
+                      placeholder="Ingrese su nombre completo"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="last_name" className="block text-sm font-medium text-slate-200">Apellidos</label>
+                    <input
+                      type="text"
+                      id="last_name"
+                      name="last_name"
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
+                      placeholder="Ingrese sus apellidos"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-slate-200">Correo electrónico</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
+                      placeholder="Ingrese su correo electrónico"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="password" className="block text-sm font-medium text-slate-200">Contraseña</label>
+                    <input
+                      type="password"
+                      id="password"
+                      name="password"
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
+                      placeholder="Ingrese su contraseña"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="confirmPass" className="block text-sm font-medium text-slate-200">Confirmar Contraseña</label>
+                    <input
+                      type="password"
+                      id="confirmPass"
+                      name="confirmPass"
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
+                      placeholder="Ingrese su contraseña"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="userType" className="block text-sm font-medium text-slate-200">Tipo de usuario</label>
+                    <select
+                      id="userType"
+                      name="userType"
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
+                      required
+                    >
+                      <option value="">Seleccione una opción</option>
+                      <option value="student">Estudiante</option>
+                      <option value="teacher">Docente</option>
+                      <option value="parent">Padre/Madre</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label htmlFor="birthDate" className="block text-sm font-medium text-slate-200">Fecha de nacimiento</label>
+                    <input
+                      type="date"
+                      id="birthDate"
+                      name="birthDate"
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="termsAccepted"
+                    name="termsAccepted"
+                    checked={formData.termsAccepted}
+                    onChange={handleChange}
+                    className="w-4 h-4 text-blue-500 border-gray-300 rounded focus:ring-blue-500"
+                    required
+                  />
+                  <label htmlFor="termsAccepted" className="ml-2 text-sm text-gray-300">
+                    Acepto los términos y condiciones
+                  </label>
+                </div>
+                <button
+                  type="submit"
+                  className="w-full px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                >
+                  Registrarse
+                </button>
+              </form>
+              <div className="mt-4 text-center text-sm">
+                <p>¿Ya tienes una cuenta? <a href="#" className="text-blue-600 hover:underline" onClick={() => setShowRegister(true)}>Inicia sesión aquí</a></p>
+              </div>
+            </>
+          )}
         </div>
-        {errors.email && (
-          <p className="text-sm text-destructive">{errors.email}</p>
+
+        {/* Terms and Conditions Panel - Only shown in register mode */}
+        {!showRegister && (
+          <div className="w-1/2 bg-white/20 backdrop-blur-md rounded-lg shadow-2xl p-8 overflow-y-auto max-h-[800px]">
+            <h2 className="text-2xl font-bold text-center text-slate-100 mb-6">Términos y Condiciones</h2>
+            <div className="space-y-4">
+              {terms.map((term, index) => (
+                <div key={index} className="border-b border-gray-200/30 pb-4">
+                  <button
+                    className="w-full text-left font-semibold py-2 px-4 rounded hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-gray-200 transition-colors duration-200 text-slate-200"
+                    onClick={() => toggleSection(index)}
+                  >
+                    {term.title}
+                    <span className="float-right">{openSection === index ? '▲' : '▼'}</span>
+                  </button>
+                  {openSection === index && (
+                    <div className="mt-2 px-4 text-slate-300">
+                      {term.content}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
         )}
       </div>
+    </div>
+  );
+};
 
-      <div className="flex flex-col gap-2">
-        <label htmlFor="login-password" className="text-foreground/80">
-          Password
-        </label>
-        <div className="relative">
-          <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-          <input
-            id="login-password"
-            type={showPassword ? "text" : "password"}
-            placeholder="Tu contrasena"
-            className="pl-10 pr-10 bg-secondary border-border text-foreground placeholder:text-muted-foreground focus-visible:ring-primary"
-            value={formData.password}
-            onChange={(e) =>
-              setFormData({ ...formData, password: e.target.value })
-            }
-          />
-          <button
-            type="button"
-            onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-            aria-label={showPassword ? "Ocultar contrasena" : "Mostrar contrasena"}
-          >
-            {showPassword ? (
-              <EyeOff className="h-4 w-4" />
-            ) : (
-              <Eye className="h-4 w-4" />
-            )}
-          </button>
-        </div>
-        {errors.password && (
-          <p className="text-sm text-destructive">{errors.password}</p>
-        )}
-      </div>
-
-      <button
-        type="submit"
-        disabled={isLoading}
-        className="w-full mt-2 bg-primary text-primary-foreground hover:bg-primary/85 h-11 rounded-xl text-base font-semibold transition-all"
-      >
-        {isLoading ? (
-          <>
-            <Loader2 className="h-4 w-4 animate-spin" />
-            Iniciando sesion...
-          </>
-        ) : (
-          "Iniciar Sesion"
-        )}
-      </button>
-    </form>
-  )
-}
+export default Login;
