@@ -3,7 +3,6 @@ import { navBarItems } from "../mock/data/navBarItems";
 import { Footer } from "../shared/components/Footer";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
-import { AboutMe } from "./components/AboutMe";
 import { Github, Instagram, Linkedin } from "lucide-react";
 
 export const PrivateZona = () => {
@@ -17,11 +16,9 @@ export const PrivateZona = () => {
 
     useEffect(()=>{
         if (currentPath === '/privated-zone' && !token) {
-            navigate('/')
+            navigate('/recruiter')
         }
     }, [currentPath, navigate, token])
-
-    const text: string[] = [];
 
   return (
     <div className="h-screen">
