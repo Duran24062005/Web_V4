@@ -95,7 +95,7 @@ export const Register = () => {
                 </div>
                 <div className="text-center text-sm">
                   ¿Ya tienes cuenta?{' '}
-                  <Link to="/auth/login" className="underline underline-offset-4">
+                  <Link to="/login" className="underline underline-offset-4">
                     Ingresa ahora
                   </Link>
                 </div>
