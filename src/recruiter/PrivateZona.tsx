@@ -1,10 +1,24 @@
 import { NavBar } from "../shared/components/NavBar";
 import { navBarItems } from "../mock/data/navBarItems";
 import { Footer } from "../shared/components/Footer";
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
 
 export const PrivateZona = () => {
+
+    const currentPath = typeof window !== "undefined" ? window.location.pathname : "";
+    const token = localStorage.getItem('token');
     const firstName = localStorage.getItem('userName');
     const lastName = localStorage.getItem('userLastName');
+
+    const navigate = useNavigate();
+
+    useEffect(()=>{
+        if (currentPath === '/privated-zone' && !token) {
+            navigate('/')
+        }
+    }, [currentPath, navigate, token])
+
   return (
     <>
         <NavBar items={navBarItems} />

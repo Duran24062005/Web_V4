@@ -9,6 +9,7 @@ import { Services } from './services/Services'
 import { Login } from './auth/pages/login/Login'
 import { Recruiter } from './recruiter/Recruiter'
 import { PrivateZona } from './recruiter/PrivateZona'
+import { Register } from './auth/pages/register/Register'
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/contact" element={<Contact />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
           <Route path='/dashboard' element={<Index />} />
           <Route path='/recruiter' element={<Recruiter />} />
           <Route path='/privated-zone' element={<PrivateZona />} />

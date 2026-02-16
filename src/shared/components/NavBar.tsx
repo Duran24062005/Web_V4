@@ -1,5 +1,7 @@
 import { Atom } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import { logoutAction } from '../../actions/logOut.action';
+import { useNavigate } from 'react-router';
 
 interface NavItem {
   label: string;
@@ -53,7 +55,8 @@ export const NavBar = ({ items }: NavBarProps) => {
     anchors.forEach(a => a.addEventListener('click', handler));
     return () => anchors.forEach(a => a.removeEventListener('click', handler));
   }, []);
-
+  
+  const navigate = useNavigate();
 
 
   const visibleItems = items.filter(item => {
@@ -81,6 +84,15 @@ export const NavBar = ({ items }: NavBarProps) => {
 });
 
 
+const logAuth = (tk: string) => {
+  console.log(tk);
+  localStorage.clear();
+  console.log(logoutAction(tk));
+  navigate('/');
+}
+
+
+const token = localStorage.getItem('token');
 
   return (
     <header className="relative z-10 bg-black">
@@ -99,6 +111,15 @@ export const NavBar = ({ items }: NavBarProps) => {
                 {item.label}
               </a>
             ))}
+            {
+              token && (
+                <button 
+                onClick={()=>logAuth(token)}
+                className='bg-red-400 p-1 rounded-lg text-black hover:bg-red-500'>
+                  Logout
+                </button>
+              )
+            }
           </div>
 
           {/* Mobile button */}
