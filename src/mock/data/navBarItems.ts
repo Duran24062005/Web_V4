@@ -6,8 +6,8 @@ export const navBarItems = [
   { label: "Proyectos", href: "/projects" },
   { label: "Blog", href: "/blog" },
   { label: "Contacto", href: "/contact" },
-  { label: "Login", href: "/login" },
   { label: "Protected", href: "/privated-zone" },
+  { label: "Login", href: "/login" },
 ];
 
 export const navBarItemsHome = [
