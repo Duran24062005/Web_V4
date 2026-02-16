@@ -35,6 +35,9 @@ export const PrivateZona = () => {
                 <AboutMe downText={text}/>
                 <section>
                     <h2>CV - Alexi Duran Gómez</h2>
+                    <div className="flex">
+                        <img src="https://duran24062005.github.io/Web_V4/public/image/AlexiDuranGomez%20Tecnología%20Currículum.png" alt="" />
+                    </div>
                 </section>
             </div>
         </main>
