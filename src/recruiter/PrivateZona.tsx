@@ -4,13 +4,12 @@ import { Footer } from "../shared/components/Footer";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { Github, Instagram, Linkedin } from "lucide-react";
+import { useAuthSession } from "../shared/hooks/useAuthSession";
 
 export const PrivateZona = () => {
 
     const currentPath = typeof window !== "undefined" ? window.location.pathname : "";
-    const token = localStorage.getItem('token');
-    const firstName = localStorage.getItem('userName');
-    const lastName = localStorage.getItem('userLastName');
+    const { token, user } = useAuthSession();
 
     const navigate = useNavigate();
 
@@ -26,7 +25,7 @@ export const PrivateZona = () => {
         <main className="flex justify-center">
             <div className="container">
                 <div className="flex-col mt-8">
-                    <h1 className="flex justify-center text-4xl">Hi there! <span className="text-3xl japonesa"> {firstName} {lastName}</span></h1>
+                    <h1 className="flex justify-center text-4xl">Hi there! <span className="text-3xl japonesa"> {user.firstName} {user.lastName}</span></h1>
                     <hr className="mt-2 border-violet-500" />
                     <p className="flex justify-center mt-2 text-lg">Welcome to my Web Site</p>
                 </div>

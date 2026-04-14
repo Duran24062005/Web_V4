@@ -14,7 +14,7 @@ import { useProjects } from '../shared/hooks/useProjects'
 
 export const Projects = () => {
 
-  const { projectsList, hanlderSerach, loading } = useProjects();
+  const { projectsList, handleSearch, loading, error } = useProjects();
 
   return (
     <>
@@ -23,7 +23,8 @@ export const Projects = () => {
             <div className="container mx-auto px-6">
                 <h2 className="text-4xl font-bold mb-8 text-center gradient-text">Mis Proyectos</h2>
                 {/* Lista de Proyectos */}
-                <FilterProjects techList={techNames} onLabelClick={hanlderSerach}/>
+                <FilterProjects techList={techNames} onLabelClick={handleSearch}/>
+                {error && <p className="mb-6 text-center text-red-400">{error}</p>}
                 {/* Lista de Proyectos */}
                 <ProjectLists projects={projectsList} state={loading}/> 
             </div>

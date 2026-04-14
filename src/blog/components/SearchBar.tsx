@@ -10,22 +10,6 @@ interface Props {
 export const SearchBar = ({ placeholder, btnDescription, onQuery }: Props) => {
 
   const [ query, setQuery ] = useState('');
-
-  
-  /*useEffect(()=>{
-    // console.log('Hola desde el efecto');
-    const timeoutId = setTimeout(()=>{
-      onQuery(query);
-    }, 900);
-    // onQuery(query);
-
-    return ()=>{
-      // console.log('Se disparó la función de limpieza. Componente desmontado');
-      clearTimeout(timeoutId);
-    }
-    
-  }, [query, onQuery]);*/
-
   const handlerSearch = () => {
     onQuery(query);
     setQuery('');

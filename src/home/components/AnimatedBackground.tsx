@@ -20,7 +20,7 @@ export const AnimateBackground = () => {
   }, []);
 
   const particlesLoaded = async (container?: Container): Promise<void> => {
-    console.log(container);
+    void container;
   };
 
   const options: ISourceOptions = useMemo(

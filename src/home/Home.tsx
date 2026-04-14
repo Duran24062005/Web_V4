@@ -9,17 +9,17 @@ import { Footer } from '../shared/components/Footer'
 import { useProjects } from '../shared/hooks/useProjects'
 import { ContactComponent } from '../contact/components/ContactComponent'
 import { ServiceComponent } from '../services/components/ServiceComponent'
+import { useAuthSession } from '../shared/hooks/useAuthSession'
 
 function Home() {
 
   const { projectsList, loading  } = useProjects();
-  
-  const token = localStorage.getItem('token');
+  const { isAuthenticated } = useAuthSession();
 
   return (
     <>
     <main className="min-h-screen flex flex-col bg-black mb-12">
-      <NavBar items={token? navBarItems : navBarItemsHome } />
+      <NavBar items={isAuthenticated ? navBarItems : navBarItemsHome } />
       {/* Other components and content would go here */}
       <div className="flex h-screen">
         <Header title={`Alexi Duran G`} subtitle='Junior Full Stack Web Developer'/>
@@ -37,4 +37,3 @@ function Home() {
 }
 
 export default Home
-

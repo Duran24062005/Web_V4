@@ -1,9 +1,3 @@
-export interface BlogResponse {
-  status: string;
-  results: number;
-  data: BlogPost[];
-}
-
 export interface BlogPost {
   id: string;
   title: string;

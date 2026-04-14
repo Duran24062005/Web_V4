@@ -7,12 +7,14 @@ import { useState, type FormEvent } from 'react';
 import { loginAction } from '../../../actions/login.action';
 import { toast } from 'sonner';
 import { CustomLogo } from '../../../shared/custom/CustomLogo';
+import { getErrorMessage } from '../../../lib/http';
+import { persistSession } from '../../../lib/session';
 
 export const Login = () => {
 
   const navigate = useNavigate();
   const [ isPosting, setIsPosting ] = useState(false);
-  const [ isError, setIsError ] = useState(false);
+  const [ errorMessage, setErrorMessage ] = useState<string | null>(null);
 
   const handleLogin = async (event: FormEvent<HTMLFormElement>) =>{
     event.preventDefault();
@@ -21,30 +23,26 @@ export const Login = () => {
     const formData = new FormData(event.target as HTMLFormElement);
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
-    console.log({email, password});
+    setErrorMessage(null);
 
     try {
       const data = await loginAction(email, password);
-      console.log({data});
-      if (data.data.token) {
-        localStorage.setItem('token', data.data.token);
-        localStorage.setItem('userName', data.data.user.first_name);
-        localStorage.setItem('userLastName', data.data.user.last_name);
-        console.log("re-direccionando a home");
+      if (data.token) {
+        persistSession({
+          token: data.token,
+          firstName: data.user.first_name,
+          lastName: data.user.last_name,
+        });
         navigate('/privated-zone')
       }
       
     } catch (error) {
-      console.log(error);
-      toast.error("Error email y/o contraseña no validos.");
-      alert("Error email y/o contraseña no validos.");
-      setIsError(true)
+      const message = getErrorMessage(error, "Error email y/o contraseña no válidos.");
+      toast.error(message);
+      setErrorMessage(message);
     } 
 
     setIsPosting(false);
-    setIsError(false);
-    
-    
   }
 
   return (
@@ -90,9 +88,9 @@ export const Login = () => {
                   />
                 </div>
                 { 
-                  isError && (
+                  errorMessage && (
                     <div className='flex justify-center bg-slate-300'>
-                      <p className='text-red-500'>Error email y/o contraseña no validos.</p>
+                      <p className='text-red-500'>{errorMessage}</p>
                     </div>
 
                   )

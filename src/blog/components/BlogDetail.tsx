@@ -3,11 +3,12 @@ import { useParams, useNavigate } from "react-router-dom"
 import { Calendar, Eye, User, ArrowLeft, Tag, Share2 } from "lucide-react"
 import ReactMarkdown from "react-markdown"
 import type { Components } from "react-markdown";
-import getBlogs from "../../actions/getblogs.action"
 import type { Blog } from "../../interfaces/blog.interface"
 import { NavBar } from "../../shared/components/NavBar"
 import { Footer } from "../../shared/components/Footer"
 import { navBarItems } from "../../mock/data/navBarItems"
+import { getErrorMessage } from "../../lib/http"
+import { getBlogById } from "../../services/blogs/blogs.service"
 
 export const BlogDetail = () => {
   const { id } = useParams<{ id: string }>()
@@ -21,24 +22,17 @@ export const BlogDetail = () => {
     const fetchBlog = async () => {
       try {
         setLoading(true)
-        const blogs = await getBlogs("all")
-        const foundBlog = blogs.find((b) => b.id === id)
-
-        if (foundBlog) {
-          setBlog(foundBlog)
-        } else {
-          setError("Blog no encontrado")
-        }
+        const foundBlog = await getBlogById(id as string)
+        setBlog(foundBlog)
       } catch (err) {
-        console.error("Error al cargar el blog:", err)
-        setError("Error al cargar el blog")
+        setError(getErrorMessage(err, "Error al cargar el blog"))
       } finally {
         setLoading(false)
       }
     }
 
     if (id) {
-      fetchBlog()
+      void fetchBlog()
     }
   }, [id])
 

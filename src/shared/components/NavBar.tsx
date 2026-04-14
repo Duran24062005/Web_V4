@@ -2,6 +2,8 @@ import { Atom } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { logoutAction } from '../../actions/logOut.action';
 import { useNavigate } from 'react-router';
+import { getSessionToken } from '../../lib/session';
+import { useAuthSession } from '../hooks/useAuthSession';
 
 interface NavItem {
   label: string;
@@ -16,8 +18,10 @@ export const NavBar = ({ items }: NavBarProps) => {
 
   const [openMenu, setOpenMenu] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement | null>(null);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   const currentPath = typeof window !== "undefined" ? window.location.pathname : "";
+  const { isAuthenticated, clearSession } = useAuthSession();
 
   // Animación al hacer scroll
   useEffect(() => {
@@ -68,7 +72,7 @@ export const NavBar = ({ items }: NavBarProps) => {
     }
   }
 
-  const token = localStorage.getItem("token");
+  const token = getSessionToken();
 
   // Si hay token, ocultar login
   if (token && item.href === "/login") {
@@ -76,7 +80,7 @@ export const NavBar = ({ items }: NavBarProps) => {
   }
 
   // Si NO hay token, ocultar zona privada
-  if (!token && item.href === "/private-zona") {
+  if (!token && item.href === "/privated-zone") {
     return false;
   }
 
@@ -84,15 +88,19 @@ export const NavBar = ({ items }: NavBarProps) => {
 });
 
 
-const logAuth = (tk: string) => {
-  console.log(tk);
-  localStorage.clear();
-  console.log(logoutAction(tk));
-  navigate('/');
+const logAuth = async () => {
+  try {
+    setIsLoggingOut(true);
+    await logoutAction();
+  } finally {
+    clearSession();
+    setIsLoggingOut(false);
+    navigate('/');
+  }
 }
 
 
-const token = localStorage.getItem('token');
+const token = getSessionToken();
 
   return (
     <header className="relative z-10 bg-black">
@@ -112,11 +120,12 @@ const token = localStorage.getItem('token');
               </a>
             ))}
             {
-              token && (
+              isAuthenticated && token && (
                 <button 
-                onClick={()=>logAuth(token)}
+                onClick={() => void logAuth()}
+                disabled={isLoggingOut}
                 className='bg-red-400 p-1 rounded-lg text-black hover:bg-red-500'>
-                  Logout
+                  {isLoggingOut ? 'Saliendo...' : 'Logout'}
                 </button>
               )
             }
@@ -162,4 +171,3 @@ const token = localStorage.getItem('token');
     </header>
   );
 };
-

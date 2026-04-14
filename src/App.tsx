@@ -10,6 +10,7 @@ import { Login } from './auth/pages/login/Login'
 import { Recruiter } from './recruiter/Recruiter'
 import { PrivateZona } from './recruiter/PrivateZona'
 import { Register } from './auth/pages/register/Register'
+import AuthLayout from './auth/layouts/AuthLayout'
 
 
 function App() {
@@ -22,8 +23,10 @@ function App() {
           <Route path="/blog" element={<Blogs />} />
           <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
+          <Route element={<AuthLayout />}>
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
+          </Route>
           <Route path='/dashboard' element={<Index />} />
           <Route path='/recruiter' element={<Recruiter />} />
           <Route path='/privated-zone' element={<PrivateZona />} />
