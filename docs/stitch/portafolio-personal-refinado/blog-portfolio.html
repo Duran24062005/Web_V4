@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Curated Ledger | Insights &amp; Engineering</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#f4be5b",
+                    "surface-bright": "#3a3939",
+                    "tertiary-container": "#c9af85",
+                    "on-tertiary-fixed": "#271900",
+                    "surface-dim": "#131313",
+                    "secondary-container": "#474746",
+                    "background": "#131313",
+                    "inverse-on-surface": "#313030",
+                    "error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#474746",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-tertiary-fixed-variant": "#564422",
+                    "primary-fixed": "#ffdeaa",
+                    "on-tertiary-container": "#544221",
+                    "on-primary-fixed-variant": "#5f4100",
+                    "on-secondary": "#303030",
+                    "surface-tint": "#f4be5b",
+                    "secondary-fixed": "#e4e2e1",
+                    "surface-container-low": "#1c1b1b",
+                    "on-error": "#690005",
+                    "on-surface-variant": "#d0c5af",
+                    "on-surface": "#e5e2e1",
+                    "inverse-surface": "#e5e2e1",
+                    "surface-variant": "#353534",
+                    "on-primary-fixed": "#271900",
+                    "on-tertiary": "#3e2e0e",
+                    "on-secondary-container": "#b7b5b4",
+                    "tertiary-fixed": "#fbdfb1",
+                    "outline-variant": "#4d4635",
+                    "error": "#ffb4ab",
+                    "primary-container": "#dfaa4a",
+                    "surface-container-high": "#2a2a2a",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-highest": "#353534",
+                    "on-primary": "#422c00",
+                    "on-secondary-fixed": "#1b1c1c",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "outline": "#99907c",
+                    "primary": "#fdc562",
+                    "on-background": "#e5e2e1",
+                    "secondary": "#c8c6c5",
+                    "surface-container": "#201f1f",
+                    "tertiary": "#e6ca9e",
+                    "inverse-primary": "#7d5700",
+                    "on-primary-container": "#5d4000",
+                    "surface": "#131313",
+                    "tertiary-fixed-dim": "#dec397"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Newsreader"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-gradient {
+            background: radial-gradient(circle at top right, rgba(253, 197, 98, 0.08), transparent 40%);
+        }
+        body {
+            cursor: default;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body editorial-gradient min-h-screen">
+<!-- Top Navigation Shell -->
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-12 py-6 max-w-screen-2xl mx-auto bg-[#131313] shadow-[0_40px_60px_-15px_rgba(229,226,225,0.06)]">
+<div class="text-2xl font-['Manrope'] font-extrabold tracking-tighter text-[#e5e2e1]">
+            The Curated Ledger
+        </div>
+<div class="hidden md:flex items-center gap-10">
+<a class="text-[#c8c6c5] font-medium font-['Inter'] tracking-wider uppercase text-xs hover:text-[#fdc562] transition-colors duration-300" href="#">Home</a>
+<a class="text-[#c8c6c5] font-medium font-['Inter'] tracking-wider uppercase text-xs hover:text-[#fdc562] transition-colors duration-300" href="#">Services</a>
+<a class="text-[#c8c6c5] font-medium font-['Inter'] tracking-wider uppercase text-xs hover:text-[#fdc562] transition-colors duration-300" href="#">Projects</a>
+<a class="text-[#fdc562] font-bold border-b-2 border-[#fdc562] pb-1 font-['Inter'] tracking-wider uppercase text-xs transition-colors duration-300" href="#">Blog</a>
+<a class="text-[#c8c6c5] font-medium font-['Inter'] tracking-wider uppercase text-xs hover:text-[#fdc562] transition-colors duration-300" href="#">Contact</a>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-md font-['Inter'] font-bold tracking-wider uppercase text-xs scale-95 active:scale-90 transition-transform">
+            Let's Talk
+        </button>
+</nav>
+<main class="pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto">
+<!-- Header Section -->
+<header class="mb-20">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
+<div class="md:col-span-8">
+<h1 class="font-headline text-5xl md:text-7xl font-extrabold tracking-tighter mb-6 text-on-surface">
+                        The Developer's <br/><span class="italic font-body text-primary font-normal">Manuscript.</span>
+</h1>
+<p class="font-body text-xl md:text-2xl text-secondary max-w-2xl leading-relaxed italic">
+                        Documenting the intersection of clean architecture, aesthetic interfaces, and the philosophical side of software engineering.
+                    </p>
+</div>
+<div class="md:col-span-4 flex flex-col gap-4">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container-low border-none border-b-2 border-outline-variant focus:border-primary focus:ring-0 text-on-surface font-label py-4 pl-12 pr-4 transition-all placeholder:text-outline-variant italic" placeholder="Search the ledger..." type="text"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Tag Filters -->
+<section class="mb-16 flex flex-wrap gap-3">
+<button class="px-5 py-2 bg-primary text-on-primary rounded-full font-label text-xs font-bold tracking-widest uppercase">All Entries</button>
+<button class="px-5 py-2 bg-surface-container-low text-secondary hover:text-primary rounded-full font-label text-xs font-bold tracking-widest uppercase transition-colors">Backend Architecture</button>
+<button class="px-5 py-2 bg-surface-container-low text-secondary hover:text-primary rounded-full font-label text-xs font-bold tracking-widest uppercase transition-colors">UI Design</button>
+<button class="px-5 py-2 bg-surface-container-low text-secondary hover:text-primary rounded-full font-label text-xs font-bold tracking-widest uppercase transition-colors">TypeScript</button>
+<button class="px-5 py-2 bg-surface-container-low text-secondary hover:text-primary rounded-full font-label text-xs font-bold tracking-widest uppercase transition-colors">Reflections</button>
+<button class="px-5 py-2 bg-surface-container-low text-secondary hover:text-primary rounded-full font-label text-xs font-bold tracking-widest uppercase transition-colors">System Design</button>
+</section>
+<!-- Featured Post - Asymmetric Split -->
+<article class="mb-24 group">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-0 md:gap-12 bg-surface-container-low overflow-hidden rounded-lg">
+<div class="md:col-span-7 h-96 md:h-auto overflow-hidden">
+<img class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" data-alt="Cinematic shot of high-end mechanical keyboard on a minimalist dark desk with soft warm amber lighting and code on screen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQXxx4t1FPY24FRsFoOWslZfsj9TKJURw4ycRhizEmvBphzRlu710tgi4e1mQ1Ws05ZEWb7kCgmmokZ2FT58zJs8PsVH92nqWSE6Z9Hms5IdAK2IgdAK6sw19Vj5UDto_C3h8iMAmwQvAh8o3eDecUKrg6PLBUJyQ6bI5x3xxA7Y0jKWcSEnJGEJNiReUPS_P-h5q7CTTIGXhZ3EE8fVMSMcwp0wty9HKkVyFK77wboEhZsMoZVbdny2uQi3nM-YKcZ2a8bbY00A"/>
+</div>
+<div class="md:col-span-5 p-8 md:p-12 flex flex-col justify-center">
+<div class="flex items-center gap-4 mb-6">
+<span class="font-label text-xs tracking-widest text-primary uppercase font-bold">Featured Entry</span>
+<span class="w-12 h-[1px] bg-outline-variant"></span>
+<span class="font-label text-xs tracking-widest text-secondary uppercase font-medium">12 Min Read</span>
+</div>
+<h2 class="font-headline text-3xl md:text-4xl font-bold mb-6 text-on-surface leading-tight group-hover:text-primary transition-colors">
+                        Architecting for Serenity: The Philosophy of Clean Codebases.
+                    </h2>
+<p class="font-body text-lg text-secondary italic mb-8 leading-relaxed">
+                        Beyond SOLID and DRY, how do we build systems that don't just work, but feel effortless to maintain and navigate?
+                    </p>
+<div class="flex items-center gap-4 mt-auto">
+<p class="font-label text-xs text-outline-variant uppercase tracking-widest font-bold">January 24, 2024</p>
+<span class="material-symbols-outlined text-primary text-xl">arrow_forward</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Article Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Article Card 1 -->
+<article class="flex flex-col bg-surface-container-high rounded-lg p-8 hover:translate-y-[-4px] transition-all duration-300 border-b-2 border-transparent hover:border-primary group">
+<div class="flex justify-between items-start mb-8">
+<span class="px-3 py-1 bg-surface-container-lowest text-secondary font-label text-[10px] tracking-widest uppercase font-bold rounded-full">TypeScript</span>
+<span class="font-label text-[10px] tracking-widest text-outline-variant uppercase font-bold">8 Min</span>
+</div>
+<h3 class="font-headline text-2xl font-bold mb-4 text-on-surface group-hover:text-primary transition-colors">Type-Safety as an Artistic Constraint.</h3>
+<p class="font-body text-secondary italic mb-10 line-clamp-3">How strict typing enables more creative freedom by eliminating the fear of regression in large-scale React applications.</p>
+<div class="mt-auto pt-6 border-t border-outline-variant/10 flex justify-between items-center">
+<span class="font-label text-[10px] text-outline-variant uppercase tracking-widest">Feb 02, 2024</span>
+<span class="material-symbols-outlined text-secondary group-hover:text-primary transition-colors">open_in_new</span>
+</div>
+</article>
+<!-- Article Card 2 -->
+<article class="flex flex-col bg-surface-container-high rounded-lg p-8 hover:translate-y-[-4px] transition-all duration-300 border-b-2 border-transparent hover:border-primary group">
+<div class="flex justify-between items-start mb-8">
+<span class="px-3 py-1 bg-surface-container-lowest text-secondary font-label text-[10px] tracking-widest uppercase font-bold rounded-full">UI Design</span>
+<span class="font-label text-[10px] tracking-widest text-outline-variant uppercase font-bold">15 Min</span>
+</div>
+<h3 class="font-headline text-2xl font-bold mb-4 text-on-surface group-hover:text-primary transition-colors">The Death of the Card Grid.</h3>
+<p class="font-body text-secondary italic mb-10 line-clamp-3">Exploring alternative layouts for content discovery that prioritize white space and hierarchy over density and boxes.</p>
+<div class="mt-auto pt-6 border-t border-outline-variant/10 flex justify-between items-center">
+<span class="font-label text-[10px] text-outline-variant uppercase tracking-widest">Jan 28, 2024</span>
+<span class="material-symbols-outlined text-secondary group-hover:text-primary transition-colors">open_in_new</span>
+</div>
+</article>
+<!-- Article Card 3 (Vertical Image Variant) -->
+<article class="flex flex-col md:row-span-2 bg-surface-container-low rounded-lg overflow-hidden hover:translate-y-[-4px] transition-all duration-300 group">
+<div class="h-64 overflow-hidden">
+<img class="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" data-alt="Atmospheric low-key photography of digital server nodes in a dark room with cool blue and sharp amber accent lights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWH--4fn2aljRnLY4bArompZM214iWjj9m6IE0GGad6KUWzfHann7ohrmqz57XrfrjlSBwC8fAb_pzjdODmWuNKCxqXeRqOF3s4VHNoB1NrDGHOMkhIVKgbR__5Ue4HGxGbd2uc3UOAoMRpf3dm0y9ACMs4zmNGw1ESYNulYBjTiCloU3O_XE4e1L2fGvriFzKM1gZ-ATjkwIOqiGuNG7qN5bqmRFU3DQp36Ip1wuAEaiPPlntV0e1lJ_i0RHolJfNufzaBHOd0w"/>
+</div>
+<div class="p-8 flex flex-col h-full">
+<div class="flex justify-between items-start mb-8">
+<span class="px-3 py-1 bg-surface-container-lowest text-secondary font-label text-[10px] tracking-widest uppercase font-bold rounded-full">Architecture</span>
+<span class="font-label text-[10px] tracking-widest text-outline-variant uppercase font-bold">20 Min</span>
+</div>
+<h3 class="font-headline text-3xl font-bold mb-6 text-on-surface group-hover:text-primary transition-colors leading-tight">Serverless: The Ghost in the Machine.</h3>
+<p class="font-body text-secondary italic mb-10 leading-relaxed">Deconstructing the abstraction of compute. When does delegating the infrastructure become a liability for the bespoke engineer?</p>
+<div class="mt-auto pt-6 border-t border-outline-variant/10 flex justify-between items-center">
+<span class="font-label text-[10px] text-outline-variant uppercase tracking-widest">Jan 15, 2024</span>
+<span class="material-symbols-outlined text-primary">read_more</span>
+</div>
+</div>
+</article>
+<!-- Article Card 4 -->
+<article class="flex flex-col bg-surface-container-high rounded-lg p-8 hover:translate-y-[-4px] transition-all duration-300 border-b-2 border-transparent hover:border-primary group">
+<div class="flex justify-between items-start mb-8">
+<span class="px-3 py-1 bg-surface-container-lowest text-secondary font-label text-[10px] tracking-widest uppercase font-bold rounded-full">Reflections</span>
+<span class="font-label text-[10px] tracking-widest text-outline-variant uppercase font-bold">5 Min</span>
+</div>
+<h3 class="font-headline text-2xl font-bold mb-4 text-on-surface group-hover:text-primary transition-colors">The Minimalist's VS Code.</h3>
+<p class="font-body text-secondary italic mb-10 line-clamp-3">A journey into stripping back the UI to focus on nothing but the syntax and the intent of the logic.</p>
+<div class="mt-auto pt-6 border-t border-outline-variant/10 flex justify-between items-center">
+<span class="font-label text-[10px] text-outline-variant uppercase tracking-widest">Jan 10, 2024</span>
+<span class="material-symbols-outlined text-secondary group-hover:text-primary transition-colors">open_in_new</span>
+</div>
+</article>
+<!-- Article Card 5 -->
+<article class="flex flex-col bg-surface-container-high rounded-lg p-8 hover:translate-y-[-4px] transition-all duration-300 border-b-2 border-transparent hover:border-primary group">
+<div class="flex justify-between items-start mb-8">
+<span class="px-3 py-1 bg-surface-container-lowest text-secondary font-label text-[10px] tracking-widest uppercase font-bold rounded-full">Database</span>
+<span class="font-label text-[10px] tracking-widest text-outline-variant uppercase font-bold">12 Min</span>
+</div>
+<h3 class="font-headline text-2xl font-bold mb-4 text-on-surface group-hover:text-primary transition-colors">SQL vs NoSQL: A Visual Metaphor.</h3>
+<p class="font-body text-secondary italic mb-10 line-clamp-3">Comparing rigid data structures to architecture and fluid ones to modern sculpture. Which one fits your soul?</p>
+<div class="mt-auto pt-6 border-t border-outline-variant/10 flex justify-between items-center">
+<span class="font-label text-[10px] text-outline-variant uppercase tracking-widest">Dec 22, 2023</span>
+<span class="material-symbols-outlined text-secondary group-hover:text-primary transition-colors">open_in_new</span>
+</div>
+</article>
+</div>
+<!-- Pagination -->
+<div class="mt-24 flex items-center justify-center gap-12 border-t border-outline-variant/20 pt-12">
+<button class="flex items-center gap-3 text-outline hover:text-primary transition-colors group">
+<span class="material-symbols-outlined text-xl group-hover:-translate-x-1 transition-transform">arrow_back</span>
+<span class="font-label text-xs tracking-widest uppercase font-bold">Older</span>
+</button>
+<div class="flex gap-4">
+<span class="font-label text-xs text-primary font-bold">01</span>
+<span class="font-label text-xs text-outline-variant font-bold">02</span>
+<span class="font-label text-xs text-outline-variant font-bold">03</span>
+</div>
+<button class="flex items-center gap-3 text-outline hover:text-primary transition-colors group">
+<span class="font-label text-xs tracking-widest uppercase font-bold">Newer</span>
+<span class="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 px-12 flex flex-col md:flex-row justify-between items-center gap-6 bg-[#1c1b1b]">
+<div class="font-['Manrope'] font-bold text-[#e5e2e1]">
+            THE CURATED LEDGER
+        </div>
+<div class="font-['Newsreader'] text-sm tracking-wide text-[#c8c6c5]">
+            © 2024 The Curated Ledger. Built with precision and soul.
+        </div>
+<div class="flex gap-8">
+<a class="font-['Newsreader'] text-sm tracking-wide text-[#c8c6c5] hover:text-[#fdc562] transition-all duration-300 opacity-80 hover:opacity-100" href="#">GitHub</a>
+<a class="font-['Newsreader'] text-sm tracking-wide text-[#c8c6c5] hover:text-[#fdc562] transition-all duration-300 opacity-80 hover:opacity-100" href="#">LinkedIn</a>
+<a class="font-['Newsreader'] text-sm tracking-wide text-[#c8c6c5] hover:text-[#fdc562] transition-all duration-300 opacity-80 hover:opacity-100" href="#">Twitter</a>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Blog Detail | The Curated Ledger</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#f4be5b",
+                        "surface-bright": "#3a3939",
+                        "tertiary-container": "#c9af85",
+                        "on-tertiary-fixed": "#271900",
+                        "surface-dim": "#131313",
+                        "secondary-container": "#474746",
+                        "background": "#131313",
+                        "inverse-on-surface": "#313030",
+                        "error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#474746",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-tertiary-fixed-variant": "#564422",
+                        "primary-fixed": "#ffdeaa",
+                        "on-tertiary-container": "#544221",
+                        "on-primary-fixed-variant": "#5f4100",
+                        "on-secondary": "#303030",
+                        "surface-tint": "#f4be5b",
+                        "secondary-fixed": "#e4e2e1",
+                        "surface-container-low": "#1c1b1b",
+                        "on-error": "#690005",
+                        "on-surface-variant": "#d0c5af",
+                        "on-surface": "#e5e2e1",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-variant": "#353534",
+                        "on-primary-fixed": "#271900",
+                        "on-tertiary": "#3e2e0e",
+                        "on-secondary-container": "#b7b5b4",
+                        "tertiary-fixed": "#fbdfb1",
+                        "outline-variant": "#4d4635",
+                        "error": "#ffb4ab",
+                        "primary-container": "#dfaa4a",
+                        "surface-container-high": "#2a2a2a",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#353534",
+                        "on-primary": "#422c00",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "outline": "#99907c",
+                        "primary": "#fdc562",
+                        "on-background": "#e5e2e1",
+                        "secondary": "#c8c6c5",
+                        "surface-container": "#201f1f",
+                        "tertiary": "#e6ca9e",
+                        "inverse-primary": "#7d5700",
+                        "on-primary-container": "#5d4000",
+                        "surface": "#131313",
+                        "tertiary-fixed-dim": "#dec397"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Newsreader"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .prose blockquote {
+            border-left: 2px solid #fdc562;
+            padding-left: 1.5rem;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-label selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 md:px-12 py-6 max-w-screen-2xl mx-auto bg-[#131313] shadow-[0_40px_60px_-15px_rgba(229,226,225,0.06)]">
+<div class="text-2xl font-['Manrope'] font-extrabold tracking-tighter text-[#e5e2e1]">The Curated Ledger</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-[#c8c6c5] font-medium hover:text-[#fdc562] transition-colors duration-300 font-['Inter'] tracking-wider uppercase text-xs" href="#">Home</a>
+<a class="text-[#c8c6c5] font-medium hover:text-[#fdc562] transition-colors duration-300 font-['Inter'] tracking-wider uppercase text-xs" href="#">Services</a>
+<a class="text-[#c8c6c5] font-medium hover:text-[#fdc562] transition-colors duration-300 font-['Inter'] tracking-wider uppercase text-xs" href="#">Projects</a>
+<a class="text-[#fdc562] font-bold border-b-2 border-[#fdc562] pb-1 font-['Inter'] tracking-wider uppercase text-xs" href="#">Blog</a>
+<a class="text-[#c8c6c5] font-medium hover:text-[#fdc562] transition-colors duration-300 font-['Inter'] tracking-wider uppercase text-xs" href="#">Contact</a>
+</nav>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-md font-['Inter'] font-bold tracking-wider uppercase text-xs hover:shadow-[0_0_20px_rgba(253,197,98,0.2)] transition-all scale-95 active:scale-90">
+            Let's Talk
+        </button>
+</header>
+<main class="pt-32 pb-24">
+<!-- Breadcrumb & Back Action -->
+<div class="max-w-4xl mx-auto px-6 mb-12">
+<a class="group flex items-center gap-2 text-secondary hover:text-primary transition-colors font-label uppercase tracking-widest text-xs" href="#">
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+                Back to blog
+            </a>
+</div>
+<!-- Article Header -->
+<article class="max-w-4xl mx-auto px-6">
+<header class="mb-16">
+<div class="flex flex-wrap items-center gap-4 mb-6">
+<span class="px-3 py-1 bg-surface-container-lowest text-primary rounded-full text-[10px] font-label font-bold tracking-widest uppercase border border-outline-variant/15">Architecture</span>
+<span class="text-secondary font-label text-xs tracking-wider uppercase">October 24, 2024</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="text-secondary font-label text-xs tracking-wider uppercase">12 min read</span>
+</div>
+<h1 class="font-headline text-4xl md:text-6xl font-extrabold tracking-tight text-on-surface leading-[1.1] mb-8">
+                    The Silent Architecture of <span class="italic font-body font-normal text-primary">Scalable</span> Microservices
+                </h1>
+<div class="flex items-center gap-4 py-8 border-y border-outline-variant/10">
+<img alt="Author profile" class="w-12 h-12 rounded-full grayscale hover:grayscale-0 transition-all duration-500" data-alt="Close up professional portrait of a male developer with glasses and neutral expression in soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGgNRrEMEIihk_Q4OzO4j7ATmkrZdHTd7N582WaSZIu8rPnAY8C0Wj5kyTMmLWfhyiglU4Ugxd0M3iuCrFrvx8ZK1KvedwLSckAd3ZTrLknrv1R9b5HMQVFlLgiyLg3X3uy5ieNBwcMWdudUmWRritpmUxxyzo8UJZcPRuu1tCX1OAebYuqpXHnINDvgLc1kGH5-jzPPrb9ou5iRW2HN3qJflNocOtu-rL9YTHRWIAqrEG-d3bhXcyZxr5P4gpxOk21PAujnAvcA"/>
+<div>
+<p class="font-headline font-bold text-on-surface text-sm uppercase tracking-tight">Written by Julian Vane</p>
+<p class="font-body italic text-secondary text-base">Lead Architect &amp; Systems Thinker</p>
+</div>
+<div class="ml-auto flex gap-3">
+<button class="w-10 h-10 rounded-full border border-outline-variant/20 flex items-center justify-center text-secondary hover:text-primary hover:border-primary transition-all">
+<span class="material-symbols-outlined text-xl">share</span>
+</button>
+<button class="w-10 h-10 rounded-full border border-outline-variant/20 flex items-center justify-center text-secondary hover:text-primary hover:border-primary transition-all">
+<span class="material-symbols-outlined text-xl">bookmark</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Featured Image -->
+<div class="mb-16 relative group">
+<div class="absolute inset-0 bg-primary/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<img alt="Technical abstract background" class="w-full aspect-[21/9] object-cover rounded-xl shadow-2xl" data-alt="Abstract digital data visualization with glowing blue and gold connections representing complex network infrastructure in dark space" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1Ooauw9i3ikOWk7tm-PrebqfgT8DgYu0YqlDGH5DMsWdipWrbNtOJ6v8nLd7y6XfsFXdXabgxXeB7MfLz6qsX8_fpbCIVo0iLxKufahyh5dGdH30rDXzt8vvzznpCHZzbiRIpyBDhF9MrWzq83MpM5Srm1Y82iv9tAV3YHoAdNvEBhwqEGXb74uz0IgwpRN2dt5GS0ICBa8mbm_AR3zPf_2ri8HdNFhU_ptD4jeZ96_a4AbhCVF67W07FYYJ4AYmtIH9IDyZUjg"/>
+</div>
+<!-- Content Body -->
+<div class="prose prose-invert max-w-none font-body text-xl leading-relaxed text-on-surface/90">
+<p class="mb-8 first-letter:text-5xl first-letter:font-headline first-letter:font-bold first-letter:mr-3 first-letter:float-left first-letter:text-primary">
+                    In the evolving landscape of full-stack development, the concept of a "ledger" extends beyond simple databases. It represents the immutable truth of system state. When building microservices, we often focus on the communication protocols—REST, gRPC, WebSockets—yet the true silent architecture lies in how we manage the ripples of change across distributed nodes.
+                </p>
+<h2 class="font-headline font-bold text-3xl text-on-surface mt-16 mb-6 tracking-tight">The Myth of Zero Latency</h2>
+<p class="mb-8">
+                    We architect systems with the assumption that data is immediate. However, in a distributed world, "now" is a relative term. Consistency models become the palette from which we paint our user experience. Choosing eventual consistency isn't just a technical trade-off; it's a design decision that impacts how trust is communicated to the end-user.
+                </p>
+<blockquote class="my-12">
+                    "Complexity is the tax we pay for the luxury of scale. The key is knowing which currencies of complexity are worth the investment."
+                </blockquote>
+<h3 class="font-headline font-bold text-2xl text-on-surface mt-12 mb-4 tracking-tight">Implementing Event Sourcing</h3>
+<p class="mb-8">
+                    Instead of storing the current state, we store the journey. Below is a simplified implementation of a message dispatcher that ensures order-of-operations in a high-concurrency environment.
+                </p>
+<!-- Code Block -->
+<div class="my-12 bg-surface-container-lowest rounded-xl overflow-hidden border border-outline-variant/10">
+<div class="flex items-center justify-between px-6 py-3 bg-surface-container-low">
+<span class="font-label text-[10px] uppercase tracking-widest text-secondary">event-dispatcher.ts</span>
+<div class="flex gap-1.5">
+<div class="w-2.5 h-2.5 rounded-full bg-error/40"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-primary/40"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-secondary/40"></div>
+</div>
+</div>
+<pre class="p-6 font-mono text-sm overflow-x-auto text-secondary-fixed leading-6"><code><span class="text-primary">async</span> <span class="text-tertiary">dispatch</span>(event: <span class="text-primary-fixed-dim">AppEvent</span>): <span class="text-primary-fixed-dim">Promise</span>&lt;void&gt; {
+  <span class="text-outline">/* Lock sequence to ensure atomic delivery */</span>
+  <span class="text-primary">const</span> sequence = <span class="text-primary">await</span> <span class="text-on-primary-container">this</span>.vault.nextSequence();
+  
+  <span class="text-primary">return</span> <span class="text-on-primary-container">this</span>.cluster.broadcast({
+    ...event,
+    meta: {
+      timestamp: <span class="text-primary-fixed-dim">Date</span>.now(),
+      id: sequence,
+      signed: <span class="text-on-primary-container">true</span>
+    }
+  });
+}</code></pre>
+</div>
+<p class="mb-8">
+                    The elegance of this approach lies in the audit trail. By maintaining an immutable ledger of actions, we gain the ability to "rewind" time—a feature that is invaluable during debugging or system recovery.
+                </p>
+</div>
+<!-- Footer Section of Article -->
+<footer class="mt-20 pt-12 border-t border-outline-variant/10">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+<div class="flex flex-wrap gap-2">
+<span class="px-4 py-2 bg-surface-container-low text-on-surface-variant rounded-full text-xs font-label">#Microservices</span>
+<span class="px-4 py-2 bg-surface-container-low text-on-surface-variant rounded-full text-xs font-label">#TypeScript</span>
+<span class="px-4 py-2 bg-surface-container-low text-on-surface-variant rounded-full text-xs font-label">#SystemDesign</span>
+</div>
+<div class="flex items-center gap-6">
+<span class="font-label text-xs uppercase tracking-widest text-secondary">Share This Ledger</span>
+<div class="flex gap-4">
+<a class="text-secondary hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">link</span></a>
+<a class="text-secondary hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+<a class="text-secondary hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">open_in_new</span></a>
+</div>
+</div>
+</div>
+<!-- Related/Next Article -->
+<div class="mt-24 p-8 md:p-12 bg-surface-container-low rounded-2xl relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<p class="font-label text-[10px] uppercase tracking-[0.2em] text-primary mb-4">Up Next</p>
+<div class="flex flex-col md:flex-row justify-between items-end gap-6">
+<h4 class="font-headline font-bold text-2xl md:text-4xl text-on-surface max-w-xl leading-tight">
+                            Refining the <span class="font-body italic font-normal">Abstract</span>: UI Patterns for High-Data Environments
+                        </h4>
+<a class="flex items-center justify-center w-16 h-16 bg-primary text-on-primary rounded-full hover:scale-110 transition-transform" href="#">
+<span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+</div>
+</footer>
+</article>
+</main>
+<!-- Footer Component -->
+<footer class="w-full py-12 px-12 flex flex-col md:flex-row justify-between items-center gap-6 bg-[#1c1b1b]">
+<div class="font-['Manrope'] font-bold text-[#e5e2e1]">The Curated Ledger</div>
+<div class="font-['Newsreader'] text-sm tracking-wide text-[#c8c6c5]">© 2024 The Curated Ledger. Built with precision and soul.</div>
+<div class="flex gap-8">
+<a class="text-[#c8c6c5] hover:text-[#fdc562] transition-all duration-300 opacity-80 hover:opacity-100 font-label text-xs uppercase tracking-widest" href="#">GitHub</a>
+<a class="text-[#c8c6c5] hover:text-[#fdc562] transition-all duration-300 opacity-80 hover:opacity-100 font-label text-xs uppercase tracking-widest" href="#">LinkedIn</a>
+<a class="text-[#c8c6c5] hover:text-[#fdc562] transition-all duration-300 opacity-80 hover:opacity-100 font-label text-xs uppercase tracking-widest" href="#">Twitter</a>
+</div>
+</footer>
+</body></html>

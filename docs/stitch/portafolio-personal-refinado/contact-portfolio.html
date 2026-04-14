@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#f4be5b",
+                    "surface-bright": "#3a3939",
+                    "tertiary-container": "#c9af85",
+                    "on-tertiary-fixed": "#271900",
+                    "surface-dim": "#131313",
+                    "secondary-container": "#474746",
+                    "background": "#131313",
+                    "inverse-on-surface": "#313030",
+                    "error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#474746",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-tertiary-fixed-variant": "#564422",
+                    "primary-fixed": "#ffdeaa",
+                    "on-tertiary-container": "#544221",
+                    "on-primary-fixed-variant": "#5f4100",
+                    "on-secondary": "#303030",
+                    "surface-tint": "#f4be5b",
+                    "secondary-fixed": "#e4e2e1",
+                    "surface-container-low": "#1c1b1b",
+                    "on-error": "#690005",
+                    "on-surface-variant": "#d0c5af",
+                    "on-surface": "#e5e2e1",
+                    "inverse-surface": "#e5e2e1",
+                    "surface-variant": "#353534",
+                    "on-primary-fixed": "#271900",
+                    "on-tertiary": "#3e2e0e",
+                    "on-secondary-container": "#b7b5b4",
+                    "tertiary-fixed": "#fbdfb1",
+                    "outline-variant": "#4d4635",
+                    "error": "#ffb4ab",
+                    "primary-container": "#dfaa4a",
+                    "surface-container-high": "#2a2a2a",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-highest": "#353534",
+                    "on-primary": "#422c00",
+                    "on-secondary-fixed": "#1b1c1c",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "outline": "#99907c",
+                    "primary": "#fdc562",
+                    "on-background": "#e5e2e1",
+                    "secondary": "#c8c6c5",
+                    "surface-container": "#201f1f",
+                    "tertiary": "#e6ca9e",
+                    "inverse-primary": "#7d5700",
+                    "on-primary-container": "#5d4000",
+                    "surface": "#131313",
+                    "tertiary-fixed-dim": "#dec397"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Newsreader"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #131313;
+            color: #e5e2e1;
+            font-family: 'Newsreader', serif;
+        }
+        .glass-panel {
+            background: rgba(42, 42, 42, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-12 py-6 max-w-screen-2xl mx-auto bg-[#131313] shadow-[0_40px_60px_-15px_rgba(229,226,225,0.06)]">
+<div class="text-2xl font-['Manrope'] font-extrabold tracking-tighter text-[#e5e2e1]">
+            The Curated Ledger
+        </div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="font-['Inter'] tracking-wider uppercase text-sm text-[#c8c6c5] hover:text-[#fdc562] transition-colors duration-300" href="#">Home</a>
+<a class="font-['Inter'] tracking-wider uppercase text-sm text-[#c8c6c5] hover:text-[#fdc562] transition-colors duration-300" href="#">Services</a>
+<a class="font-['Inter'] tracking-wider uppercase text-sm text-[#c8c6c5] hover:text-[#fdc562] transition-colors duration-300" href="#">Projects</a>
+<a class="font-['Inter'] tracking-wider uppercase text-sm text-[#c8c6c5] hover:text-[#fdc562] transition-colors duration-300" href="#">Blog</a>
+<a class="font-['Inter'] tracking-wider uppercase text-sm text-[#fdc562] font-bold border-b-2 border-[#fdc562] pb-1" href="#">Contact</a>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-md font-label font-semibold text-sm scale-95 active:scale-90 transition-transform hover:shadow-[0_0_20px_rgba(253,197,98,0.2)]">
+            Let's Talk
+        </button>
+</nav>
+<main class="pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto">
+<!-- Hero Section Asymmetric Split -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end mb-24">
+<div class="lg:col-span-7">
+<h1 class="font-headline text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-none">
+                    Start a <span class="italic font-body font-medium text-primary">Conversation</span>
+</h1>
+<p class="font-body text-xl md:text-2xl text-secondary leading-relaxed max-w-2xl">
+                    Whether you have a specific project in mind or just want to explore the possibilities of digital craftsmanship, I’m here to help translate your vision into a robust technical reality.
+                </p>
+</div>
+<div class="lg:col-span-5 flex justify-end">
+<div class="w-full aspect-square max-w-sm relative">
+<div class="absolute inset-0 bg-primary opacity-5 rounded-full blur-3xl"></div>
+<img alt="Contact Office" class="w-full h-full object-cover rounded-xl grayscale hover:grayscale-0 transition-all duration-700" data-alt="Modern minimalist home office with warm desk lamp lighting, a high-end laptop, and architectural design books in soft focus" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCfTEEIXAR8rHvWZxkdg3_ZmxByQU964qqJFQAnk1ZpTeRAsdvSHhdkgOEGsPI8QLiayY2OLs6cG2AhZWAnEoirNYWPykFUSuO464fdquRmw65Tf_xbqW4LeprtKsysKDqcOf4ZAnE8a8boWQ3i6J5ybdBvMLniRCiptpHr66ANjJohJ6qn8YwBiIUCJXOU7fFk7cp-_gnxscxdUtwMnhpdp6jgtTQwq9eNqNL6XEn86UmXXt3f10Q6XnkTaOkQwmHAy2stcVx9A"/>
+</div>
+</div>
+</div>
+<!-- Contact Section Bento Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Information Panel -->
+<div class="lg:col-span-1 flex flex-col gap-8">
+<!-- Location Card -->
+<div class="bg-surface-container-low p-8 rounded-xl border border-outline-variant/10 group">
+<div class="flex items-center gap-4 mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">location_on</span>
+<h3 class="font-headline text-lg font-bold">Location</h3>
+</div>
+<p class="font-body text-xl italic text-on-surface mb-2">Based in Berlin, Germany</p>
+<p class="font-label text-xs uppercase tracking-widest text-secondary/60">Available for remote worldwide</p>
+</div>
+<!-- Direct Links Card -->
+<div class="bg-surface-container-low p-8 rounded-xl border border-outline-variant/10 flex-grow">
+<h3 class="font-headline text-lg font-bold mb-8">Direct Channels</h3>
+<div class="space-y-6">
+<a class="flex items-center gap-4 group" href="mailto:hello@curatedledger.com">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-primary text-xl">mail</span>
+</div>
+<div>
+<p class="font-label text-xs uppercase tracking-widest text-secondary/60">Email</p>
+<p class="font-body text-lg group-hover:text-primary transition-colors">hello@curatedledger.com</p>
+</div>
+</a>
+<div class="flex items-center gap-4 group">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-xl">schedule</span>
+</div>
+<div>
+<p class="font-label text-xs uppercase tracking-widest text-secondary/60">Response Time</p>
+<p class="font-body text-lg">Within 24 business hours</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Socials Card -->
+<div class="bg-surface-container-low p-8 rounded-xl border border-outline-variant/10">
+<h3 class="font-headline text-lg font-bold mb-6">Follow the Process</h3>
+<div class="flex gap-4">
+<a class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center hover:text-primary transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">terminal</span>
+</a>
+<a class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center hover:text-primary transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">work</span>
+</a>
+<a class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center hover:text-primary transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">share</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Contact Form Panel -->
+<div class="lg:col-span-2 bg-surface-container-high p-8 md:p-12 rounded-xl relative overflow-hidden">
+<!-- Background Glow -->
+<div class="absolute top-0 right-0 -mr-24 -mt-24 w-64 h-64 bg-primary opacity-[0.03] rounded-full blur-3xl"></div>
+<h2 class="font-headline text-3xl font-bold mb-2">Send a Message</h2>
+<p class="font-body text-lg text-secondary mb-10 italic">Inquiry regarding a project, collaboration, or just a friendly hello.</p>
+<form class="space-y-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="relative group">
+<label class="font-label text-xs uppercase tracking-widest text-secondary block mb-2 transition-colors group-focus-within:text-primary">Full Name</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant/30 py-3 px-0 focus:ring-0 focus:border-primary font-body text-xl placeholder:text-secondary/20 transition-all" placeholder="Johnathan Doe" type="text"/>
+</div>
+<div class="relative group">
+<label class="font-label text-xs uppercase tracking-widest text-secondary block mb-2 transition-colors group-focus-within:text-primary">Email Address</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant/30 py-3 px-0 focus:ring-0 focus:border-primary font-body text-xl placeholder:text-secondary/20 transition-all" placeholder="john@example.com" type="email"/>
+</div>
+</div>
+<div class="relative group">
+<label class="font-label text-xs uppercase tracking-widest text-secondary block mb-2 transition-colors group-focus-within:text-primary">Project Interest</label>
+<select class="w-full bg-transparent border-0 border-b border-outline-variant/30 py-3 px-0 focus:ring-0 focus:border-primary font-body text-xl appearance-none cursor-pointer">
+<option class="bg-surface-container-highest">Full Stack Development</option>
+<option class="bg-surface-container-highest">UI/UX Design Architecture</option>
+<option class="bg-surface-container-highest">Technical Consultation</option>
+<option class="bg-surface-container-highest">Other</option>
+</select>
+</div>
+<div class="relative group">
+<label class="font-label text-xs uppercase tracking-widest text-secondary block mb-2 transition-colors group-focus-within:text-primary">Your Message</label>
+<textarea class="w-full bg-transparent border-0 border-b border-outline-variant/30 py-3 px-0 focus:ring-0 focus:border-primary font-body text-xl placeholder:text-secondary/20 transition-all resize-none" placeholder="Tell me about your vision..." rows="4"></textarea>
+</div>
+<div class="pt-4">
+<button class="group relative flex items-center gap-4 bg-primary text-on-primary px-10 py-4 rounded-md font-label font-bold tracking-widest uppercase text-sm overflow-hidden transition-all hover:pr-14 active:scale-95 shadow-[0_10px_30px_-10px_rgba(253,197,98,0.4)]" type="submit">
+<span class="relative z-10">Send Dispatch</span>
+<span class="material-symbols-outlined text-xl absolute right-6 opacity-0 group-hover:opacity-100 transition-all">arrow_forward</span>
+</button>
+</div>
+</form>
+</div>
+</div>
+<!-- Trust Section -->
+<div class="mt-24 py-16 border-t border-outline-variant/10">
+<p class="font-label text-xs uppercase tracking-[0.3em] text-center text-secondary/40 mb-12">Trusted by teams at</p>
+<div class="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-30 grayscale">
+<div class="font-headline text-2xl font-black">NEXUS</div>
+<div class="font-headline text-2xl font-black italic">VANTAGE</div>
+<div class="font-headline text-2xl font-black tracking-widest">AETHER</div>
+<div class="font-headline text-2xl font-black">CORE.IO</div>
+</div>
+</div>
+</main>
+<!-- Map Section (Decorative) -->
+<section class="w-full h-[400px] grayscale filter contrast-[1.2] brightness-[0.8] opacity-40">
+<div class="w-full h-full bg-surface-container-lowest flex items-center justify-center overflow-hidden">
+<img alt="Berlin Map" class="w-full h-full object-cover" data-alt="Monochrome dark aesthetic map of Berlin streets with highlighted grid patterns and elegant minimalist cartography" data-location="Berlin" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEZijUrXHNjutFBEYM_c-iKYCC940vdWYq7eWxEiH6Pve-XDIRKrJ0ZsYXzEkoGur_eZybRJz1JBDedhds7k1pUNoXbYkIpVgym4uKvhP7C3SCTIB9ct6R4f21BG97VYZuiNq8NthShh6Wtc2oN7sphSSyevDGcuOmKxohgAqKLI02_9chqlc4m146v2cfPCZcHQgq5l4xgPxw1GW2-pqcs87G15GErGnMIGy2Lj5BXuYdzhGBf3zC9ZvNGjhqS6edlKvX-qxyvQ"/>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full py-12 px-12 flex flex-col md:flex-row justify-between items-center gap-6 bg-[#1c1b1b]">
+<div class="font-['Manrope'] font-bold text-[#e5e2e1]">
+            The Curated Ledger
+        </div>
+<div class="font-['Newsreader'] text-sm tracking-wide text-[#c8c6c5]">
+            © 2024 The Curated Ledger. Built with precision and soul.
+        </div>
+<div class="flex gap-8">
+<a class="font-['Newsreader'] text-sm tracking-wide text-[#c8c6c5] hover:text-[#fdc562] transition-all duration-300 opacity-80 hover:opacity-100" href="#">GitHub</a>
+<a class="font-['Newsreader'] text-sm tracking-wide text-[#c8c6c5] hover:text-[#fdc562] transition-all duration-300 opacity-80 hover:opacity-100" href="#">LinkedIn</a>
+<a class="font-['Newsreader'] text-sm tracking-wide text-[#c8c6c5] hover:text-[#fdc562] transition-all duration-300 opacity-80 hover:opacity-100" href="#">Twitter</a>
+</div>
+</footer>
+</body></html>

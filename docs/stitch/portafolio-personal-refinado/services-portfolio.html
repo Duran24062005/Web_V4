@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;family=Newsreader:ital,wght@1,400;1,600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#f4be5b",
+                    "surface-bright": "#3a3939",
+                    "tertiary-container": "#c9af85",
+                    "on-tertiary-fixed": "#271900",
+                    "surface-dim": "#131313",
+                    "secondary-container": "#474746",
+                    "background": "#131313",
+                    "inverse-on-surface": "#313030",
+                    "error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#474746",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-tertiary-fixed-variant": "#564422",
+                    "primary-fixed": "#ffdeaa",
+                    "on-tertiary-container": "#544221",
+                    "on-primary-fixed-variant": "#5f4100",
+                    "on-secondary": "#303030",
+                    "surface-tint": "#f4be5b",
+                    "secondary-fixed": "#e4e2e1",
+                    "surface-container-low": "#1c1b1b",
+                    "on-error": "#690005",
+                    "on-surface-variant": "#d0c5af",
+                    "on-surface": "#e5e2e1",
+                    "inverse-surface": "#e5e2e1",
+                    "surface-variant": "#353534",
+                    "on-primary-fixed": "#271900",
+                    "on-tertiary": "#3e2e0e",
+                    "on-secondary-container": "#b7b5b4",
+                    "tertiary-fixed": "#fbdfb1",
+                    "outline-variant": "#4d4635",
+                    "error": "#ffb4ab",
+                    "primary-container": "#dfaa4a",
+                    "surface-container-high": "#2a2a2a",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-highest": "#353534",
+                    "on-primary": "#422c00",
+                    "on-secondary-fixed": "#1b1c1c",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "outline": "#99907c",
+                    "primary": "#fdc562",
+                    "on-background": "#e5e2e1",
+                    "secondary": "#c8c6c5",
+                    "surface-container": "#201f1f",
+                    "tertiary": "#e6ca9e",
+                    "inverse-primary": "#7d5700",
+                    "on-primary-container": "#5d4000",
+                    "surface": "#131313",
+                    "tertiary-fixed-dim": "#dec397"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Newsreader"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .signature-glow {
+            background: radial-gradient(circle at center, rgba(253, 197, 98, 0.08) 0%, rgba(19, 19, 19, 0) 70%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-label selection:bg-primary selection:text-on-primary">
+<!-- TopNavBar Shell -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-12 py-6 max-w-screen-2xl mx-auto bg-[#131313] dark:bg-[#131313] shadow-[0_40px_60px_-15px_rgba(229,226,225,0.06)]">
+<div class="text-2xl font-['Manrope'] font-extrabold tracking-tighter text-[#e5e2e1]">
+            The Curated Ledger
+        </div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-[#c8c6c5] font-medium hover:text-[#fdc562] transition-colors duration-300" href="#">Home</a>
+<a class="text-[#fdc562] font-bold border-b-2 border-[#fdc562] pb-1" href="#">Services</a>
+<a class="text-[#c8c6c5] font-medium hover:text-[#fdc562] transition-colors duration-300" href="#">Projects</a>
+<a class="text-[#c8c6c5] font-medium hover:text-[#fdc562] transition-colors duration-300" href="#">Blog</a>
+<a class="text-[#c8c6c5] font-medium hover:text-[#fdc562] transition-colors duration-300" href="#">Contact</a>
+</nav>
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-md font-label font-semibold scale-95 active:scale-90 transition-transform hover:shadow-[0_0_20px_rgba(253,197,98,0.2)]">
+            Let's Talk
+        </button>
+</header>
+<main class="pt-32 pb-24 px-6 md:px-12 max-w-screen-2xl mx-auto overflow-hidden">
+<!-- Hero / Header Section -->
+<section class="mb-32 relative">
+<div class="signature-glow absolute -top-48 -left-48 w-full h-full -z-10"></div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
+<div class="lg:col-span-8">
+<span class="font-label tracking-wider uppercase text-primary text-sm mb-4 block">Architecture &amp; Execution</span>
+<h1 class="font-headline font-bold text-6xl md:text-8xl tracking-tighter text-on-surface leading-[0.9]">
+                        Crafting Digital <br/>
+<span class="font-body italic font-normal text-secondary">Infrastructures.</span>
+</h1>
+</div>
+<div class="lg:col-span-4 pb-2">
+<p class="font-body text-xl md:text-2xl text-on-surface-variant leading-relaxed">
+                        Moving beyond simple code to build systems that balance <span class="text-on-surface">technical precision</span> with <span class="text-on-surface">human-centric</span> design.
+                    </p>
+</div>
+</div>
+</section>
+<!-- Services Bento-ish Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Service Card 1: Frontend -->
+<div class="group bg-surface-container-low p-10 flex flex-col justify-between min-h-[420px] transition-all duration-500 hover:bg-surface-container-high relative overflow-hidden">
+<div class="relative z-10">
+<div class="mb-8 inline-flex items-center justify-center w-12 h-12 rounded-full bg-surface-container-lowest text-primary">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<h3 class="font-headline font-bold text-3xl text-on-surface mb-4">Frontend Engineering</h3>
+<p class="font-body text-lg text-secondary mb-8">Building fluid, responsive, and highly-performant user interfaces using React, Vue, and modern CSS architectures.</p>
+<ul class="space-y-3 font-label text-sm text-on-surface-variant mb-12">
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span> Design System Implementation</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span> WebGL &amp; Complex Interactions</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span> Performance Optimization</li>
+</ul>
+</div>
+<div class="mt-auto z-10">
+<a class="group/btn inline-flex items-center gap-2 font-label font-bold text-primary tracking-wide text-sm" href="#">
+                        EXPLORE CAPABILITIES 
+                        <span class="material-symbols-outlined text-lg transition-transform group-hover/btn:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<!-- Bottom border highlight on hover -->
+<div class="absolute bottom-0 left-0 w-0 h-[2px] bg-primary group-hover:w-full transition-all duration-700"></div>
+</div>
+<!-- Service Card 2: Backend (Large/Spanning) -->
+<div class="group bg-surface-container-low p-10 flex flex-col justify-between min-h-[420px] transition-all duration-500 hover:bg-surface-container-high relative overflow-hidden">
+<div class="relative z-10">
+<div class="mb-8 inline-flex items-center justify-center w-12 h-12 rounded-full bg-surface-container-lowest text-primary">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+</div>
+<h3 class="font-headline font-bold text-3xl text-on-surface mb-4">System Architecture</h3>
+<p class="font-body text-lg text-secondary mb-8">Robust, scalable server-side solutions designed for high availability and complex data orchestration.</p>
+<ul class="space-y-3 font-label text-sm text-on-surface-variant mb-12">
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span> Node.js &amp; Go Microservices</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span> GraphQL &amp; REST API Design</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span> Database Modeling (SQL/NoSQL)</li>
+</ul>
+</div>
+<div class="mt-auto z-10">
+<a class="group/btn inline-flex items-center gap-2 font-label font-bold text-primary tracking-wide text-sm" href="#">
+                        EXPLORE CAPABILITIES 
+                        <span class="material-symbols-outlined text-lg transition-transform group-hover/btn:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<div class="absolute bottom-0 left-0 w-0 h-[2px] bg-primary group-hover:w-full transition-all duration-700"></div>
+</div>
+<!-- Service Card 3: Consulting -->
+<div class="group bg-surface-container-low p-10 flex flex-col justify-between min-h-[420px] transition-all duration-500 hover:bg-surface-container-high relative overflow-hidden">
+<div class="relative z-10">
+<div class="mb-8 inline-flex items-center justify-center w-12 h-12 rounded-full bg-surface-container-lowest text-primary">
+<span class="material-symbols-outlined" data-icon="lightbulb">lightbulb</span>
+</div>
+<h3 class="font-headline font-bold text-3xl text-on-surface mb-4">Technical Strategy</h3>
+<p class="font-body text-lg text-secondary mb-8">Bridging the gap between business objectives and technical execution with curated architectural roadmaps.</p>
+<ul class="space-y-3 font-label text-sm text-on-surface-variant mb-12">
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span> Code Audits &amp; Refactoring</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span> Technology Stack Selection</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span> Team Mentorship &amp; Lead</li>
+</ul>
+</div>
+<div class="mt-auto z-10">
+<a class="group/btn inline-flex items-center gap-2 font-label font-bold text-primary tracking-wide text-sm" href="#">
+                        EXPLORE CAPABILITIES 
+                        <span class="material-symbols-outlined text-lg transition-transform group-hover/btn:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<div class="absolute bottom-0 left-0 w-0 h-[2px] bg-primary group-hover:w-full transition-all duration-700"></div>
+</div>
+<!-- Service Card 4: Full Stack (Spanning 2 columns on large) -->
+<div class="lg:col-span-2 group bg-surface-container-low p-12 transition-all duration-500 hover:bg-surface-container-high relative overflow-hidden flex flex-col md:flex-row gap-12">
+<div class="md:w-1/2 relative z-10">
+<div class="mb-8 inline-flex items-center justify-center w-12 h-12 rounded-full bg-surface-container-lowest text-primary">
+<span class="material-symbols-outlined" data-icon="layers">layers</span>
+</div>
+<h3 class="font-headline font-bold text-4xl text-on-surface mb-6">Full Stack Product Delivery</h3>
+<p class="font-body text-xl text-secondary mb-8">From napkin sketch to production deployment. I handle the entire lifecycle of a digital product, ensuring cohesive architecture from UI to DB.</p>
+<a class="group/btn inline-flex items-center gap-2 font-label font-bold text-primary tracking-wide text-sm" href="#">
+                        START A NEW PROJECT 
+                        <span class="material-symbols-outlined text-lg transition-transform group-hover/btn:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<div class="md:w-1/2 relative min-h-[240px] rounded-lg overflow-hidden border-2 border-outline-variant/10">
+<img alt="Development Workspace" class="absolute inset-0 w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-1000" data-alt="Monochrome close-up of high-end mechanical keyboard and curved monitor with clean code in a dark minimalist home office setup" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5jwKPfpfH4WEc3U7fNROS7iMHswqMc5fP7BP0uIJzDluGkQpEprmNAXBdfUEh5hbJGIUX-xw4WsJ-LxroMS-Bj_1VI0BQ7NT8TJlMgzHxkza4uVr0MYEXYvaxLjZmJZq1Tn9A5_puL6Sgonylvs29LILALz0Scm9djMBtNHjohQogyfL1pvFarn5rnK0j8rd5ThpoiPciaQwfLvg41ADNEsCXq4yPLeblN8HIxSXlcDS1x-SeDfYPFnjgheitwvIFfGjZnAHPPQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-transparent"></div>
+</div>
+<div class="absolute bottom-0 left-0 w-0 h-[2px] bg-primary group-hover:w-full transition-all duration-700"></div>
+</div>
+<!-- Service Card 5: Maintenance/DevOps -->
+<div class="group bg-surface-container-low p-10 flex flex-col justify-between min-h-[420px] transition-all duration-500 hover:bg-surface-container-high relative overflow-hidden">
+<div class="relative z-10">
+<div class="mb-8 inline-flex items-center justify-center w-12 h-12 rounded-full bg-surface-container-lowest text-primary">
+<span class="material-symbols-outlined" data-icon="settings_suggest">settings_suggest</span>
+</div>
+<h3 class="font-headline font-bold text-3xl text-on-surface mb-4">DevOps &amp; Cloud</h3>
+<p class="font-body text-lg text-secondary mb-8">Infrastructure as code, ensuring your application lives in a secure, scalable, and automated cloud environment.</p>
+<ul class="space-y-3 font-label text-sm text-on-surface-variant mb-12">
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span> AWS / GCP Infrastructure</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span> CI/CD Pipeline Automation</li>
+<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full"></span> Docker &amp; Kubernetes</li>
+</ul>
+</div>
+<div class="mt-auto z-10">
+<a class="group/btn inline-flex items-center gap-2 font-label font-bold text-primary tracking-wide text-sm" href="#">
+                        EXPLORE CAPABILITIES 
+                        <span class="material-symbols-outlined text-lg transition-transform group-hover/btn:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<div class="absolute bottom-0 left-0 w-0 h-[2px] bg-primary group-hover:w-full transition-all duration-700"></div>
+</div>
+</div>
+<!-- Major CTA Section -->
+<section class="mt-48 mb-24 py-24 px-12 bg-surface-container-low rounded-xl relative overflow-hidden flex flex-col items-center text-center">
+<div class="signature-glow absolute inset-0 opacity-40"></div>
+<div class="relative z-10 max-w-2xl">
+<span class="font-label tracking-widest uppercase text-secondary text-xs mb-6 block">Ready for the next step</span>
+<h2 class="font-headline font-bold text-5xl md:text-6xl text-on-surface mb-8 tracking-tighter">Let's build something that <span class="font-body italic font-normal text-primary">endures.</span></h2>
+<p class="font-body text-xl text-on-surface-variant mb-12 leading-relaxed">
+                    Whether you need a specialized engineer to augment your team or a lead to build your vision from zero, I'm here to translate your goals into high-fidelity reality.
+                </p>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+<button class="bg-primary text-on-primary px-10 py-4 rounded-md font-label font-bold tracking-wide scale-95 active:scale-90 transition-all hover:shadow-[0_0_30px_rgba(253,197,98,0.2)]">
+                        START THE CONVERSATION
+                    </button>
+<button class="text-on-surface font-label font-semibold border border-outline-variant/30 px-10 py-4 rounded-md hover:bg-surface-container-high transition-colors">
+                        DOWNLOAD PROCESS PDF
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Shell -->
+<footer class="w-full py-12 px-12 flex flex-col md:flex-row justify-between items-center gap-6 bg-[#1c1b1b] dark:bg-[#1c1b1b]">
+<div class="font-['Manrope'] font-bold text-[#e5e2e1]">
+            The Curated Ledger
+        </div>
+<div class="font-['Newsreader'] text-sm tracking-wide text-[#c8c6c5]">
+            © 2024 The Curated Ledger. Built with precision and soul.
+        </div>
+<div class="flex gap-8">
+<a class="text-[#c8c6c5] hover:text-[#fdc562] transition-all duration-300 opacity-80 hover:opacity-100 font-label text-sm uppercase tracking-widest" href="#">GitHub</a>
+<a class="text-[#c8c6c5] hover:text-[#fdc562] transition-all duration-300 opacity-80 hover:opacity-100 font-label text-sm uppercase tracking-widest" href="#">LinkedIn</a>
+<a class="text-[#c8c6c5] hover:text-[#fdc562] transition-all duration-300 opacity-80 hover:opacity-100 font-label text-sm uppercase tracking-widest" href="#">Twitter</a>
+</div>
+</footer>
+</body></html>
