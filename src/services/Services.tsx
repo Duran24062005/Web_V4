@@ -1,9 +1,14 @@
 import { ArrowRight } from 'lucide-react'
-import { Link } from 'react-router-dom'
 import { CuratedPageShell } from '../shared/components/CuratedPageShell'
-import { servicesPageContent } from './services.content'
+import { useLanguage } from '../i18n/LanguageContext'
+import { LocalizedLink } from '../i18n/LocalizedLink'
+import { getCopy } from '../i18n/copy'
+import { getServicesPageContent } from './services.content'
 
 export const Services = () => {
+  const { language } = useLanguage()
+  const copy = getCopy(language)
+  const servicesPageContent = getServicesPageContent(language)
   const FullStackIcon = servicesPageContent.cards[3].icon
   const OptimizationIcon = servicesPageContent.cards[4].icon
 
@@ -19,10 +24,10 @@ export const Services = () => {
                 {servicesPageContent.heroEyebrow}
               </span>
               <h1 className="font-headline text-5xl font-extrabold leading-[0.9] tracking-[-0.06em] md:text-7xl xl:text-8xl">
-                Construyendo sistemas
+                {servicesPageContent.heroTitleLead}
                 <br />
                 <span className="font-editorial font-normal italic text-[var(--curated-muted)]">
-                  digitales sostenibles.
+                  {servicesPageContent.heroTitleAccent}
                 </span>
               </h1>
             </div>
@@ -62,14 +67,14 @@ export const Services = () => {
                   </ul>
                 </div>
 
-                <div className="mt-auto z-10">
-                  <Link
+                <div className="z-10 mt-auto">
+                  <LocalizedLink
                     to="/contact"
                     className="inline-flex items-center gap-2 font-label text-sm font-bold tracking-wide text-[var(--curated-accent)]"
                   >
-                    EXPLORAR CAPACIDADES
+                    {copy.common.exploreCapabilities.toUpperCase()}
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Link>
+                  </LocalizedLink>
                 </div>
 
                 <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-[var(--curated-accent)] transition-all duration-700 group-hover:w-full" />
@@ -88,13 +93,13 @@ export const Services = () => {
               <p className="mb-8 font-editorial text-xl italic text-[var(--curated-muted)]">
                 {servicesPageContent.cards[3].description}
               </p>
-              <Link
+              <LocalizedLink
                 to="/projects"
                 className="inline-flex items-center gap-2 font-label text-sm font-bold tracking-wide text-[var(--curated-accent)]"
               >
-                VER PROYECTOS RELACIONADOS
+                {copy.common.viewRelatedProjects.toUpperCase()}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
+              </LocalizedLink>
             </div>
 
             <div className="relative min-h-[240px] overflow-hidden border border-[rgba(153,144,124,0.12)] md:w-1/2">
@@ -130,14 +135,14 @@ export const Services = () => {
               </ul>
             </div>
 
-            <div className="mt-auto z-10">
-              <Link
+            <div className="z-10 mt-auto">
+              <LocalizedLink
                 to="/contact"
                 className="inline-flex items-center gap-2 font-label text-sm font-bold tracking-wide text-[var(--curated-accent)]"
               >
-                CONVERSEMOS
+                {copy.common.letsTalk.toUpperCase()}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
+              </LocalizedLink>
             </div>
 
             <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-[var(--curated-accent)] transition-all duration-700 group-hover:w-full" />
@@ -149,31 +154,31 @@ export const Services = () => {
 
           <div className="relative z-10 mx-auto max-w-3xl">
             <span className="mb-6 block font-label text-xs uppercase tracking-[0.3em] text-[var(--curated-muted)]">
-              Siguiente paso
+              {copy.common.nextStep}
             </span>
             <h2 className="mb-8 font-headline text-5xl font-bold tracking-[-0.05em] md:text-6xl">
-              {servicesPageContent.ctaTitle.split(' que ')[0]}{' '}
+              {servicesPageContent.ctaTitleLead}{' '}
               <span className="font-editorial font-normal italic text-[var(--curated-accent)]">
-                que
+                {servicesPageContent.ctaTitleAccent}
               </span>{' '}
-              {servicesPageContent.ctaTitle.split(' que ')[1]}
+              {servicesPageContent.ctaTitleTail}
             </h2>
             <p className="mb-12 font-editorial text-xl leading-relaxed text-[var(--curated-muted)]">
               {servicesPageContent.ctaBody}
             </p>
             <div className="flex flex-col items-center justify-center gap-6 sm:flex-row">
-              <Link
+              <LocalizedLink
                 to="/contact"
                 className="bg-[var(--curated-accent)] px-10 py-4 font-label text-sm font-bold tracking-[0.14em] text-[#422c00] transition-all hover:shadow-[0_0_30px_rgba(253,197,98,0.2)]"
               >
-                INICIAR CONVERSACIÓN
-              </Link>
-              <Link
+                {copy.common.startConversation.toUpperCase()}
+              </LocalizedLink>
+              <LocalizedLink
                 to="/projects"
                 className="border border-[rgba(153,144,124,0.3)] px-10 py-4 font-label text-sm font-semibold text-[var(--curated-text)] transition-colors hover:bg-[var(--curated-surface-strong)]"
               >
-                VER PROYECTOS
-              </Link>
+                {copy.common.viewProjects.toUpperCase()}
+              </LocalizedLink>
             </div>
           </div>
         </section>

@@ -1,37 +1,38 @@
-import { Facebook, Github, Instagram, Linkedin } from "lucide-react";
+import { Facebook, Github, Instagram, Linkedin } from 'lucide-react'
+import { useLanguage } from '../../i18n/LanguageContext'
+import { getCopy } from '../../i18n/copy'
+import { contactData } from '../../home/home.content'
 
 export const Footer = () => {
+  const { language } = useLanguage()
+  const copy = getCopy(language)
+
   return (
-    <footer className="relative bottom-0 left-0 w-full bg-gray-900 py-2 z-40">
-      <div className="conatiner mx-auto px-6 justify-center">
-        <div className="flex flex-col md:flex-row lg:justify-between md:w-[60vh]">
-          <div className="flex justify-center space-x-4 mt-4">
+    <footer className="relative bottom-0 left-0 z-40 w-full bg-gray-900 py-2">
+      <div className="conatiner mx-auto justify-center px-6">
+        <div className="flex flex-col md:w-[60vh] md:flex-row lg:justify-between">
+          <div className="mt-4 flex justify-center space-x-4">
             <p className="text-[0.2vh] md:text-sm">
-              Copyright &copy; {new Date().getFullYear() + " "}
+              {copy.footer.copyrightPrefix} &copy; {new Date().getFullYear()}{' '}
               <span className="Alexi md:text-lg">Alexi Dg</span>.
             </p>
           </div>
-          <div className="flex justify-center space-x-4 mt-4">
-            <a href="https://www.facebook.com/profile.php?id=61573188309392" className="text-gray-400 hover:text-blue-600">
-            <Facebook />
-            {/*<a href="https://www.facebook.com/alexis.duran.54772728" className="text-gray-400 hover:text-blue-600"></a>/*}
-              {/* <i className="fab fa-facebook"></i> */}
+          <div className="mt-4 flex justify-center space-x-4">
+            <a href={contactData.facebook} className="text-gray-400 hover:text-blue-600">
+              <Facebook />
             </a>
-            <a href="https://github.com/Duran24062005" className="text-gray-400 hover:text-white">
+            <a href={contactData.github} className="text-gray-400 hover:text-white">
               <Github />
-              {/* <i className="fab fa-github"></i> */}
             </a>
-            <a href="https://www.instagram.com/alexis_duran_dg/" className="text-gray-400 hover:text-pink-600">
+            <a href={contactData.instagram} className="text-gray-400 hover:text-pink-600">
               <Instagram />
-              {/* <i className="fab fa-instagram"></i> */}
             </a>
-            <a href="https://www.linkedin.com/in/alexi-duran-gomez-6b17042a3/" className="text-gray-400 hover:text-blue-600">
+            <a href={contactData.linkedin} className="text-gray-400 hover:text-blue-600">
               <Linkedin />
-              {/* <i className="fab fa-linkedin"></i> */}
             </a>
           </div>
         </div>
       </div>
     </footer>
-  );
-};
+  )
+}

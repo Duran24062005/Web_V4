@@ -1,8 +1,11 @@
 import { ArrowRight, ChevronRight, Github } from 'lucide-react'
 import { useState } from 'react'
+import { useLanguage } from '../i18n/LanguageContext'
+import { getCopy } from '../i18n/copy'
 import { CuratedPageShell } from '../shared/components/CuratedPageShell'
 import { techNames } from '../mock/data/tech.data'
 import { useProjects } from '../shared/hooks/useProjects'
+import { LocalizedLink } from '../i18n/LocalizedLink'
 
 const filterOptions = ['all', ...techNames]
 
@@ -20,6 +23,8 @@ const ProjectCardSkeleton = ({ tall = false }: { tall?: boolean }) => (
 export const Projects = () => {
   const { projectsList, handleSearch, loading, error } = useProjects()
   const [activeFilter, setActiveFilter] = useState('all')
+  const { language } = useLanguage()
+  const copy = getCopy(language)
 
   const applyFilter = (filter: string) => {
     setActiveFilter(filter)
@@ -33,16 +38,16 @@ export const Projects = () => {
       <main className="mx-auto max-w-[1440px] px-4 pb-24 pt-32 md:px-8">
         <header className="mb-20">
           <h1 className="mb-4 font-headline text-5xl font-extrabold tracking-[-0.06em] md:text-7xl">
-            Proyectos seleccionados.
+            {copy.projects.title}
           </h1>
           <p className="max-w-3xl font-editorial text-2xl italic leading-relaxed text-[var(--curated-muted)] md:text-3xl">
-            Un registro de productos y experimentos construidos con foco en experiencia, estructura técnica y entrega funcional.
+            {copy.projects.description}
           </p>
         </header>
 
         <section className="mb-16 flex flex-wrap items-center gap-4">
           <span className="font-label text-[10px] uppercase tracking-[0.3em] text-[var(--curated-muted)]">
-            Filtrar por:
+            {copy.common.filterBy}
           </span>
           {filterOptions.map((filter) => (
             <button
@@ -55,7 +60,7 @@ export const Projects = () => {
                   : 'bg-[var(--curated-surface)] text-[var(--curated-muted)] hover:text-[var(--curated-accent)]'
               }`}
             >
-              {filter === 'all' ? 'Todos los proyectos' : filter}
+              {filter === 'all' ? copy.common.allProjects : filter}
             </button>
           ))}
         </section>
@@ -105,7 +110,7 @@ export const Projects = () => {
                       rel="noreferrer"
                       className="inline-flex items-center gap-2 font-label text-xs font-bold uppercase tracking-[0.24em] text-[var(--curated-accent)] transition-all hover:gap-4"
                     >
-                      Live demo
+                      {copy.common.liveDemo}
                       <ArrowRight className="h-4 w-4" />
                     </a>
                     <a
@@ -156,7 +161,7 @@ export const Projects = () => {
                         rel="noreferrer"
                         className="inline-flex items-center gap-2 font-label text-xs font-bold uppercase tracking-[0.24em] text-[var(--curated-accent)]"
                       >
-                        Ver proyecto
+                        {copy.common.viewProject}
                         <ChevronRight className="h-4 w-4" />
                       </a>
                     </div>
@@ -198,7 +203,7 @@ export const Projects = () => {
                       rel="noreferrer"
                       className="inline-flex items-center gap-2 font-label text-xs font-bold uppercase tracking-[0.24em] text-[var(--curated-accent)]"
                     >
-                      Deploy
+                      {copy.common.deploy}
                       <ArrowRight className="h-4 w-4" />
                     </a>
                     <a
@@ -207,7 +212,7 @@ export const Projects = () => {
                       rel="noreferrer"
                       className="inline-flex items-center gap-2 font-label text-xs font-bold uppercase tracking-[0.24em] text-[var(--curated-muted)]"
                     >
-                      Código
+                      {copy.common.code}
                       <Github className="h-4 w-4" />
                     </a>
                   </div>
@@ -217,25 +222,23 @@ export const Projects = () => {
           </section>
         ) : (
           <div className="bg-[var(--curated-surface)] p-12 text-center">
-            <p className="font-editorial text-2xl italic text-[var(--curated-muted)]">
-              No hay proyectos disponibles para este filtro.
-            </p>
+            <p className="font-editorial text-2xl italic text-[var(--curated-muted)]">{copy.projects.empty}</p>
           </div>
         )}
 
         <section className="relative mt-32 overflow-hidden bg-[var(--curated-surface)] p-16 text-center">
           <div className="absolute inset-0 opacity-10 [background:radial-gradient(circle_at_center,#fdc562_0%,transparent_70%)]" />
           <div className="relative z-10">
-            <h2 className="mb-6 font-headline text-4xl font-bold">¿Tienes un proyecto en mente?</h2>
+            <h2 className="mb-6 font-headline text-4xl font-bold">{copy.projects.ctaTitle}</h2>
             <p className="mx-auto mb-10 max-w-2xl font-editorial text-xl italic text-[var(--curated-muted)]">
-              Estoy abierto a oportunidades freelance y colaboraciones donde haga sentido aportar producto, frontend o arquitectura.
+              {copy.projects.ctaBody}
             </p>
-            <a
-              href="/contact"
+            <LocalizedLink
+              to="/contact"
               className="inline-flex bg-[var(--curated-accent)] px-10 py-4 font-label text-sm font-bold uppercase tracking-[0.24em] text-[#422c00] transition-all hover:shadow-[0_0_30px_rgba(253,197,98,0.3)]"
             >
-              Iniciar conversación
-            </a>
+              {copy.common.startConversation}
+            </LocalizedLink>
           </div>
         </section>
       </main>

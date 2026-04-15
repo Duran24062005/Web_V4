@@ -1,114 +1,76 @@
-import { ChevronRight, Github } from "lucide-react";
-import type { Project } from "../../interfaces/Project.interfaces"
-import { ProjectCardSkeletonGrid } from "../../shared/skeletons/ProjectsSkeleton";
+import { ChevronRight, Github } from 'lucide-react'
+import type { Project } from '../../interfaces/Project.interfaces'
+import { useLanguage } from '../../i18n/LanguageContext'
+import { getCopy } from '../../i18n/copy'
+import { LocalizedLink } from '../../i18n/LocalizedLink'
+import { ProjectCardSkeletonGrid } from '../../shared/skeletons/ProjectsSkeleton'
 
 interface TopProjectsProps {
-    projects: Project[];
-    state?: boolean;
+  projects: Project[]
+  state?: boolean
 }
 
-
-const TOP_PROJECT_TITLES = [
-    "Web_V4",
-    "Email_Python_FastAPI",
-    "UserManagerExpress"
-];
-
-
+const topProjectTitles = ['Web_V4', 'Email_Python_FastAPI', 'UserManagerExpress']
 
 export const TopProjects = ({ projects, state }: TopProjectsProps) => {
+  const { language } = useLanguage()
+  const copy = getCopy(language)
+
   return (
-     <section id="projects" className="py-20 z-20 relative">
-            <div className="container mx-auto px-6">
-                <h2 className="text-4xl font-bold mb-8 text-center gradient-text">Proyectos Destacados</h2>
-                {
-                    state ? (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            <ProjectCardSkeletonGrid quantity={3} />
-                        </div>
-                    ) :
-                    projects.length > 0 ? (
-                        <>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {projects.filter(project => TOP_PROJECT_TITLES.includes(project.title))
-                            .slice(0, 3)
-                            .map((project) => (
-                                <div key={project.id} className="bg-gray-800 rounded-lg overflow-hidden">
-                                    <img src={project.imageUrl} alt={project.title}
-                                        className="w-full h-48 object-cover"/>
-                                    <div className="p-6">
-                                        <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                                        <p className="text-gray-400 mb-4">{project.description}</p>
-                                        <div>
-                                            {project.technologies.map((tech, index) => (
-                                                <span key={index} className="inline-block bg-purple-600 text-white text-xs px-2 py-1 rounded-full mr-2 mb-2">
-                                                    {tech}
-                                                </span>
-                                            ))}
-                                        </div>
-                                        <div className="flex justify-between mt-4">
-                                            <a href={project.repoUrl} className="flex text-purple-400 hover:text-purple-300">
-                                                <Github />
-                                            </a>
-                                            <a href={project.demoUrl} className="flex text-purple-400 hover:text-purple-300">
-                                                Ver más <ChevronRight />
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                        <div className="container text-center mt-6">
-                            <button
-                            className="group inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold px-4 sm:px-8 py-2 sm:py-2 rounded-full transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-105 text-center"
-                            >
-                                <a href="/projects">Ver más...</a>
-                            </button>
-                        </div>
-                        </>
-                    ) : (
-                        <p className="text-center text-gray-400">No hay proyectos destacados disponibles en este momento.</p>
-                    )
-                }
+    <section id="projects" className="relative z-20 py-20">
+      <div className="container mx-auto px-6">
+        <h2 className="mb-8 text-center text-4xl font-bold gradient-text">{copy.recruiter.featuredProjectsTitle}</h2>
+        {state ? (
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <ProjectCardSkeletonGrid quantity={3} />
+          </div>
+        ) : projects.length > 0 ? (
+          <>
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {projects
+                .filter((project) => topProjectTitles.includes(project.title))
+                .slice(0, 3)
+                .map((project) => (
+                  <div key={project.id} className="overflow-hidden rounded-lg bg-gray-800">
+                    <img src={project.imageUrl} alt={project.title} className="h-48 w-full object-cover" />
+                    <div className="p-6">
+                      <h3 className="mb-2 text-xl font-bold">{project.title}</h3>
+                      <p className="mb-4 text-gray-400">{project.description}</p>
+                      <div>
+                        {project.technologies.map((tech, index) => (
+                          <span
+                            key={`${project.id}-${tech}-${index}`}
+                            className="mr-2 mb-2 inline-block rounded-full bg-purple-600 px-2 py-1 text-xs text-white"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="mt-4 flex justify-between">
+                        <a href={project.repoUrl} className="flex text-purple-400 hover:text-purple-300">
+                          <Github />
+                        </a>
+                        <a href={project.demoUrl} className="flex text-purple-400 hover:text-purple-300">
+                          {copy.common.readMore} <ChevronRight />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                ))}
             </div>
-        </section>
+            <div className="container mt-6 text-center">
+              <LocalizedLink
+                to="/projects"
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-red-600 px-4 py-2 text-center font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-red-700 hover:shadow-2xl sm:px-8"
+              >
+                {copy.common.readMore}...
+              </LocalizedLink>
+            </div>
+          </>
+        ) : (
+          <p className="text-center text-gray-400">{copy.common.noFeaturedProjects}</p>
+        )}
+      </div>
+    </section>
   )
 }
-
-
- {/*<section id="projects" className="py-20 bg-gray-900 z-20 relative">
-            <div className="container mx-auto px-6">
-                <h2 className="text-4xl font-bold mb-8 text-center gradient-text">Proyectos Destacados</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div className="bg-gray-800 rounded-lg overflow-hidden">
-                        <img src="/image/Captura de pantalla 2024-09-16 143050.png" alt="Proyecto 1"
-                            className="w-full h-48 object-cover"/>
-                        <div className="p-6">
-                            <h3 className="text-xl font-bold mb-2">Sistema de Gestión de Tareas</h3>
-                            <p className="text-gray-400 mb-4">Aplicación web para la organización y seguimiento de tareas
-                                personales y de equipo.</p>
-                            <a href="#" className="text-purple-400 hover:text-purple-300">Ver más</a>
-                        </div>
-                    </div>
-                    <div className="bg-gray-800 rounded-lg overflow-hidden">
-                        <img src="/image/Captura de pantalla 2024-09-22 100455.png" alt="Proyecto 2" className="w-full h-48 object-cover"/>
-                        <div className="p-6">
-                            <h3 className="text-xl font-bold mb-2">App para escuchar musica</h3>
-                            <p className="text-gray-400 mb-4">Plataforma integral que permite buscar, reproducir y gestionar 
-                                listas de reproducción de sus canciones y artistas favoritos..</p>
-                            <a href="#" className="text-purple-400 hover:text-purple-300">Ver más</a>
-                        </div>
-                    </div>
-                    <div className="bg-gray-800 rounded-lg overflow-hidden">
-                        <img src="/image/Captura de pantalla 2024-09-29 093158.png" alt="Proyecto 3"
-                            className="w-full h-48 object-cover"/>
-                        <div className="p-6">
-                            <h3 className="text-xl font-bold mb-2">Dashboard de Análisis de Datos</h3>
-                            <p className="text-gray-400 mb-4">Herramienta de visualización de datos en tiempo real para toma
-                                de decisiones educativa.</p>
-                            <a href="#" className="text-purple-400 hover:text-purple-300">Ver más</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>*/}

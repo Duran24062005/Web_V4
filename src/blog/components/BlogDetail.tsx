@@ -2,11 +2,15 @@ import { useEffect, useState } from 'react'
 import { ArrowLeft, Bookmark, Link2, Share2 } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
 import type { Components } from 'react-markdown'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import type { Blog } from '../../interfaces/blog.interface'
+import { useLanguage } from '../../i18n/LanguageContext'
+import { getCopy } from '../../i18n/copy'
+import { formatReadingTime } from '../../i18n/utils'
 import { getErrorMessage } from '../../lib/http'
-import { getBlogById } from '../../services/blogs/blogs.service'
 import { CuratedPageShell } from '../../shared/components/CuratedPageShell'
+import { getBlogById } from '../../services/blogs/blogs.service'
+import { LocalizedLink } from '../../i18n/LocalizedLink'
 
 const estimateReadingTime = (content: string) => {
   const words = content.trim().split(/\s+/).filter(Boolean).length
@@ -16,6 +20,8 @@ const estimateReadingTime = (content: string) => {
 export const BlogDetail = () => {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
+  const { language, locale } = useLanguage()
+  const copy = getCopy(language)
 
   const [blog, setBlog] = useState<Blog | null>(null)
   const [loading, setLoading] = useState(true)
@@ -28,7 +34,7 @@ export const BlogDetail = () => {
         const foundBlog = await getBlogById(id as string)
         setBlog(foundBlog)
       } catch (loadError) {
-        setError(getErrorMessage(loadError, 'Error al cargar el blog'))
+        setError(getErrorMessage(loadError, language === 'es' ? 'Error al cargar el blog' : 'Error loading the blog'))
       } finally {
         setLoading(false)
       }
@@ -37,7 +43,7 @@ export const BlogDetail = () => {
     if (id) {
       void fetchBlog()
     }
-  }, [id])
+  }, [id, language])
 
   const handleCopyLink = async () => {
     await navigator.clipboard.writeText(window.location.href)
@@ -122,7 +128,7 @@ export const BlogDetail = () => {
         <div className="flex min-h-screen items-center justify-center px-4 pt-32">
           <div className="text-center">
             <div className="mx-auto mb-4 h-16 w-16 animate-spin rounded-full border-b-2 border-t-2 border-[var(--curated-accent)]" />
-            <p className="font-editorial text-xl italic text-[var(--curated-muted)]">Cargando artículo...</p>
+            <p className="font-editorial text-xl italic text-[var(--curated-muted)]">{copy.common.loadingArticle}</p>
           </div>
         </div>
       </CuratedPageShell>
@@ -134,16 +140,16 @@ export const BlogDetail = () => {
       <CuratedPageShell activePath="/blog">
         <div className="flex min-h-screen items-center justify-center px-4 pt-32">
           <div className="text-center">
-            <h2 className="mb-4 font-headline text-4xl font-bold text-red-400">No fue posible abrir el artículo</h2>
+            <h2 className="mb-4 font-headline text-4xl font-bold text-red-400">{copy.common.articleUnavailable}</h2>
             <p className="mb-8 font-editorial text-xl italic text-[var(--curated-muted)]">
-              {error || 'Blog no encontrado'}
+              {error || copy.common.blogNotFound}
             </p>
             <button
-              onClick={() => navigate('/blog')}
+              onClick={() => navigate(-1)}
               className="inline-flex items-center gap-2 bg-[var(--curated-accent)] px-6 py-3 font-label text-sm font-bold uppercase tracking-[0.18em] text-[#422c00]"
             >
               <ArrowLeft className="h-4 w-4" />
-              Volver al blog
+              {copy.blogs.backToBlog}
             </button>
           </div>
         </div>
@@ -155,13 +161,13 @@ export const BlogDetail = () => {
     <CuratedPageShell activePath="/blog">
       <main className="pb-24 pt-32">
         <div className="mx-auto mb-12 max-w-4xl px-4 md:px-8">
-          <Link
+          <LocalizedLink
             to="/blog"
             className="group flex items-center gap-2 font-label text-xs uppercase tracking-[0.24em] text-[var(--curated-muted)] transition-colors hover:text-[var(--curated-accent)]"
           >
             <ArrowLeft className="h-4 w-4" />
-            Volver al blog
-          </Link>
+            {copy.blogs.backToBlog}
+          </LocalizedLink>
         </div>
 
         <article className="mx-auto max-w-4xl px-4 md:px-8">
@@ -171,7 +177,7 @@ export const BlogDetail = () => {
                 {blog.tags[0] ?? 'Blog'}
               </span>
               <span className="font-label text-xs uppercase tracking-[0.2em] text-[var(--curated-muted)]">
-                {new Date(blog.createdAt).toLocaleDateString('es-CO', {
+                {new Date(blog.createdAt).toLocaleDateString(locale, {
                   day: '2-digit',
                   month: 'long',
                   year: 'numeric',
@@ -179,7 +185,7 @@ export const BlogDetail = () => {
               </span>
               <span className="h-1 w-1 rounded-full bg-[rgba(153,144,124,0.5)]" />
               <span className="font-label text-xs uppercase tracking-[0.2em] text-[var(--curated-muted)]">
-                {estimateReadingTime(blog.content)} min lectura
+                {formatReadingTime(estimateReadingTime(blog.content), language)}
               </span>
             </div>
 
@@ -198,7 +204,7 @@ export const BlogDetail = () => {
                   {blog.author}
                 </p>
                 <p className="font-editorial text-base italic text-[var(--curated-muted)]">
-                  Desarrollo, arquitectura y producto
+                  {copy.common.authorRole}
                 </p>
               </div>
 
@@ -207,14 +213,14 @@ export const BlogDetail = () => {
                   type="button"
                   onClick={handleCopyLink}
                   className="flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(153,144,124,0.2)] text-[var(--curated-muted)] transition-all hover:border-[var(--curated-accent)] hover:text-[var(--curated-accent)]"
-                  aria-label="Copiar enlace"
+                  aria-label={copy.common.copyLink}
                 >
                   <Link2 className="h-4 w-4" />
                 </button>
                 <button
                   type="button"
                   className="flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(153,144,124,0.2)] text-[var(--curated-muted)] transition-all hover:border-[var(--curated-accent)] hover:text-[var(--curated-accent)]"
-                  aria-label="Guardar artículo"
+                  aria-label={copy.common.saveArticle}
                 >
                   <Bookmark className="h-4 w-4" />
                 </button>
@@ -222,7 +228,7 @@ export const BlogDetail = () => {
                   type="button"
                   onClick={handleCopyLink}
                   className="flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(153,144,124,0.2)] text-[var(--curated-muted)] transition-all hover:border-[var(--curated-accent)] hover:text-[var(--curated-accent)]"
-                  aria-label="Compartir"
+                  aria-label={copy.common.share}
                 >
                   <Share2 className="h-4 w-4" />
                 </button>
@@ -264,7 +270,7 @@ export const BlogDetail = () => {
 
               <div className="flex items-center gap-6">
                 <span className="font-label text-xs uppercase tracking-[0.24em] text-[var(--curated-muted)]">
-                  Compartir artículo
+                  {copy.common.shareArticle}
                 </span>
                 <button
                   type="button"

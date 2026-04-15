@@ -1,8 +1,11 @@
 import { Search } from 'lucide-react'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { CuratedPageShell } from '../shared/components/CuratedPageShell'
 import { useBlogs } from '../shared/hooks/useBlogs'
+import { useLanguage } from '../i18n/LanguageContext'
+import { getCopy } from '../i18n/copy'
+import { LocalizedLink } from '../i18n/LocalizedLink'
+import { formatReadingTime } from '../i18n/utils'
 
 const estimateReadingTime = (content: string) => {
   const words = content.trim().split(/\s+/).filter(Boolean).length
@@ -12,10 +15,10 @@ const estimateReadingTime = (content: string) => {
 export const Blogs = () => {
   const { blogs, loading, error, searchBlogs } = useBlogs()
   const [query, setQuery] = useState('')
+  const { language, locale } = useLanguage()
+  const copy = getCopy(language)
 
-  const tagOptions = Array.from(
-    new Set(blogs.flatMap((blog) => blog.tags).filter(Boolean)),
-  ).slice(0, 6)
+  const tagOptions = Array.from(new Set(blogs.flatMap((blog) => blog.tags).filter(Boolean))).slice(0, 6)
 
   const featuredBlog = blogs[0]
   const secondaryBlogs = blogs.slice(1)
@@ -27,14 +30,14 @@ export const Blogs = () => {
           <div className="grid items-end gap-8 md:grid-cols-12">
             <div className="md:col-span-8">
               <h1 className="mb-6 font-headline text-5xl font-extrabold tracking-[-0.06em] md:text-7xl">
-                El cuaderno del
+                {copy.blogs.titleLead}
                 <br />
                 <span className="font-editorial font-normal italic text-[var(--curated-accent)]">
-                  desarrollador.
+                  {copy.blogs.titleAccent}
                 </span>
               </h1>
               <p className="max-w-3xl font-editorial text-xl italic leading-relaxed text-[var(--curated-muted)] md:text-2xl">
-                Artículos sobre arquitectura, frontend, backend y decisiones técnicas que vale la pena dejar escritas.
+                {copy.blogs.description}
               </p>
             </div>
 
@@ -49,7 +52,7 @@ export const Blogs = () => {
                     searchBlogs(value)
                   }}
                   className="w-full border-0 border-b-2 border-[rgba(153,144,124,0.2)] bg-[var(--curated-surface)] py-4 pl-12 pr-4 font-editorial text-lg italic text-[var(--curated-text)] transition-all placeholder:text-[rgba(200,198,197,0.5)] focus:border-[var(--curated-accent)] focus:outline-none"
-                  placeholder="Buscar artículos..."
+                  placeholder={copy.common.searchArticles}
                   type="text"
                 />
               </div>
@@ -66,7 +69,7 @@ export const Blogs = () => {
             }}
             className="rounded-full bg-[var(--curated-accent)] px-5 py-2 font-label text-xs font-bold uppercase tracking-[0.24em] text-[#422c00]"
           >
-            Todas las entradas
+            {copy.common.allEntries}
           </button>
           {tagOptions.map((tag) => (
             <button
@@ -111,24 +114,24 @@ export const Blogs = () => {
                   <div className="flex flex-col justify-center p-8 md:col-span-5 md:p-12">
                     <div className="mb-6 flex items-center gap-4">
                       <span className="font-label text-xs font-bold uppercase tracking-[0.24em] text-[var(--curated-accent)]">
-                        Artículo destacado
+                        {copy.common.featuredArticle}
                       </span>
                       <span className="h-px w-12 bg-[rgba(153,144,124,0.3)]" />
                       <span className="font-label text-xs font-medium uppercase tracking-[0.24em] text-[var(--curated-muted)]">
-                        {estimateReadingTime(featuredBlog.content)} min lectura
+                        {formatReadingTime(estimateReadingTime(featuredBlog.content), language)}
                       </span>
                     </div>
-                    <Link to={`/blog/${featuredBlog.id}`}>
+                    <LocalizedLink to={`/blog/${featuredBlog.id}`}>
                       <h2 className="mb-6 font-headline text-3xl font-bold leading-tight transition-colors group-hover:text-[var(--curated-accent)] md:text-4xl">
                         {featuredBlog.title}
                       </h2>
-                    </Link>
+                    </LocalizedLink>
                     <p className="mb-8 font-editorial text-lg italic leading-relaxed text-[var(--curated-muted)]">
                       {featuredBlog.excerpt}
                     </p>
                     <div className="mt-auto flex items-center gap-4">
                       <p className="font-label text-xs font-bold uppercase tracking-[0.24em] text-[var(--curated-muted)]">
-                        {new Date(featuredBlog.createdAt).toLocaleDateString('es-CO', {
+                        {new Date(featuredBlog.createdAt).toLocaleDateString(locale, {
                           day: '2-digit',
                           month: 'long',
                           year: 'numeric',
@@ -142,7 +145,7 @@ export const Blogs = () => {
 
             <section className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
               {secondaryBlogs.map((blog, index) => (
-                <Link
+                <LocalizedLink
                   key={blog.id}
                   to={`/blog/${blog.id}`}
                   className={`group flex flex-col overflow-hidden ${
@@ -168,34 +171,32 @@ export const Blogs = () => {
                         {estimateReadingTime(blog.content)} min
                       </span>
                     </div>
-                    <h3 className={`${index === 2 ? 'text-3xl' : 'text-2xl'} mb-4 font-headline font-bold transition-colors group-hover:text-[var(--curated-accent)]`}>
+                    <h3
+                      className={`${index === 2 ? 'text-3xl' : 'text-2xl'} mb-4 font-headline font-bold transition-colors group-hover:text-[var(--curated-accent)]`}
+                    >
                       {blog.title}
                     </h3>
-                    <p className="mb-10 font-editorial italic text-[var(--curated-muted)]">
-                      {blog.excerpt}
-                    </p>
+                    <p className="mb-10 font-editorial italic text-[var(--curated-muted)]">{blog.excerpt}</p>
                     <div className="mt-auto flex items-center justify-between border-t border-[rgba(153,144,124,0.08)] pt-6">
                       <span className="font-label text-[10px] uppercase tracking-[0.24em] text-[rgba(200,198,197,0.55)]">
-                        {new Date(blog.createdAt).toLocaleDateString('es-CO', {
+                        {new Date(blog.createdAt).toLocaleDateString(locale, {
                           day: '2-digit',
                           month: 'short',
                           year: 'numeric',
                         })}
                       </span>
                       <span className="font-label text-xs uppercase tracking-[0.2em] text-[var(--curated-muted)] transition-colors group-hover:text-[var(--curated-accent)]">
-                        Leer
+                        {copy.common.read}
                       </span>
                     </div>
                   </div>
-                </Link>
+                </LocalizedLink>
               ))}
             </section>
           </>
         ) : (
           <div className="bg-[var(--curated-surface)] p-12 text-center">
-            <p className="font-editorial text-2xl italic text-[var(--curated-muted)]">
-              No se encontraron artículos con el criterio actual.
-            </p>
+            <p className="font-editorial text-2xl italic text-[var(--curated-muted)]">{copy.common.noArticles}</p>
           </div>
         )}
       </main>

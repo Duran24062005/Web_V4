@@ -1,173 +1,192 @@
-import { Atom } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
-import { logoutAction } from '../../actions/logOut.action';
-import { useNavigate } from 'react-router';
-import { getSessionToken } from '../../lib/session';
-import { useAuthSession } from '../hooks/useAuthSession';
+import { Atom } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { logoutAction } from '../../actions/logOut.action'
+import { useLanguage } from '../../i18n/LanguageContext'
+import { LanguageSwitch } from '../../i18n/LanguageSwitch'
+import { LocalizedLink } from '../../i18n/LocalizedLink'
+import { getCopy } from '../../i18n/copy'
+import { buildLocalizedPath, stripLanguageFromPath } from '../../i18n/utils'
+import { getSessionToken } from '../../lib/session'
+import { useAuthSession } from '../hooks/useAuthSession'
 
 interface NavItem {
-  label: string;
-  href: string; // puede ser "/projects" o "#skills"
+  label: string
+  href: string
 }
 
 interface NavBarProps {
-  items: NavItem[];
+  items: readonly NavItem[]
 }
 
 export const NavBar = ({ items }: NavBarProps) => {
+  const [openMenu, setOpenMenu] = useState(false)
+  const mobileMenuRef = useRef<HTMLDivElement | null>(null)
+  const [isLoggingOut, setIsLoggingOut] = useState(false)
+  const location = useLocation()
+  const navigate = useNavigate()
+  const currentPath = stripLanguageFromPath(location.pathname)
+  const { isAuthenticated, clearSession } = useAuthSession()
+  const { language } = useLanguage()
+  const copy = getCopy(language)
 
-  const [openMenu, setOpenMenu] = useState(false);
-  const mobileMenuRef = useRef<HTMLDivElement | null>(null);
-  const [isLoggingOut, setIsLoggingOut] = useState(false);
-
-  const currentPath = typeof window !== "undefined" ? window.location.pathname : "";
-  const { isAuthenticated, clearSession } = useAuthSession();
-
-  // Animación al hacer scroll
   useEffect(() => {
     const animateOnScroll = () => {
-      const elements = document.querySelectorAll('.animate-on-scroll');
-      elements.forEach(element => {
-        const top = element.getBoundingClientRect().top;
-        const winHeight = window.innerHeight;
+      const elements = document.querySelectorAll('.animate-on-scroll')
+      elements.forEach((element) => {
+        const top = element.getBoundingClientRect().top
+        const winHeight = window.innerHeight
         if (top < winHeight - 100) {
-          element.classList.add('animate-fadeIn');
+          element.classList.add('animate-fadeIn')
         }
-      });
-    };
+      })
+    }
 
-    window.addEventListener('scroll', animateOnScroll);
-    window.addEventListener('load', animateOnScroll);
+    window.addEventListener('scroll', animateOnScroll)
+    window.addEventListener('load', animateOnScroll)
 
     return () => {
-      window.removeEventListener('scroll', animateOnScroll);
-      window.removeEventListener('load', animateOnScroll);
-    };
-  }, []);
+      window.removeEventListener('scroll', animateOnScroll)
+      window.removeEventListener('load', animateOnScroll)
+    }
+  }, [])
 
-  // Scroll suave para enlaces con #
   useEffect(() => {
-    const anchors = document.querySelectorAll('a[href^="#"]');
+    const anchors = document.querySelectorAll('a[href^="#"]')
 
-    const handler = (e: Event) => {
-      e.preventDefault();
-      const anchor = e.currentTarget as HTMLAnchorElement;
-      const target = document.querySelector(anchor.getAttribute('href')!);
-      target?.scrollIntoView({ behavior: 'smooth' });
-    };
+    const handler = (event: Event) => {
+      event.preventDefault()
+      const anchor = event.currentTarget as HTMLAnchorElement
+      const target = document.querySelector(anchor.getAttribute('href')!)
+      target?.scrollIntoView({ behavior: 'smooth' })
+    }
 
-    anchors.forEach(a => a.addEventListener('click', handler));
-    return () => anchors.forEach(a => a.removeEventListener('click', handler));
-  }, []);
-  
-  const navigate = useNavigate();
+    anchors.forEach((anchor) => anchor.addEventListener('click', handler))
+    return () => anchors.forEach((anchor) => anchor.removeEventListener('click', handler))
+  }, [])
 
+  const visibleItems = items.filter((item) => {
+    if (currentPath !== '/') {
+      if (item.href === '#about-me' || item.href === '#skills') {
+        return false
+      }
+    }
 
-  const visibleItems = items.filter(item => {
+    const token = getSessionToken()
 
-  // Ocultar anchors si no estamos en home
-  if (currentPath !== "/") {
-    if (item.href === "#about-me" || item.href === "#skills") {
-      return false;
+    if (token && item.href === '/login') {
+      return false
+    }
+
+    if (!token && item.href === '/privated-zone') {
+      return false
+    }
+
+    return true
+  })
+
+  const logAuth = async () => {
+    try {
+      setIsLoggingOut(true)
+      await logoutAction()
+    } finally {
+      clearSession()
+      setIsLoggingOut(false)
+      navigate(buildLocalizedPath(language, '/'))
     }
   }
 
-  const token = getSessionToken();
-
-  // Si hay token, ocultar login
-  if (token && item.href === "/login") {
-    return false;
-  }
-
-  // Si NO hay token, ocultar zona privada
-  if (!token && item.href === "/privated-zone") {
-    return false;
-  }
-
-  return true;
-});
-
-
-const logAuth = async () => {
-  try {
-    setIsLoggingOut(true);
-    await logoutAction();
-  } finally {
-    clearSession();
-    setIsLoggingOut(false);
-    navigate('/');
-  }
-}
-
-
-const token = getSessionToken();
+  const token = getSessionToken()
 
   return (
     <header className="relative z-10 bg-black">
       <nav className="container mx-auto px-6 py-3">
-        <div className="flex justify-between items-center">
-          
-          <a href="/" className="flex gap-2 text-2xl font-bold gradient-text">
+        <div className="flex items-center justify-between gap-4">
+          <LocalizedLink to="/" className="flex gap-2 text-2xl font-bold gradient-text">
             <Atom />
-             Alexi Dg
-          </a>
+            Alexi Dg
+          </LocalizedLink>
 
-          {/* Desktop menu */}
-          <div className="hidden md:flex space-x-6 items-center">
-            {visibleItems.map(item => (
-              <a key={item.href} href={item.href} className={`nav-link ${item.href === currentPath  ? "nav-link-active" : ""} ${item.href === '/login' ? 'bg-violet-800 p-2 rounded-lg border-2 border-green-400' : ''}`}>
-                {item.label}
-              </a>
-            ))}
-            {
-              isAuthenticated && token && (
-                <button 
+          <div className="hidden items-center space-x-6 md:flex">
+            {visibleItems.map((item) =>
+              item.href.startsWith('#') ? (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className={`nav-link ${item.href === currentPath ? 'nav-link-active' : ''}`}
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <LocalizedLink
+                  key={item.href}
+                  to={item.href}
+                  className={`nav-link ${item.href === currentPath ? 'nav-link-active' : ''} ${
+                    item.href === '/login' ? 'rounded-lg border-2 border-green-400 bg-violet-800 p-2' : ''
+                  }`}
+                >
+                  {item.label}
+                </LocalizedLink>
+              ),
+            )}
+            <LanguageSwitch
+              className="flex items-center rounded-full border border-slate-700 bg-slate-950 p-1"
+              buttonClassName="rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em]"
+              activeButtonClassName="bg-violet-700 text-white"
+              inactiveButtonClassName="text-slate-400 hover:text-white"
+            />
+            {isAuthenticated && token ? (
+              <button
                 onClick={() => void logAuth()}
                 disabled={isLoggingOut}
-                className='bg-red-400 p-1 rounded-lg text-black hover:bg-red-500'>
-                  {isLoggingOut ? 'Saliendo...' : 'Logout'}
-                </button>
-              )
-            }
+                className="rounded-lg bg-red-400 p-1 text-black hover:bg-red-500"
+              >
+                {isLoggingOut ? copy.navigation.loggingOut : copy.navigation.logout}
+              </button>
+            ) : null}
           </div>
 
-          {/* Mobile button */}
-          <button
-            type="button"
-            className="md:hidden"
-            onClick={() => setOpenMenu(!openMenu)}
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
+          <button type="button" className="md:hidden" onClick={() => setOpenMenu(!openMenu)}>
+            <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
         </div>
 
-        {/* Mobile menu */}
-        <div
-          ref={mobileMenuRef}
-          className={`${openMenu ? 'block' : 'hidden'} md:hidden`}
-        >
-          <div className="px-4 pt-2 pb-3 space-y-1 sm:px-3 grid col-span-1">
-            {visibleItems.map(item => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="nav-link mobile-nav-link"
-                onClick={() => setOpenMenu(false)}
-              >
-                {item.label}
-              </a>
-            ))}
+        <div ref={mobileMenuRef} className={`${openMenu ? 'block' : 'hidden'} md:hidden`}>
+          <div className="grid col-span-1 space-y-1 px-4 pb-3 pt-2 sm:px-3">
+            <div className="mb-3 flex justify-center">
+              <LanguageSwitch
+                className="flex items-center rounded-full border border-slate-700 bg-slate-950 p-1"
+                buttonClassName="rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em]"
+                activeButtonClassName="bg-violet-700 text-white"
+                inactiveButtonClassName="text-slate-400 hover:text-white"
+              />
+            </div>
+            {visibleItems.map((item) =>
+              item.href.startsWith('#') ? (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="nav-link mobile-nav-link"
+                  onClick={() => setOpenMenu(false)}
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <LocalizedLink
+                  key={item.href}
+                  to={item.href}
+                  className="nav-link mobile-nav-link"
+                  onClick={() => setOpenMenu(false)}
+                >
+                  {item.label}
+                </LocalizedLink>
+              ),
+            )}
           </div>
         </div>
-
       </nav>
     </header>
-  );
-};
+  )
+}

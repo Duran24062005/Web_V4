@@ -1,18 +1,18 @@
-import { Link } from 'react-router';
+import { useLanguage } from '../../i18n/LanguageContext'
+import { LocalizedLink } from '../../i18n/LocalizedLink'
 
 interface Props {
-  subtitle?: string;
+  subtitle?: string
 }
 
-export const CustomLogo = ({ subtitle = 'Shop' }: Props) => {
+export const CustomLogo = ({ subtitle }: Props) => {
+  const { language } = useLanguage()
+  const fallbackSubtitle = language === 'es' ? 'Tienda' : 'Shop'
+
   return (
-    <Link to="/" className="flex items-center whitespace-nowrap">
-      <span className="font-montserrat font-bold text-xl m-0 whitespace-nowrap">
-        Teslo |
-      </span>
-      <p className="text-muted-foreground m-0 px-2 whitespace-nowrap">
-        {subtitle}
-      </p>
-    </Link>
-  );
-};
+    <LocalizedLink to="/" className="flex items-center whitespace-nowrap">
+      <span className="m-0 whitespace-nowrap font-montserrat text-xl font-bold">Teslo |</span>
+      <p className="m-0 whitespace-nowrap px-2 text-muted-foreground">{subtitle ?? fallbackSubtitle}</p>
+    </LocalizedLink>
+  )
+}

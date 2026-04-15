@@ -1,15 +1,21 @@
 import type { FormEvent } from 'react'
 import { Github, Instagram, Linkedin, Mail, MessageSquare, Timer } from 'lucide-react'
 import { CuratedPageShell } from '../shared/components/CuratedPageShell'
-import { homeContent } from '../home/home.content'
+import { contactData } from '../home/home.content'
+import { useLanguage } from '../i18n/LanguageContext'
+import { getCopy } from '../i18n/copy'
 
 const buildWhatsAppLink = (phone: string, message: string) =>
   `https://wa.me/${phone.replace(/[^\d]/g, '')}?text=${encodeURIComponent(message)}`
 
 export const Contact = () => {
+  const { language } = useLanguage()
+  const copy = getCopy(language)
   const whatsAppUrl = buildWhatsAppLink(
-    homeContent.contact.whatsapp,
-    homeContent.contact.whatsappMessage,
+    contactData.whatsapp,
+    language === 'es'
+      ? 'Hola Alexi, quiero conversar sobre un proyecto web y conocer tu disponibilidad.'
+      : 'Hi Alexi, I would like to talk about a web project and learn about your availability.',
   )
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -21,12 +27,14 @@ export const Contact = () => {
     const interest = String(formData.get('interest') ?? '').trim()
     const message = String(formData.get('message') ?? '').trim()
 
-    const subject = encodeURIComponent(`Nuevo contacto desde portafolio: ${interest || 'Consulta general'}`)
+    const subject = encodeURIComponent(
+      `${copy.contactPage.mailSubjectPrefix}: ${interest || copy.contactPage.generalInquiry}`,
+    )
     const body = encodeURIComponent(
-      `Nombre: ${name}\nEmail: ${email}\nInterés: ${interest}\n\nMensaje:\n${message}`,
+      `${copy.contactPage.nameLabel}: ${name}\n${copy.common.email}: ${email}\n${copy.contactPage.interestLabel}: ${interest}\n\n${copy.contactPage.messageLabel}:\n${message}`,
     )
 
-    window.location.href = `mailto:${homeContent.contact.email}?subject=${subject}&body=${body}`
+    window.location.href = `mailto:${contactData.email}?subject=${subject}&body=${body}`
   }
 
   return (
@@ -35,13 +43,13 @@ export const Contact = () => {
         <section className="mb-24 grid items-end gap-12 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <h1 className="mb-6 font-headline text-5xl font-extrabold leading-none tracking-[-0.06em] md:text-7xl">
-              Iniciar una{' '}
+              {copy.contactPage.heroTitleLead}{' '}
               <span className="font-editorial font-medium italic text-[var(--curated-accent)]">
-                conversación
+                {copy.contactPage.heroTitleAccent}
               </span>
             </h1>
             <p className="max-w-3xl font-editorial text-xl leading-relaxed text-[var(--curated-muted)] md:text-2xl">
-              Si ya tienes un proyecto definido o todavía estás aterrizando la idea, puedo ayudarte a traducirlo a una solución web clara y técnicamente sólida.
+              {copy.contactPage.heroBody}
             </p>
           </div>
 
@@ -62,29 +70,27 @@ export const Contact = () => {
             <article className="border border-[rgba(153,144,124,0.1)] bg-[var(--curated-surface)] p-8">
               <div className="mb-6 flex items-center gap-4">
                 <MessageSquare className="h-7 w-7 text-[var(--curated-accent)]" />
-                <h3 className="font-headline text-lg font-bold">Ubicación y alcance</h3>
+                <h3 className="font-headline text-lg font-bold">{copy.common.locationReach}</h3>
               </div>
-              <p className="mb-2 font-editorial text-xl italic text-[var(--curated-text)]">
-                Colombia
-              </p>
+              <p className="mb-2 font-editorial text-xl italic text-[var(--curated-text)]">Colombia</p>
               <p className="font-label text-xs uppercase tracking-[0.24em] text-[var(--curated-muted)]">
-                Disponible para trabajo remoto y colaboraciones internacionales
+                {copy.contactPage.locationLabel}
               </p>
             </article>
 
             <article className="border border-[rgba(153,144,124,0.1)] bg-[var(--curated-surface)] p-8">
-              <h3 className="mb-8 font-headline text-lg font-bold">Canales directos</h3>
+              <h3 className="mb-8 font-headline text-lg font-bold">{copy.common.directChannels}</h3>
               <div className="space-y-6">
-                <a href={`mailto:${homeContent.contact.email}`} className="group flex items-center gap-4">
+                <a href={`mailto:${contactData.email}`} className="group flex items-center gap-4">
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--curated-surface-strong)] transition-colors group-hover:bg-[rgba(253,197,98,0.12)]">
                     <Mail className="h-5 w-5 text-[var(--curated-accent)]" />
                   </div>
                   <div>
                     <p className="font-label text-xs uppercase tracking-[0.24em] text-[var(--curated-muted)]">
-                      Email
+                      {copy.common.email}
                     </p>
                     <p className="font-editorial text-lg transition-colors group-hover:text-[var(--curated-accent)]">
-                      {homeContent.contact.email}
+                      {contactData.email}
                     </p>
                   </div>
                 </a>
@@ -95,10 +101,10 @@ export const Contact = () => {
                   </div>
                   <div>
                     <p className="font-label text-xs uppercase tracking-[0.24em] text-[var(--curated-muted)]">
-                      WhatsApp
+                      {copy.common.whatsapp}
                     </p>
                     <p className="font-editorial text-lg transition-colors group-hover:text-[var(--curated-accent)]">
-                      {homeContent.contact.whatsapp}
+                      {contactData.whatsapp}
                     </p>
                   </div>
                 </a>
@@ -109,19 +115,19 @@ export const Contact = () => {
                   </div>
                   <div>
                     <p className="font-label text-xs uppercase tracking-[0.24em] text-[var(--curated-muted)]">
-                      Respuesta
+                      {copy.common.response}
                     </p>
-                    <p className="font-editorial text-lg">Dentro de 24 horas hábiles</p>
+                    <p className="font-editorial text-lg">{copy.contactPage.responseValue}</p>
                   </div>
                 </div>
               </div>
             </article>
 
             <article className="border border-[rgba(153,144,124,0.1)] bg-[var(--curated-surface)] p-8">
-              <h3 className="mb-6 font-headline text-lg font-bold">Seguir proceso</h3>
+              <h3 className="mb-6 font-headline text-lg font-bold">{copy.contactPage.followProcessTitle}</h3>
               <div className="flex gap-4">
                 <a
-                  href={homeContent.contact.github}
+                  href={contactData.github}
                   target="_blank"
                   rel="noreferrer"
                   className="flex h-12 w-12 items-center justify-center bg-[var(--curated-surface-strong)] transition-all hover:text-[var(--curated-accent)]"
@@ -129,7 +135,7 @@ export const Contact = () => {
                   <Github className="h-5 w-5" />
                 </a>
                 <a
-                  href={homeContent.contact.linkedin}
+                  href={contactData.linkedin}
                   target="_blank"
                   rel="noreferrer"
                   className="flex h-12 w-12 items-center justify-center bg-[var(--curated-surface-strong)] transition-all hover:text-[var(--curated-accent)]"
@@ -137,7 +143,7 @@ export const Contact = () => {
                   <Linkedin className="h-5 w-5" />
                 </a>
                 <a
-                  href={homeContent.contact.instagram}
+                  href={contactData.instagram}
                   target="_blank"
                   rel="noreferrer"
                   className="flex h-12 w-12 items-center justify-center bg-[var(--curated-surface-strong)] transition-all hover:text-[var(--curated-accent)]"
@@ -150,21 +156,21 @@ export const Contact = () => {
 
           <section className="relative overflow-hidden bg-[var(--curated-surface-strong)] p-8 md:p-12 lg:col-span-2">
             <div className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-[var(--curated-accent)] opacity-[0.03] blur-3xl" />
-            <h2 className="mb-2 font-headline text-3xl font-bold">Enviar mensaje</h2>
+            <h2 className="mb-2 font-headline text-3xl font-bold">{copy.common.sendMessage}</h2>
             <p className="mb-10 font-editorial text-lg italic text-[var(--curated-muted)]">
-              Consulta sobre proyecto, colaboración o una conversación técnica inicial.
+              {copy.contactPage.sendMessageDescription}
             </p>
 
             <form className="space-y-8" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
                 <div className="group relative">
                   <label className="mb-2 block font-label text-xs uppercase tracking-[0.24em] text-[var(--curated-muted)] transition-colors group-focus-within:text-[var(--curated-accent)]">
-                    Nombre completo
+                    {copy.common.fullName}
                   </label>
                   <input
                     className="w-full border-0 border-b border-[rgba(153,144,124,0.3)] bg-transparent px-0 py-3 font-editorial text-xl text-[var(--curated-text)] placeholder:text-[rgba(200,198,197,0.2)] focus:border-[var(--curated-accent)] focus:outline-none"
                     name="fullName"
-                    placeholder="Tu nombre"
+                    placeholder={copy.contactPage.yourName}
                     required
                     type="text"
                   />
@@ -172,7 +178,7 @@ export const Contact = () => {
 
                 <div className="group relative">
                   <label className="mb-2 block font-label text-xs uppercase tracking-[0.24em] text-[var(--curated-muted)] transition-colors group-focus-within:text-[var(--curated-accent)]">
-                    Correo electrónico
+                    {copy.common.emailAddress}
                   </label>
                   <input
                     className="w-full border-0 border-b border-[rgba(153,144,124,0.3)] bg-transparent px-0 py-3 font-editorial text-xl text-[var(--curated-text)] placeholder:text-[rgba(200,198,197,0.2)] focus:border-[var(--curated-accent)] focus:outline-none"
@@ -186,28 +192,28 @@ export const Contact = () => {
 
               <div className="group relative">
                 <label className="mb-2 block font-label text-xs uppercase tracking-[0.24em] text-[var(--curated-muted)] transition-colors group-focus-within:text-[var(--curated-accent)]">
-                  Tipo de interés
+                  {copy.common.interestType}
                 </label>
                 <select
                   className="w-full cursor-pointer appearance-none border-0 border-b border-[rgba(153,144,124,0.3)] bg-transparent px-0 py-3 font-editorial text-xl text-[var(--curated-text)] focus:border-[var(--curated-accent)] focus:outline-none"
                   name="interest"
                 >
-                  <option className="bg-[var(--curated-surface-strong)]">Desarrollo full stack</option>
-                  <option className="bg-[var(--curated-surface-strong)]">Frontend</option>
-                  <option className="bg-[var(--curated-surface-strong)]">Backend</option>
-                  <option className="bg-[var(--curated-surface-strong)]">Consultoría técnica</option>
-                  <option className="bg-[var(--curated-surface-strong)]">Otro</option>
+                  <option className="bg-[var(--curated-surface-strong)]">{copy.contactPage.fullStack}</option>
+                  <option className="bg-[var(--curated-surface-strong)]">{copy.contactPage.frontend}</option>
+                  <option className="bg-[var(--curated-surface-strong)]">{copy.contactPage.backend}</option>
+                  <option className="bg-[var(--curated-surface-strong)]">{copy.contactPage.consulting}</option>
+                  <option className="bg-[var(--curated-surface-strong)]">{copy.contactPage.other}</option>
                 </select>
               </div>
 
               <div className="group relative">
                 <label className="mb-2 block font-label text-xs uppercase tracking-[0.24em] text-[var(--curated-muted)] transition-colors group-focus-within:text-[var(--curated-accent)]">
-                  Mensaje
+                  {copy.common.message}
                 </label>
                 <textarea
                   className="w-full resize-none border-0 border-b border-[rgba(153,144,124,0.3)] bg-transparent px-0 py-3 font-editorial text-xl text-[var(--curated-text)] placeholder:text-[rgba(200,198,197,0.2)] focus:border-[var(--curated-accent)] focus:outline-none"
                   name="message"
-                  placeholder="Cuéntame sobre tu idea, necesidad o contexto."
+                  placeholder={copy.contactPage.yourIdea}
                   required
                   rows={4}
                 />
@@ -218,7 +224,7 @@ export const Contact = () => {
                   className="group relative flex items-center gap-4 overflow-hidden bg-[var(--curated-accent)] px-10 py-4 font-label text-sm font-bold uppercase tracking-[0.24em] text-[#422c00] shadow-[0_10px_30px_-10px_rgba(253,197,98,0.4)] transition-all hover:pr-14"
                   type="submit"
                 >
-                  <span className="relative z-10">Enviar mensaje</span>
+                  <span className="relative z-10">{copy.contactPage.submit}</span>
                   <span className="absolute right-6 opacity-0 transition-all group-hover:opacity-100">→</span>
                 </button>
               </div>

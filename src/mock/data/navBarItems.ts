@@ -1,21 +1,6 @@
-export const navBarItems = [
-  { label: "Inicio", href: "/" },
-  { label: "Sobre mi", href: "#about-me" },
-  { label: "Habilidades", href: "#skills" },
-  { label: "Servicios", href: "/services" },
-  { label: "Proyectos", href: "/projects" },
-  { label: "Blog", href: "/blog" },
-  { label: "Contacto", href: "/contact" },
-  { label: "Protected", href: "/privated-zone" },
-  { label: "Login", href: "/login" },
-];
+import type { Language } from '../../i18n/config'
+import { getCopy } from '../../i18n/copy'
 
-export const navBarItemsHome = [
-  { label: "Inicio", href: "/" },
-  { label: "Sobre mi", href: "#about-me" },
-  { label: "Habilidades", href: "#skills" },
-  { label: "Servicios", href: "/services" },
-  { label: "Proyectos", href: "/projects" },
-  { label: "Blog", href: "/blog" },
-  { label: "Contacto", href: "/contact" },
-];
+export const getNavBarItems = (language: Language) => getCopy(language).navigation.legacy
+
+export const getNavBarItemsHome = (language: Language) => getCopy(language).navigation.legacy.slice(0, 7)

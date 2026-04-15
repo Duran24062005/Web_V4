@@ -20,7 +20,11 @@ import {
 import { useAuthSession } from '../shared/hooks/useAuthSession'
 import { useProjects } from '../shared/hooks/useProjects'
 import { techNames } from '../mock/data/tech.data'
-import { homeContent, homeNavigation } from './home.content'
+import { contactData, getHomeContent } from './home.content'
+import { useLanguage } from '../i18n/LanguageContext'
+import { LanguageSwitch } from '../i18n/LanguageSwitch'
+import { LocalizedLink } from '../i18n/LocalizedLink'
+import { getCopy } from '../i18n/copy'
 
 const techIconMap = {
   html: Code2,
@@ -38,10 +42,10 @@ const techIconMap = {
   docker: BriefcaseBusiness,
 }
 
-const statItems = (projectCount: number) => [
-  { value: '2+', label: 'Años de experiencia práctica' },
-  { value: `${projectCount}+`, label: 'Proyectos registrados en el sistema' },
-  { value: `${techNames.length}`, label: 'Tecnologías activas en mi stack' },
+const statItems = (projectCount: number, labels: ReturnType<typeof getHomeContent>['stats']) => [
+  { value: '2+', label: labels.years },
+  { value: `${projectCount}+`, label: labels.projects },
+  { value: `${techNames.length}`, label: labels.technologies },
 ]
 
 const serviceIcons = [MonitorSmartphone, ServerCog, Sparkles]
@@ -58,44 +62,74 @@ const buildWhatsAppLink = (phone: string, message: string) =>
 
 const HomeNavigation = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
   const [menuOpen, setMenuOpen] = useState(false)
+  const { language } = useLanguage()
+  const copy = getCopy(language)
 
   const cta = isAuthenticated
-    ? { label: 'Dashboard', href: '/dashboard' }
-    : { label: 'Hablemos', href: '#contact' }
+    ? { label: copy.navigation.dashboard, href: '/dashboard' }
+    : { label: copy.navigation.talk, href: '#contact' }
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 md:px-8">
-      <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between border border-[rgba(153,144,124,0.12)] bg-[rgba(19,19,19,0.94)] px-5 py-4 shadow-[0_40px_60px_-15px_rgba(229,226,225,0.06)] backdrop-blur-xl md:px-8">
-        <a href="#hero" className="font-headline text-xl font-extrabold tracking-[-0.04em] text-[var(--curated-text)] md:text-2xl">
+      <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between gap-4 border border-[rgba(153,144,124,0.12)] bg-[rgba(19,19,19,0.94)] px-5 py-4 shadow-[0_40px_60px_-15px_rgba(229,226,225,0.06)] backdrop-blur-xl md:px-8">
+        <a
+          href="#hero"
+          className="font-headline text-xl font-extrabold tracking-[-0.04em] text-[var(--curated-text)] md:text-2xl"
+        >
           Alexi Dg
         </a>
 
         <nav className="hidden items-center gap-8 md:flex">
-          {homeNavigation.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="font-label text-xs font-semibold uppercase tracking-[0.28em] text-[var(--curated-muted)] transition-colors duration-300 hover:text-[var(--curated-accent)]"
-            >
-              {item.label}
-            </a>
-          ))}
+          {copy.navigation.home.map((item) =>
+            item.href.startsWith('#') ? (
+              <a
+                key={item.href}
+                href={item.href}
+                className="font-label text-xs font-semibold uppercase tracking-[0.28em] text-[var(--curated-muted)] transition-colors duration-300 hover:text-[var(--curated-accent)]"
+              >
+                {item.label}
+              </a>
+            ) : (
+              <LocalizedLink
+                key={item.href}
+                to={item.href}
+                className="font-label text-xs font-semibold uppercase tracking-[0.28em] text-[var(--curated-muted)] transition-colors duration-300 hover:text-[var(--curated-accent)]"
+              >
+                {item.label}
+              </LocalizedLink>
+            ),
+          )}
         </nav>
 
-        <div className="hidden md:block">
-          <a
-            href={cta.href}
-            className="inline-flex items-center gap-2 bg-[var(--curated-accent)] px-6 py-2.5 font-label text-sm font-semibold tracking-[0.08em] text-[#422c00] transition-transform duration-300 hover:scale-[1.02]"
-          >
-            {cta.label}
-          </a>
+        <div className="hidden items-center gap-3 md:flex">
+          <LanguageSwitch
+            className="flex items-center rounded-full border border-[rgba(153,144,124,0.16)] bg-[var(--curated-surface-soft)] p-1"
+            buttonClassName="rounded-full px-3 py-1 font-label text-[10px] font-semibold uppercase tracking-[0.2em] transition-colors"
+            activeButtonClassName="bg-[var(--curated-accent)] text-[#422c00]"
+            inactiveButtonClassName="text-[var(--curated-muted)] hover:text-[var(--curated-text)]"
+          />
+          {cta.href.startsWith('#') ? (
+            <a
+              href={cta.href}
+              className="inline-flex items-center gap-2 bg-[var(--curated-accent)] px-6 py-2.5 font-label text-sm font-semibold tracking-[0.08em] text-[#422c00] transition-transform duration-300 hover:scale-[1.02]"
+            >
+              {cta.label}
+            </a>
+          ) : (
+            <LocalizedLink
+              to={cta.href}
+              className="inline-flex items-center gap-2 bg-[var(--curated-accent)] px-6 py-2.5 font-label text-sm font-semibold tracking-[0.08em] text-[#422c00] transition-transform duration-300 hover:scale-[1.02]"
+            >
+              {cta.label}
+            </LocalizedLink>
+          )}
         </div>
 
         <button
           type="button"
           onClick={() => setMenuOpen((current) => !current)}
           className="inline-flex h-11 w-11 items-center justify-center border border-[rgba(153,144,124,0.16)] bg-[var(--curated-surface-soft)] text-[var(--curated-text)] md:hidden"
-          aria-label="Abrir navegación"
+          aria-label={copy.navigation.openMenu}
         >
           {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
@@ -103,24 +137,53 @@ const HomeNavigation = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
 
       {menuOpen && (
         <div className="mx-auto mt-3 w-full max-w-[1440px] border border-[rgba(153,144,124,0.12)] bg-[rgba(19,19,19,0.98)] p-4 shadow-[0_40px_60px_-15px_rgba(229,226,225,0.06)] backdrop-blur-xl md:hidden">
+          <div className="mb-4 flex justify-center">
+            <LanguageSwitch
+              className="flex items-center rounded-full border border-[rgba(153,144,124,0.16)] bg-[var(--curated-surface-soft)] p-1"
+              buttonClassName="rounded-full px-4 py-2 font-label text-[10px] font-semibold uppercase tracking-[0.2em] transition-colors"
+              activeButtonClassName="bg-[var(--curated-accent)] text-[#422c00]"
+              inactiveButtonClassName="text-[var(--curated-muted)] hover:text-[var(--curated-text)]"
+            />
+          </div>
           <nav className="flex flex-col gap-3">
-            {homeNavigation.map((item) => (
+            {copy.navigation.home.map((item) =>
+              item.href.startsWith('#') ? (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="px-3 py-3 font-label text-xs font-semibold uppercase tracking-[0.28em] text-[var(--curated-muted)] transition-colors duration-300 hover:bg-[rgba(253,197,98,0.08)] hover:text-[var(--curated-accent)]"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <LocalizedLink
+                  key={item.href}
+                  to={item.href}
+                  className="px-3 py-3 font-label text-xs font-semibold uppercase tracking-[0.28em] text-[var(--curated-muted)] transition-colors duration-300 hover:bg-[rgba(253,197,98,0.08)] hover:text-[var(--curated-accent)]"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {item.label}
+                </LocalizedLink>
+              ),
+            )}
+            {cta.href.startsWith('#') ? (
               <a
-                key={item.href}
-                href={item.href}
-                className="px-3 py-3 font-label text-xs font-semibold uppercase tracking-[0.28em] text-[var(--curated-muted)] transition-colors duration-300 hover:bg-[rgba(253,197,98,0.08)] hover:text-[var(--curated-accent)]"
+                href={cta.href}
+                className="mt-2 inline-flex items-center justify-center bg-[var(--curated-accent)] px-4 py-3 font-label text-sm font-semibold tracking-[0.08em] text-[#422c00]"
                 onClick={() => setMenuOpen(false)}
               >
-                {item.label}
+                {cta.label}
               </a>
-            ))}
-            <a
-              href={cta.href}
-              className="mt-2 inline-flex items-center justify-center bg-[var(--curated-accent)] px-4 py-3 font-label text-sm font-semibold tracking-[0.08em] text-[#422c00]"
-              onClick={() => setMenuOpen(false)}
-            >
-              {cta.label}
-            </a>
+            ) : (
+              <LocalizedLink
+                to={cta.href}
+                className="mt-2 inline-flex items-center justify-center bg-[var(--curated-accent)] px-4 py-3 font-label text-sm font-semibold tracking-[0.08em] text-[#422c00]"
+                onClick={() => setMenuOpen(false)}
+              >
+                {cta.label}
+              </LocalizedLink>
+            )}
           </nav>
         </div>
       )}
@@ -146,15 +209,14 @@ const ProjectSkeletonCard = ({ large = false }: { large?: boolean }) => (
 function Home() {
   const { projectsList, loading } = useProjects()
   const { isAuthenticated } = useAuthSession()
+  const { language } = useLanguage()
+  const homeContent = getHomeContent(language)
 
   const featuredProjects = projectsList.filter((project) => project.featured)
   const curatedProjects = (featuredProjects.length > 0 ? featuredProjects : projectsList).slice(0, 4)
   const [featuredHeroProject, ...secondaryProjects] = curatedProjects
-  const stats = statItems(projectsList.length)
-  const whatsAppUrl = buildWhatsAppLink(
-    homeContent.contact.whatsapp,
-    homeContent.contact.whatsappMessage,
-  )
+  const stats = statItems(projectsList.length, homeContent.stats)
+  const whatsAppUrl = buildWhatsAppLink(homeContent.contact.whatsapp, homeContent.contact.whatsappMessage)
 
   return (
     <>
@@ -181,12 +243,12 @@ function Home() {
                   {homeContent.role}
                 </p>
                 <h1 className="font-headline text-5xl font-extrabold leading-none tracking-[-0.07em] md:text-7xl xl:text-[5.5rem]">
-                  Construyo productos
+                  {homeContent.titleLead}
                   <span className="font-editorial ml-3 inline italic font-normal text-[var(--curated-accent)]">
-                    digitales
+                    {homeContent.titleAccent}
                   </span>
                   <br />
-                  con criterio técnico.
+                  {homeContent.titleTail}
                 </h1>
                 <p className="max-w-2xl font-editorial text-2xl italic leading-relaxed text-[var(--curated-muted)] md:text-[2rem]">
                   {homeContent.subtitle}
@@ -198,13 +260,13 @@ function Home() {
                   href="#projects"
                   className="inline-flex items-center justify-center bg-[var(--curated-accent)] px-8 py-4 font-headline text-sm font-bold uppercase tracking-[0.14em] text-[#422c00] transition-all hover:shadow-[0_0_30px_rgba(253,197,98,0.2)]"
                 >
-                  Ver proyectos seleccionados
+                  {homeContent.ctas.featuredProjects}
                 </a>
                 <a
                   href="#about-me"
                   className="inline-flex items-center justify-center border border-[rgba(153,144,124,0.2)] px-8 py-4 font-headline text-sm font-bold uppercase tracking-[0.14em] text-[var(--curated-text)] transition-colors hover:bg-[var(--curated-surface)]"
                 >
-                  Mi proceso
+                  {homeContent.ctas.process}
                 </a>
               </div>
             </div>
@@ -234,10 +296,10 @@ function Home() {
           <div className="mx-auto flex w-full max-w-6xl flex-col gap-16 md:flex-row md:items-start md:gap-24">
             <div className="md:w-1/3 md:sticky md:top-32">
               <h2 className="mb-6 font-label text-sm uppercase tracking-[0.3em] text-[var(--curated-accent)]">
-                Perfil y criterio
+                {homeContent.aboutTitle}
               </h2>
               <p className="font-headline text-3xl font-bold leading-snug md:text-4xl">
-                Un portafolio no solo muestra lo que hago. También deja ver cómo pienso.
+                {homeContent.aboutHeadline}
               </p>
             </div>
 
@@ -277,7 +339,7 @@ function Home() {
 
               <div className="max-w-xl md:text-right">
                 <span className="font-label text-sm uppercase tracking-[0.3em] text-[var(--curated-muted)]">
-                  Stack actual del portafolio
+                  {homeContent.ctas.stackLabel}
                 </span>
               </div>
             </div>
@@ -307,7 +369,7 @@ function Home() {
         <section id="projects" className="bg-[var(--curated-surface-lowest,#0e0e0e)] px-4 py-28 md:px-8 md:py-32">
           <div className="mx-auto w-full max-w-[1440px]">
             <h2 className="mb-12 text-center font-label text-sm uppercase tracking-[0.3em] text-[var(--curated-accent)]">
-              Proyectos seleccionados
+              {homeContent.ctas.projectsTitle}
             </h2>
 
             {loading ? (
@@ -357,7 +419,7 @@ function Home() {
                           rel="noreferrer"
                           className="inline-flex items-center gap-2 font-headline text-sm font-bold text-[var(--curated-accent)] transition-all hover:gap-3"
                         >
-                          Ver proyecto
+                          {homeContent.ctas.project}
                           <ArrowRight className="h-4 w-4" />
                         </a>
                         <a
@@ -367,7 +429,7 @@ function Home() {
                           className="inline-flex items-center gap-2 font-label text-xs font-semibold uppercase tracking-[0.22em] text-[var(--curated-muted)] transition-colors hover:text-[var(--curated-text)]"
                         >
                           <Github className="h-4 w-4" />
-                          Código
+                          {homeContent.ctas.code}
                         </a>
                       </div>
                     </div>
@@ -413,7 +475,7 @@ function Home() {
                           rel="noreferrer"
                           className="inline-flex items-center gap-2 font-headline text-sm font-bold text-[var(--curated-accent)] transition-all hover:gap-3"
                         >
-                          Ver demo
+                          {homeContent.ctas.demo}
                           <ArrowRight className="h-4 w-4" />
                         </a>
                       </div>
@@ -424,26 +486,26 @@ function Home() {
             ) : (
               <div className="border border-[rgba(153,144,124,0.08)] bg-[var(--curated-surface-soft)] p-10 text-center">
                 <p className="font-editorial text-2xl italic text-[var(--curated-muted)]">
-                  Aún no hay proyectos disponibles para mostrar en esta vista.
+                  {homeContent.ctas.emptyProjects}
                 </p>
               </div>
             )}
 
             <div className="mt-10 flex justify-end">
-              <a
-                href="/projects"
+              <LocalizedLink
+                to="/projects"
                 className="inline-flex items-center gap-2 font-label text-xs font-semibold uppercase tracking-[0.24em] text-[var(--curated-muted)] transition-colors hover:text-[var(--curated-accent)]"
               >
-                Ver catálogo completo
+                {homeContent.ctas.fullCatalog}
                 <ChevronRight className="h-4 w-4" />
-              </a>
+              </LocalizedLink>
             </div>
           </div>
         </section>
 
         <section id="experience" className="mx-auto max-w-5xl px-4 py-28 md:px-8 md:py-32">
           <h2 className="mb-16 font-label text-sm uppercase tracking-[0.3em] text-[var(--curated-accent)]">
-            Experiencia profesional
+            {homeContent.ctas.experienceTitle}
           </h2>
 
           <div className="space-y-12">
@@ -476,14 +538,14 @@ function Home() {
             <div className="mb-14 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div>
                 <p className="font-label text-sm uppercase tracking-[0.3em] text-[var(--curated-accent)]">
-                  Servicios
+                  {homeContent.ctas.servicesEyebrow}
                 </p>
                 <h2 className="mt-4 font-headline text-4xl font-extrabold tracking-[-0.05em] md:text-5xl">
-                  Cómo aporto a un producto digital
+                  {homeContent.ctas.servicesTitle}
                 </h2>
               </div>
               <p className="max-w-xl text-[var(--curated-muted)] md:text-right">
-                Arquitectura, implementación y criterio técnico para convertir una idea en una experiencia web mantenible.
+                {homeContent.ctas.servicesDescription}
               </p>
             </div>
 
@@ -513,27 +575,27 @@ function Home() {
 
           <div className="relative mx-auto flex w-full max-w-5xl flex-col items-center">
             <span className="font-label text-sm uppercase tracking-[0.3em] text-[var(--curated-accent)]">
-              Contacto
+              {homeContent.ctas.contactEyebrow}
             </span>
             <h2 className="mt-6 font-headline text-5xl font-extrabold leading-none tracking-[-0.06em] md:text-7xl">
-              ¿Listo para construir tu próximo
+              {homeContent.ctas.contactTitleLead}
               <br />
               <span className="font-editorial italic font-normal text-[var(--curated-accent)]">
-                proyecto
+                {homeContent.ctas.contactTitleAccent}
               </span>
-              ?
+              {homeContent.ctas.contactTitleTail}
             </h2>
             <p className="mt-8 max-w-3xl font-editorial text-2xl italic leading-relaxed text-[var(--curated-muted)]">
-              Estoy abierto a colaboraciones, desarrollo por encargo y conversaciones técnicas sobre productos web.
+              {homeContent.ctas.contactDescription}
             </p>
 
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <a
-                href={`mailto:${homeContent.contact.email}`}
+                href={`mailto:${contactData.email}`}
                 className="inline-flex items-center justify-center gap-2 bg-[var(--curated-accent)] px-8 py-4 font-headline text-sm font-bold uppercase tracking-[0.14em] text-[#422c00]"
               >
                 <Mail className="h-4 w-4" />
-                Escribir por email
+                {homeContent.ctas.emailAction}
               </a>
               <a
                 href={whatsAppUrl}
@@ -548,15 +610,13 @@ function Home() {
 
             <div className="mt-14 grid w-full gap-4 md:grid-cols-3">
               <a
-                href={`mailto:${homeContent.contact.email}`}
+                href={`mailto:${contactData.email}`}
                 className="border border-[rgba(153,144,124,0.1)] bg-[var(--curated-surface)] p-5 text-left transition-colors hover:border-[rgba(253,197,98,0.3)]"
               >
                 <p className="font-label text-[10px] uppercase tracking-[0.28em] text-[var(--curated-muted)]">
                   Email
                 </p>
-                <p className="mt-3 font-headline text-lg font-bold text-[var(--curated-text)]">
-                  {homeContent.contact.email}
-                </p>
+                <p className="mt-3 font-headline text-lg font-bold text-[var(--curated-text)]">{contactData.email}</p>
               </a>
 
               <a
@@ -569,17 +629,17 @@ function Home() {
                   WhatsApp
                 </p>
                 <p className="mt-3 font-headline text-lg font-bold text-[var(--curated-text)]">
-                  {homeContent.contact.whatsapp}
+                  {contactData.whatsapp}
                 </p>
               </a>
 
               <div className="border border-[rgba(153,144,124,0.1)] bg-[var(--curated-surface)] p-5 text-left">
                 <p className="font-label text-[10px] uppercase tracking-[0.28em] text-[var(--curated-muted)]">
-                  Redes
+                  {homeContent.ctas.networks}
                 </p>
                 <div className="mt-4 flex flex-wrap gap-3">
                   <a
-                    href={homeContent.contact.github}
+                    href={contactData.github}
                     target="_blank"
                     rel="noreferrer"
                     className="text-[var(--curated-muted)] transition-colors hover:text-[var(--curated-accent)]"
@@ -588,7 +648,7 @@ function Home() {
                     <Github className="h-5 w-5" />
                   </a>
                   <a
-                    href={homeContent.contact.linkedin}
+                    href={contactData.linkedin}
                     target="_blank"
                     rel="noreferrer"
                     className="text-[var(--curated-muted)] transition-colors hover:text-[var(--curated-accent)]"
@@ -597,7 +657,7 @@ function Home() {
                     <Linkedin className="h-5 w-5" />
                   </a>
                   <a
-                    href={homeContent.contact.instagram}
+                    href={contactData.instagram}
                     target="_blank"
                     rel="noreferrer"
                     className="text-[var(--curated-muted)] transition-colors hover:text-[var(--curated-accent)]"
@@ -606,7 +666,7 @@ function Home() {
                     <Instagram className="h-5 w-5" />
                   </a>
                   <a
-                    href={homeContent.contact.facebook}
+                    href={contactData.facebook}
                     target="_blank"
                     rel="noreferrer"
                     className="text-[var(--curated-muted)] transition-colors hover:text-[var(--curated-accent)]"
@@ -620,49 +680,6 @@ function Home() {
           </div>
         </section>
       </main>
-
-      <footer className="border-t border-[rgba(153,144,124,0.12)] bg-[var(--curated-surface)] px-4 py-8 md:px-8">
-        <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div>
-            <p className="font-headline text-sm font-extrabold uppercase tracking-[0.3em] text-[var(--curated-text)]">
-              Alexi Dg
-            </p>
-            <p className="mt-2 text-sm text-[var(--curated-muted)]">
-              © {new Date().getFullYear()} Portafolio personal. Home alineado con Stitch y contenido real del sistema.
-            </p>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <a
-              href={homeContent.contact.github}
-              target="_blank"
-              rel="noreferrer"
-              className="text-[var(--curated-muted)] transition-colors hover:text-[var(--curated-accent)]"
-              aria-label="GitHub"
-            >
-              <Github className="h-5 w-5" />
-            </a>
-            <a
-              href={homeContent.contact.linkedin}
-              target="_blank"
-              rel="noreferrer"
-              className="text-[var(--curated-muted)] transition-colors hover:text-[var(--curated-accent)]"
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="h-5 w-5" />
-            </a>
-            <a
-              href={homeContent.contact.instagram}
-              target="_blank"
-              rel="noreferrer"
-              className="text-[var(--curated-muted)] transition-colors hover:text-[var(--curated-accent)]"
-              aria-label="Instagram"
-            >
-              <Instagram className="h-5 w-5" />
-            </a>
-          </div>
-        </div>
-      </footer>
     </>
   )
 }
