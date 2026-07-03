@@ -177,7 +177,7 @@ const copyByLanguage = {
     },
     recruiter: {
       title: 'Alexi Duran G',
-      subtitle: 'Junior Full Stack Web Developer',
+      subtitle: 'Full Stack Web Developer',
       heroQuote: 'Vivir para aprender y aprender para crecer',
       contactMe: 'Contáctame',
       viewProjects: 'Ver proyectos',
@@ -185,7 +185,7 @@ const copyByLanguage = {
       aboutTitle: 'Sobre mí',
       aboutUp: [
         '¡Bienvenidos a mi sitio web! Este es el espacio donde comparto mi pasión, mis proyectos y la forma en que convierto ideas en software funcional.',
-        'Soy un desarrollador web full stack junior enfocado en construir soluciones digitales útiles, claras y mantenibles.',
+        'Soy un desarrollador web full stack enfocado en construir soluciones digitales útiles, claras y mantenibles.',
         'Trabajo tanto en frontend como backend, con experiencia en React, Laravel, Python (FastAPI) y bases de datos SQL y NoSQL.',
         'Fuera del código disfruto la música, la pintura y la ciencia ficción; esas referencias también alimentan mi forma de diseñar productos.',
       ],
@@ -214,7 +214,7 @@ const copyByLanguage = {
       ],
       experience: [
         {
-          title: 'Desarrollador Full Stack Entry Junior',
+          title: 'Desarrollador Full Stack',
           company: 'Palestina Digital',
           period: '06/2023 - 05/2024',
           highlights: [
@@ -434,7 +434,7 @@ const copyByLanguage = {
     },
     recruiter: {
       title: 'Alexi Duran G',
-      subtitle: 'Junior Full Stack Web Developer',
+      subtitle: 'Full Stack Web Developer',
       heroQuote: 'Live to learn and learn to grow',
       contactMe: 'Contact me',
       viewProjects: 'View projects',
@@ -442,7 +442,7 @@ const copyByLanguage = {
       aboutTitle: 'About me',
       aboutUp: [
         'Welcome to my website. This is the place where I share my passion, my projects and the way I turn ideas into functional software.',
-        'I am a junior full stack web developer focused on building useful, clear and maintainable digital solutions.',
+        'I am a full stack web developer focused on building useful, clear and maintainable digital solutions.',
         'I work across frontend and backend, with experience in React, Laravel, Python (FastAPI) and both SQL and NoSQL databases.',
         'Outside of code I enjoy music, painting and science fiction; those references also shape the way I design products.',
       ],
@@ -471,7 +471,7 @@ const copyByLanguage = {
       ],
       experience: [
         {
-          title: 'Junior Entry Full Stack Developer',
+          title: 'Full Stack Developer',
           company: 'Palestina Digital',
           period: '06/2023 - 05/2024',
           highlights: [

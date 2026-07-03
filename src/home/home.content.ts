@@ -12,7 +12,7 @@ export const contactData = {
 const homeContentByLanguage = {
   es: {
     status: 'Disponible para nuevos proyectos',
-    role: 'Junior Full Stack Web Developer',
+    role: 'Full Stack Web Developer',
     titleLead: 'Construyo productos',
     titleAccent: 'digitales',
     titleTail: 'con criterio técnico.',
@@ -21,7 +21,7 @@ const homeContentByLanguage = {
     aboutTitle: 'Perfil y criterio',
     aboutHeadline: 'Un portafolio no solo muestra lo que hago. También deja ver cómo pienso.',
     aboutLead:
-      'Soy Alexi Durán Gómez, desarrollador full stack junior enfocado en construir soluciones web con una base técnica sólida y una presentación cuidada.',
+      'Soy Alexi Durán Gómez, desarrollador full stack enfocado en construir soluciones web con una base técnica sólida y una presentación cuidada.',
     aboutBody: [
       'Trabajo entre frontend y backend para entregar productos completos: interfaces claras, APIs bien estructuradas y decisiones técnicas que no se vuelvan deuda al mes siguiente.',
       'Mi experiencia abarca React, Node.js, FastAPI, Laravel y bases de datos SQL y NoSQL. Me interesa especialmente que el software sea útil, mantenible y fácil de escalar.',
@@ -94,7 +94,7 @@ const homeContentByLanguage = {
       {
         period: '06/2023 — 05/2024',
         company: 'Palestina Digital',
-        role: 'Desarrollador Full Stack Entry Junior',
+        role: 'Desarrollador Full Stack',
         highlights: [
           'Participé en el desarrollo de una plataforma de e-learning orientada a alto volumen de usuarios.',
           'Trabajé sobre una arquitectura basada en microservicios para mejorar escalabilidad y organización del sistema.',
@@ -120,7 +120,7 @@ const homeContentByLanguage = {
   },
   en: {
     status: 'Available for new projects',
-    role: 'Junior Full Stack Web Developer',
+    role: 'Full Stack Web Developer',
     titleLead: 'I build',
     titleAccent: 'digital',
     titleTail: 'products with technical judgment.',
@@ -129,7 +129,7 @@ const homeContentByLanguage = {
     aboutTitle: 'Profile and judgment',
     aboutHeadline: 'A portfolio does more than show what I do. It also reveals how I think.',
     aboutLead:
-      'I am Alexi Durán Gómez, a junior full stack developer focused on building web solutions on top of solid technical foundations and careful presentation.',
+      'I am Alexi Durán Gómez, a full stack developer focused on building web solutions on top of solid technical foundations and careful presentation.',
     aboutBody: [
       'I work across frontend and backend to deliver complete products: clear interfaces, well-structured APIs and technical decisions that do not become debt a month later.',
       'My experience includes React, Node.js, FastAPI, Laravel and both SQL and NoSQL databases. I care especially about software being useful, maintainable and easy to scale.',
@@ -202,7 +202,7 @@ const homeContentByLanguage = {
       {
         period: '06/2023 — 05/2024',
         company: 'Palestina Digital',
-        role: 'Junior Entry Full Stack Developer',
+        role: 'Full Stack Developer',
         highlights: [
           'Contributed to the development of an e-learning platform designed for a high-volume user base.',
           'Worked within a microservices-based architecture to improve scalability and system organization.',
