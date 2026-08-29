@@ -13,9 +13,9 @@ const homeContentByLanguage = {
   es: {
     status: 'Disponible para nuevos proyectos',
     role: 'Full Stack Web Developer',
-    titleLead: 'Construyo productos',
-    titleAccent: 'digitales',
-    titleTail: 'con criterio técnico.',
+    titleLead: 'Construyo',
+    titleAccent: 'productos',
+    titleTail: 'que funcionan.',
     subtitle:
       'Desarrollo experiencias web completas que conectan frontend, backend y arquitectura en soluciones mantenibles, escalables y listas para producción.',
     aboutTitle: 'Perfil y criterio',
@@ -92,7 +92,7 @@ const homeContentByLanguage = {
     ],
     experience: [
       {
-        period: '06/2023 — 05/2024',
+        period: '06/2023 - 05/2024',
         company: 'Palestina Digital',
         role: 'Desarrollador Full Stack',
         highlights: [
@@ -102,7 +102,7 @@ const homeContentByLanguage = {
         ],
       },
       {
-        period: '07/2024 — 08/2024',
+        period: '07/2024 - 08/2024',
         company: 'Tensor S.A.S',
         role: 'Analista y Desarrollador de Software',
         highlights: [
@@ -122,8 +122,8 @@ const homeContentByLanguage = {
     status: 'Available for new projects',
     role: 'Full Stack Web Developer',
     titleLead: 'I build',
-    titleAccent: 'digital',
-    titleTail: 'products with technical judgment.',
+    titleAccent: 'products',
+    titleTail: 'that hold up.',
     subtitle:
       'I build complete web experiences that connect frontend, backend and architecture into maintainable, scalable and production-ready solutions.',
     aboutTitle: 'Profile and judgment',
@@ -200,7 +200,7 @@ const homeContentByLanguage = {
     ],
     experience: [
       {
-        period: '06/2023 — 05/2024',
+        period: '06/2023 - 05/2024',
         company: 'Palestina Digital',
         role: 'Full Stack Developer',
         highlights: [
@@ -210,7 +210,7 @@ const homeContentByLanguage = {
         ],
       },
       {
-        period: '07/2024 — 08/2024',
+        period: '07/2024 - 08/2024',
         company: 'Tensor S.A.S',
         role: 'Software Analyst and Developer',
         highlights: [
