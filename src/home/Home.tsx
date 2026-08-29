@@ -38,13 +38,21 @@ const techIconMap = {
   mongodb: Database,
   postgresql: Database,
   docker: BriefcaseBusiness,
+  java: ServerCog,
+  spring: ServerCog,
+  'asp.net': ServerCog,
+  'c#': Code2,
+  rust: Code2,
+  dart: MonitorSmartphone,
 }
 
 const serviceIcons = [MonitorSmartphone, ServerCog, Sparkles]
 
 const resolveTechIcon = (tech: string) => {
   const techKey = tech.toLowerCase()
-  const entry = Object.entries(techIconMap).find(([key]) => techKey.includes(key))
+  const entries = Object.entries(techIconMap)
+  const exactEntry = entries.find(([key]) => techKey === key)
+  const entry = exactEntry ?? entries.find(([key]) => techKey.includes(key))
 
   return entry?.[1] ?? Code2
 }

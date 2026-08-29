@@ -12,4 +12,10 @@ export const techNames: string[] = [
   "MongoDB",
   "PostgreSQL",
   "Docker",
+  "Java",
+  "Spring Boot",
+  "ASP.NET",
+  "C#",
+  "Rust",
+  "Dart",
 ];
