@@ -35,10 +35,15 @@ export const Login = () => {
       if (data.token) {
         persistSession({
           token: data.token,
+          id: data.user._id || data.user.id,
           firstName: data.user.first_name,
           lastName: data.user.last_name,
+          email: data.user.email,
+          role: data.user.role,
+          status: data.user.status,
+          isAdmin: data.user.is_admin || data.user.role === 'admin',
         })
-        navigate(buildLocalizedPath(language, '/privated-zone'))
+        navigate(buildLocalizedPath(language, '/dashboard'))
       }
     } catch (error) {
       const message = getErrorMessage(error, copy.auth.invalidCredentials)

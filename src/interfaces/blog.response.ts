@@ -4,6 +4,9 @@ export interface BlogPost {
   content: string;
   excerpt: string;
   author: string;
+  authorId?: string | null;
+  authorName?: string;
+  authorEmail?: string | null;
   tags: string[];
   imageUrl: string;
   published: boolean;

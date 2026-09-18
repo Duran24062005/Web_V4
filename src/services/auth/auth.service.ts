@@ -24,3 +24,8 @@ export const logout = async (): Promise<LogOut> => {
     message: data.message || 'Logout exitoso',
   };
 };
+
+export const getMe = async (): Promise<AuthApiResponseData['user']> => {
+  const { data } = await apiClient.get<ApiSuccessResponse<{ user: AuthApiResponseData['user'] }>>('/api/auth/me');
+  return data.data.user;
+};

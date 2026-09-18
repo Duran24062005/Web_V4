@@ -42,12 +42,17 @@ export const Register = () => {
 
       persistSession({
         token: payload.token,
+        id: payload.user._id || payload.user.id,
         firstName: payload.user.first_name,
         lastName: payload.user.last_name,
+        email: payload.user.email,
+        role: payload.user.role,
+        status: payload.user.status,
+        isAdmin: payload.user.is_admin || payload.user.role === 'admin',
       })
 
       toast.success(copy.auth.accountCreated)
-      navigate(buildLocalizedPath(language, '/privated-zone'))
+      navigate(buildLocalizedPath(language, '/dashboard'))
     } catch (error) {
       const message = getErrorMessage(error, copy.auth.registerError)
       setErrorMessage(message)

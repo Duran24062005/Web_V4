@@ -13,6 +13,7 @@ import { PrivateZona } from './recruiter/PrivateZona'
 import { Recruiter } from './recruiter/Recruiter'
 import { Services } from './services/Services'
 import { Login } from './auth/pages/login/Login'
+import { RequireAuth } from './shared/components/RequireAuth'
 
 function App() {
   return (
@@ -29,7 +30,9 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Route>
-        <Route path="dashboard" element={<Index />} />
+        <Route element={<RequireAuth />}>
+          <Route path="dashboard" element={<Index />} />
+        </Route>
         <Route path="recruiter" element={<Recruiter />} />
         <Route path="privated-zone" element={<PrivateZona />} />
       </Route>

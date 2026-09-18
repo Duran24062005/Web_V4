@@ -35,7 +35,7 @@ apiClient.interceptors.response.use(
     const message =
       error.response?.data?.message || error.message || 'Unexpected request error';
 
-    if (statusCode === 401) {
+    if (statusCode === 401 || statusCode === 403) {
       clearSession();
     }
 
