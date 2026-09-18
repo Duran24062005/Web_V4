@@ -19,6 +19,7 @@
         "@tsparticles/engine": "^3.9.1",
         "@tsparticles/react": "^3.0.0",
         "@tsparticles/slim": "^3.9.1",
+        "@vercel/speed-insights": "^2.0.0",
         "animejs": "^4.2.2",
         "axios": "^1.13.2",
         "class-variance-authority": "^0.7.1",
