@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useEffect, useMemo, type PropsWithChildren } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { localeByLanguage, type Language } from './config'
@@ -51,4 +52,3 @@ export const useLanguage = () => {
 
   return context
 }
-
