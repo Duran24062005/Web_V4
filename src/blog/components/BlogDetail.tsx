@@ -201,7 +201,7 @@ export const BlogDetail = () => {
               />
               <div>
                 <p className="font-headline text-sm font-bold uppercase tracking-tight text-[var(--curated-text)]">
-                  {blog.author}
+                  {blog.authorName || blog.author}
                 </p>
                 <p className="font-editorial text-base italic text-[var(--curated-muted)]">
                   {copy.common.authorRole}

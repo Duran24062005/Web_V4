@@ -131,6 +131,10 @@ export const Blogs = () => {
                     </p>
                     <div className="mt-auto flex items-center gap-4">
                       <p className="font-label text-xs font-bold uppercase tracking-[0.24em] text-[var(--curated-muted)]">
+                        {featuredBlog.authorName || featuredBlog.author}
+                      </p>
+                      <span className="h-px w-8 bg-[rgba(153,144,124,0.3)]" />
+                      <p className="font-label text-xs font-bold uppercase tracking-[0.24em] text-[var(--curated-muted)]">
                         {new Date(featuredBlog.createdAt).toLocaleDateString(locale, {
                           day: '2-digit',
                           month: 'long',
@@ -179,11 +183,7 @@ export const Blogs = () => {
                     <p className="mb-10 font-editorial italic text-[var(--curated-muted)]">{blog.excerpt}</p>
                     <div className="mt-auto flex items-center justify-between border-t border-[rgba(153,144,124,0.08)] pt-6">
                       <span className="font-label text-[10px] uppercase tracking-[0.24em] text-[rgba(200,198,197,0.55)]">
-                        {new Date(blog.createdAt).toLocaleDateString(locale, {
-                          day: '2-digit',
-                          month: 'short',
-                          year: 'numeric',
-                        })}
+                        {blog.authorName || blog.author}
                       </span>
                       <span className="font-label text-xs uppercase tracking-[0.2em] text-[var(--curated-muted)] transition-colors group-hover:text-[var(--curated-accent)]">
                         {copy.common.read}

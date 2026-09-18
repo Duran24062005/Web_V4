@@ -82,7 +82,7 @@ export const BlogsList = ({ blogs, state }: BlogListProps) => {
                     <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 text-xs text-zinc-400">
                         <User className="h-3.5 w-3.5" />
-                        <span className="font-medium">{blog.author}</span>
+                        <span className="font-medium">{blog.authorName || blog.author}</span>
                     </div>
                     <a
                         href={`/blog/${blog.id}`}
