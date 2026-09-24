@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /es/dashboard
+Disallow: /en/dashboard
+Disallow: /es/privated-zone
+Disallow: /en/privated-zone
+
+Sitemap: https://alexidg.vercel.app/sitemap.xml

@@ -84,7 +84,7 @@ export const Projects = () => {
                     alt={featuredProject.title}
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[rgba(19,19,19,0.8)] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[rgba(8,13,26,0.8)] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                 </div>
                 <div className="p-8 md:p-12">
                   <div className="mb-6 flex flex-wrap gap-2">
@@ -235,7 +235,7 @@ export const Projects = () => {
             </p>
             <LocalizedLink
               to="/contact"
-              className="inline-flex bg-[var(--curated-accent)] px-10 py-4 font-label text-sm font-bold uppercase tracking-[0.24em] text-[#422c00] transition-all hover:shadow-[0_0_30px_rgba(253,197,98,0.3)]"
+              className="inline-flex bg-[var(--curated-accent)] px-10 py-4 font-label text-sm font-bold uppercase tracking-[0.24em] text-[var(--curated-accent-ink)] transition-all hover:shadow-[0_0_30px_rgba(77,124,255,0.3)]"
             >
               {copy.common.startConversation}
             </LocalizedLink>

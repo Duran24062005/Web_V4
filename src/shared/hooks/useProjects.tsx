@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import type { Project } from "../../interfaces/Project.interfaces";
-import getProjects from "../../actions/get.projects.actions";
-import { getErrorMessage } from "../../lib/http";
 
 export const useProjects = () => {
     const [projectsList, setProjects] = useState<Project[]>([]);
@@ -11,6 +9,17 @@ export const useProjects = () => {
     
         useEffect(() => {
             const setProjectsList = async () => {
+                // Without a configured API there is nothing to fetch; skip the failing request.
+                if (!import.meta.env.VITE_URL_BASE_API) {
+                  setLoading(false);
+                  return;
+                }
+
+                // Loaded on demand so axios stays out of the home page's entry chunk.
+                const [{ default: getProjects }, { getErrorMessage }] = await Promise.all([
+                  import("../../actions/get.projects.actions"),
+                  import("../../lib/http"),
+                ]);
                 try {
                   const dat = await getProjects("all");
                   setProjects(dat);

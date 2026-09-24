@@ -7,7 +7,6 @@ const copyByLanguage = {
         { label: 'Inicio', href: '#hero' },
         { label: 'Servicios', href: '#services' },
         { label: 'Proyectos', href: '#projects' },
-        { label: 'Blog', href: '/blog' },
         { label: 'Experiencia', href: '#experience' },
         { label: 'Contacto', href: '#contact' },
       ],
@@ -15,7 +14,6 @@ const copyByLanguage = {
         { label: 'Inicio', href: '/' },
         { label: 'Servicios', href: '/services' },
         { label: 'Proyectos', href: '/projects' },
-        { label: 'Blog', href: '/blog' },
         { label: 'Contacto', href: '/contact' },
       ],
       legacy: [
@@ -265,7 +263,6 @@ const copyByLanguage = {
         { label: 'Home', href: '#hero' },
         { label: 'Services', href: '#services' },
         { label: 'Projects', href: '#projects' },
-        { label: 'Blog', href: '/blog' },
         { label: 'Experience', href: '#experience' },
         { label: 'Contact', href: '#contact' },
       ],
@@ -273,7 +270,6 @@ const copyByLanguage = {
         { label: 'Home', href: '/' },
         { label: 'Services', href: '/services' },
         { label: 'Projects', href: '/projects' },
-        { label: 'Blog', href: '/blog' },
         { label: 'Contact', href: '/contact' },
       ],
       legacy: [

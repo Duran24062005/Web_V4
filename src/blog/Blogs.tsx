@@ -51,7 +51,7 @@ export const Blogs = () => {
                     setQuery(value)
                     searchBlogs(value)
                   }}
-                  className="w-full border-0 border-b-2 border-[rgba(153,144,124,0.2)] bg-[var(--curated-surface)] py-4 pl-12 pr-4 font-editorial text-lg italic text-[var(--curated-text)] transition-all placeholder:text-[rgba(200,198,197,0.5)] focus:border-[var(--curated-accent)] focus:outline-none"
+                  className="w-full border-0 border-b-2 border-[rgba(148,168,210,0.2)] bg-[var(--curated-surface)] py-4 pl-12 pr-4 font-editorial text-lg italic text-[var(--curated-text)] transition-all placeholder:text-[rgba(200,198,197,0.5)] focus:border-[var(--curated-accent)] focus:outline-none"
                   placeholder={copy.common.searchArticles}
                   type="text"
                 />
@@ -67,7 +67,7 @@ export const Blogs = () => {
               setQuery('')
               searchBlogs('all')
             }}
-            className="rounded-full bg-[var(--curated-accent)] px-5 py-2 font-label text-xs font-bold uppercase tracking-[0.24em] text-[#422c00]"
+            className="rounded-full bg-[var(--curated-accent)] px-5 py-2 font-label text-xs font-bold uppercase tracking-[0.24em] text-[var(--curated-accent-ink)]"
           >
             {copy.common.allEntries}
           </button>
@@ -116,7 +116,7 @@ export const Blogs = () => {
                       <span className="font-label text-xs font-bold uppercase tracking-[0.24em] text-[var(--curated-accent)]">
                         {copy.common.featuredArticle}
                       </span>
-                      <span className="h-px w-12 bg-[rgba(153,144,124,0.3)]" />
+                      <span className="h-px w-12 bg-[rgba(148,168,210,0.3)]" />
                       <span className="font-label text-xs font-medium uppercase tracking-[0.24em] text-[var(--curated-muted)]">
                         {formatReadingTime(estimateReadingTime(featuredBlog.content), language)}
                       </span>
@@ -133,7 +133,7 @@ export const Blogs = () => {
                       <p className="font-label text-xs font-bold uppercase tracking-[0.24em] text-[var(--curated-muted)]">
                         {featuredBlog.authorName || featuredBlog.author}
                       </p>
-                      <span className="h-px w-8 bg-[rgba(153,144,124,0.3)]" />
+                      <span className="h-px w-8 bg-[rgba(148,168,210,0.3)]" />
                       <p className="font-label text-xs font-bold uppercase tracking-[0.24em] text-[var(--curated-muted)]">
                         {new Date(featuredBlog.createdAt).toLocaleDateString(locale, {
                           day: '2-digit',
@@ -181,7 +181,7 @@ export const Blogs = () => {
                       {blog.title}
                     </h3>
                     <p className="mb-10 font-editorial italic text-[var(--curated-muted)]">{blog.excerpt}</p>
-                    <div className="mt-auto flex items-center justify-between border-t border-[rgba(153,144,124,0.08)] pt-6">
+                    <div className="mt-auto flex items-center justify-between border-t border-[rgba(148,168,210,0.08)] pt-6">
                       <span className="font-label text-[10px] uppercase tracking-[0.24em] text-[rgba(200,198,197,0.55)]">
                         {blog.authorName || blog.author}
                       </span>

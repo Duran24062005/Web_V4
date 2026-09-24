@@ -1,15 +1,21 @@
 import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { createRoot, hydrateRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.tsx'
 import { BrowserRouter } from 'react-router-dom'
-import { Toaster } from 'sonner'
+import { AppShell } from './AppShell'
 
-createRoot(document.getElementById('root')!).render(
+const container = document.getElementById('root')!
+const app = (
   <StrictMode>
     <BrowserRouter>
-      <App />
-      <Toaster richColors />
+      <AppShell />
     </BrowserRouter>
   </StrictMode>
 )
+
+// /es and /en ship prerendered HTML (scripts/prerender.mjs); every other route is client-rendered.
+if (container.hasChildNodes()) {
+  hydrateRoot(container, app)
+} else {
+  createRoot(container).render(app)
+}

@@ -67,7 +67,7 @@ export const Contact = () => {
 
         <section className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div className="flex flex-col gap-8 lg:col-span-1">
-            <article className="border border-[rgba(153,144,124,0.1)] bg-[var(--curated-surface)] p-8">
+            <article className="border border-[rgba(148,168,210,0.1)] bg-[var(--curated-surface)] p-8">
               <div className="mb-6 flex items-center gap-4">
                 <MessageSquare className="h-7 w-7 text-[var(--curated-accent)]" />
                 <h3 className="font-headline text-lg font-bold">{copy.common.locationReach}</h3>
@@ -78,11 +78,11 @@ export const Contact = () => {
               </p>
             </article>
 
-            <article className="border border-[rgba(153,144,124,0.1)] bg-[var(--curated-surface)] p-8">
+            <article className="border border-[rgba(148,168,210,0.1)] bg-[var(--curated-surface)] p-8">
               <h3 className="mb-8 font-headline text-lg font-bold">{copy.common.directChannels}</h3>
               <div className="space-y-6">
                 <a href={`mailto:${contactData.email}`} className="group flex items-center gap-4">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--curated-surface-strong)] transition-colors group-hover:bg-[rgba(253,197,98,0.12)]">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--curated-surface-strong)] transition-colors group-hover:bg-[rgba(77,124,255,0.12)]">
                     <Mail className="h-5 w-5 text-[var(--curated-accent)]" />
                   </div>
                   <div>
@@ -96,7 +96,7 @@ export const Contact = () => {
                 </a>
 
                 <a href={whatsAppUrl} target="_blank" rel="noreferrer" className="group flex items-center gap-4">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--curated-surface-strong)] transition-colors group-hover:bg-[rgba(253,197,98,0.12)]">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--curated-surface-strong)] transition-colors group-hover:bg-[rgba(77,124,255,0.12)]">
                     <MessageSquare className="h-5 w-5 text-[var(--curated-accent)]" />
                   </div>
                   <div>
@@ -123,7 +123,7 @@ export const Contact = () => {
               </div>
             </article>
 
-            <article className="border border-[rgba(153,144,124,0.1)] bg-[var(--curated-surface)] p-8">
+            <article className="border border-[rgba(148,168,210,0.1)] bg-[var(--curated-surface)] p-8">
               <h3 className="mb-6 font-headline text-lg font-bold">{copy.contactPage.followProcessTitle}</h3>
               <div className="flex gap-4">
                 <a
@@ -168,7 +168,7 @@ export const Contact = () => {
                     {copy.common.fullName}
                   </label>
                   <input
-                    className="w-full border-0 border-b border-[rgba(153,144,124,0.3)] bg-transparent px-0 py-3 font-editorial text-xl text-[var(--curated-text)] placeholder:text-[rgba(200,198,197,0.2)] focus:border-[var(--curated-accent)] focus:outline-none"
+                    className="w-full border-0 border-b border-[rgba(148,168,210,0.3)] bg-transparent px-0 py-3 font-editorial text-xl text-[var(--curated-text)] placeholder:text-[rgba(200,198,197,0.2)] focus:border-[var(--curated-accent)] focus:outline-none"
                     name="fullName"
                     placeholder={copy.contactPage.yourName}
                     required
@@ -181,7 +181,7 @@ export const Contact = () => {
                     {copy.common.emailAddress}
                   </label>
                   <input
-                    className="w-full border-0 border-b border-[rgba(153,144,124,0.3)] bg-transparent px-0 py-3 font-editorial text-xl text-[var(--curated-text)] placeholder:text-[rgba(200,198,197,0.2)] focus:border-[var(--curated-accent)] focus:outline-none"
+                    className="w-full border-0 border-b border-[rgba(148,168,210,0.3)] bg-transparent px-0 py-3 font-editorial text-xl text-[var(--curated-text)] placeholder:text-[rgba(200,198,197,0.2)] focus:border-[var(--curated-accent)] focus:outline-none"
                     name="email"
                     placeholder="tu@email.com"
                     required
@@ -195,7 +195,7 @@ export const Contact = () => {
                   {copy.common.interestType}
                 </label>
                 <select
-                  className="w-full cursor-pointer appearance-none border-0 border-b border-[rgba(153,144,124,0.3)] bg-transparent px-0 py-3 font-editorial text-xl text-[var(--curated-text)] focus:border-[var(--curated-accent)] focus:outline-none"
+                  className="w-full cursor-pointer appearance-none border-0 border-b border-[rgba(148,168,210,0.3)] bg-transparent px-0 py-3 font-editorial text-xl text-[var(--curated-text)] focus:border-[var(--curated-accent)] focus:outline-none"
                   name="interest"
                 >
                   <option className="bg-[var(--curated-surface-strong)]">{copy.contactPage.fullStack}</option>
@@ -211,7 +211,7 @@ export const Contact = () => {
                   {copy.common.message}
                 </label>
                 <textarea
-                  className="w-full resize-none border-0 border-b border-[rgba(153,144,124,0.3)] bg-transparent px-0 py-3 font-editorial text-xl text-[var(--curated-text)] placeholder:text-[rgba(200,198,197,0.2)] focus:border-[var(--curated-accent)] focus:outline-none"
+                  className="w-full resize-none border-0 border-b border-[rgba(148,168,210,0.3)] bg-transparent px-0 py-3 font-editorial text-xl text-[var(--curated-text)] placeholder:text-[rgba(200,198,197,0.2)] focus:border-[var(--curated-accent)] focus:outline-none"
                   name="message"
                   placeholder={copy.contactPage.yourIdea}
                   required
@@ -221,7 +221,7 @@ export const Contact = () => {
 
               <div className="pt-4">
                 <button
-                  className="group relative flex items-center gap-4 overflow-hidden bg-[var(--curated-accent)] px-10 py-4 font-label text-sm font-bold uppercase tracking-[0.24em] text-[#422c00] shadow-[0_10px_30px_-10px_rgba(253,197,98,0.4)] transition-all hover:pr-14"
+                  className="group relative flex items-center gap-4 overflow-hidden bg-[var(--curated-accent)] px-10 py-4 font-label text-sm font-bold uppercase tracking-[0.24em] text-[var(--curated-accent-ink)] shadow-[0_10px_30px_-10px_rgba(77,124,255,0.4)] transition-all hover:pr-14"
                   type="submit"
                 >
                   <span className="relative z-10">{copy.contactPage.submit}</span>

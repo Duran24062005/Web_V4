@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="5" fill="#080d1a"/>
+  <rect x="4.5" y="4.5" width="23" height="23" rx="3" fill="none" stroke="#4d7cff"/>
+  <path d="M13 4.5a3 3 0 0 0 6 0" fill="none" stroke="#4d7cff"/>
+  <text x="16" y="20.5" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10" font-weight="700" fill="#e7ecf6">AD</text>
+</svg>

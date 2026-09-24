@@ -66,7 +66,7 @@ export const BlogDetail = () => {
       </h3>
     ),
     p: ({ children }) => (
-      <p className="mb-8 font-editorial text-xl leading-relaxed text-[rgba(229,226,225,0.9)]">
+      <p className="mb-8 font-editorial text-xl leading-relaxed text-[rgba(231,236,246,0.9)]">
         {children}
       </p>
     ),
@@ -76,12 +76,12 @@ export const BlogDetail = () => {
       </blockquote>
     ),
     ul: ({ children }) => (
-      <ul className="mb-8 list-disc space-y-3 pl-6 font-editorial text-xl text-[rgba(229,226,225,0.9)]">
+      <ul className="mb-8 list-disc space-y-3 pl-6 font-editorial text-xl text-[rgba(231,236,246,0.9)]">
         {children}
       </ul>
     ),
     ol: ({ children }) => (
-      <ol className="mb-8 list-decimal space-y-3 pl-6 font-editorial text-xl text-[rgba(229,226,225,0.9)]">
+      <ol className="mb-8 list-decimal space-y-3 pl-6 font-editorial text-xl text-[rgba(231,236,246,0.9)]">
         {children}
       </ol>
     ),
@@ -95,7 +95,7 @@ export const BlogDetail = () => {
     ),
     pre: ({ children, ...props }) => (
       <pre
-        className="my-12 overflow-x-auto border border-[rgba(153,144,124,0.1)] bg-[var(--curated-surface-lowest)] p-6 font-mono text-sm leading-6 text-[var(--curated-muted)]"
+        className="my-12 overflow-x-auto border border-[rgba(148,168,210,0.1)] bg-[var(--curated-surface-lowest)] p-6 font-mono text-sm leading-6 text-[var(--curated-muted)]"
         {...props}
       >
         {children}
@@ -146,7 +146,7 @@ export const BlogDetail = () => {
             </p>
             <button
               onClick={() => navigate(-1)}
-              className="inline-flex items-center gap-2 bg-[var(--curated-accent)] px-6 py-3 font-label text-sm font-bold uppercase tracking-[0.18em] text-[#422c00]"
+              className="inline-flex items-center gap-2 bg-[var(--curated-accent)] px-6 py-3 font-label text-sm font-bold uppercase tracking-[0.18em] text-[var(--curated-accent-ink)]"
             >
               <ArrowLeft className="h-4 w-4" />
               {copy.blogs.backToBlog}
@@ -173,7 +173,7 @@ export const BlogDetail = () => {
         <article className="mx-auto max-w-4xl px-4 md:px-8">
           <header className="mb-16">
             <div className="mb-6 flex flex-wrap items-center gap-4">
-              <span className="rounded-full border border-[rgba(153,144,124,0.15)] bg-[var(--curated-surface-lowest)] px-3 py-1 font-label text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--curated-accent)]">
+              <span className="rounded-full border border-[rgba(148,168,210,0.15)] bg-[var(--curated-surface-lowest)] px-3 py-1 font-label text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--curated-accent)]">
                 {blog.tags[0] ?? 'Blog'}
               </span>
               <span className="font-label text-xs uppercase tracking-[0.2em] text-[var(--curated-muted)]">
@@ -183,7 +183,7 @@ export const BlogDetail = () => {
                   year: 'numeric',
                 })}
               </span>
-              <span className="h-1 w-1 rounded-full bg-[rgba(153,144,124,0.5)]" />
+              <span className="h-1 w-1 rounded-full bg-[rgba(148,168,210,0.5)]" />
               <span className="font-label text-xs uppercase tracking-[0.2em] text-[var(--curated-muted)]">
                 {formatReadingTime(estimateReadingTime(blog.content), language)}
               </span>
@@ -193,7 +193,7 @@ export const BlogDetail = () => {
               {blog.title}
             </h1>
 
-            <div className="flex items-center gap-4 border-y border-[rgba(153,144,124,0.1)] py-8">
+            <div className="flex items-center gap-4 border-y border-[rgba(148,168,210,0.1)] py-8">
               <img
                 src="/image/image_94f2750b.png"
                 alt="Alexi Durán Gómez"
@@ -212,14 +212,14 @@ export const BlogDetail = () => {
                 <button
                   type="button"
                   onClick={handleCopyLink}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(153,144,124,0.2)] text-[var(--curated-muted)] transition-all hover:border-[var(--curated-accent)] hover:text-[var(--curated-accent)]"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(148,168,210,0.2)] text-[var(--curated-muted)] transition-all hover:border-[var(--curated-accent)] hover:text-[var(--curated-accent)]"
                   aria-label={copy.common.copyLink}
                 >
                   <Link2 className="h-4 w-4" />
                 </button>
                 <button
                   type="button"
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(153,144,124,0.2)] text-[var(--curated-muted)] transition-all hover:border-[var(--curated-accent)] hover:text-[var(--curated-accent)]"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(148,168,210,0.2)] text-[var(--curated-muted)] transition-all hover:border-[var(--curated-accent)] hover:text-[var(--curated-accent)]"
                   aria-label={copy.common.saveArticle}
                 >
                   <Bookmark className="h-4 w-4" />
@@ -227,7 +227,7 @@ export const BlogDetail = () => {
                 <button
                   type="button"
                   onClick={handleCopyLink}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(153,144,124,0.2)] text-[var(--curated-muted)] transition-all hover:border-[var(--curated-accent)] hover:text-[var(--curated-accent)]"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(148,168,210,0.2)] text-[var(--curated-muted)] transition-all hover:border-[var(--curated-accent)] hover:text-[var(--curated-accent)]"
                   aria-label={copy.common.share}
                 >
                   <Share2 className="h-4 w-4" />
@@ -238,7 +238,7 @@ export const BlogDetail = () => {
 
           {blog.imageUrl && (
             <div className="group relative mb-16">
-              <div className="absolute inset-0 rounded-xl bg-[rgba(253,197,98,0.05)] opacity-0 transition-opacity group-hover:opacity-100" />
+              <div className="absolute inset-0 rounded-xl bg-[rgba(77,124,255,0.05)] opacity-0 transition-opacity group-hover:opacity-100" />
               <img
                 src={blog.imageUrl}
                 alt={blog.title}
@@ -255,7 +255,7 @@ export const BlogDetail = () => {
             <ReactMarkdown components={markdownComponents}>{blog.content}</ReactMarkdown>
           </div>
 
-          <footer className="mt-20 border-t border-[rgba(153,144,124,0.1)] pt-12">
+          <footer className="mt-20 border-t border-[rgba(148,168,210,0.1)] pt-12">
             <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
               <div className="flex flex-wrap gap-2">
                 {blog.tags.map((tag) => (

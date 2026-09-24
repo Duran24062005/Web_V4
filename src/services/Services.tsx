@@ -16,7 +16,7 @@ export const Services = () => {
     <CuratedPageShell activePath="/services">
       <main className="mx-auto max-w-[1440px] overflow-hidden px-4 pb-24 pt-32 md:px-8">
         <section className="relative mb-24 md:mb-32">
-          <div className="absolute -left-24 top-0 h-72 w-72 bg-[radial-gradient(circle,rgba(253,197,98,0.08),transparent_70%)]" />
+          <div className="absolute -left-24 top-0 h-72 w-72 bg-[radial-gradient(circle,rgba(77,124,255,0.08),transparent_70%)]" />
 
           <div className="grid items-end gap-12 lg:grid-cols-12">
             <div className="lg:col-span-8">
@@ -102,7 +102,7 @@ export const Services = () => {
               </LocalizedLink>
             </div>
 
-            <div className="relative min-h-[240px] overflow-hidden border border-[rgba(153,144,124,0.12)] md:w-1/2">
+            <div className="relative min-h-[240px] overflow-hidden border border-[rgba(148,168,210,0.12)] md:w-1/2">
               <img
                 src="/image/setup.jpg"
                 alt="Espacio de trabajo y desarrollo"
@@ -150,7 +150,7 @@ export const Services = () => {
         </section>
 
         <section className="relative mt-32 overflow-hidden bg-[var(--curated-surface)] px-8 py-20 text-center md:px-12 md:py-24">
-          <div className="absolute inset-0 opacity-40 [background:radial-gradient(circle_at_center,rgba(253,197,98,0.12),transparent_70%)]" />
+          <div className="absolute inset-0 opacity-40 [background:radial-gradient(circle_at_center,rgba(77,124,255,0.12),transparent_70%)]" />
 
           <div className="relative z-10 mx-auto max-w-3xl">
             <span className="mb-6 block font-label text-xs uppercase tracking-[0.3em] text-[var(--curated-muted)]">
@@ -169,13 +169,13 @@ export const Services = () => {
             <div className="flex flex-col items-center justify-center gap-6 sm:flex-row">
               <LocalizedLink
                 to="/contact"
-                className="bg-[var(--curated-accent)] px-10 py-4 font-label text-sm font-bold tracking-[0.14em] text-[#422c00] transition-all hover:shadow-[0_0_30px_rgba(253,197,98,0.2)]"
+                className="bg-[var(--curated-accent)] px-10 py-4 font-label text-sm font-bold tracking-[0.14em] text-[var(--curated-accent-ink)] transition-all hover:shadow-[0_0_30px_rgba(77,124,255,0.2)]"
               >
                 {copy.common.startConversation.toUpperCase()}
               </LocalizedLink>
               <LocalizedLink
                 to="/projects"
-                className="border border-[rgba(153,144,124,0.3)] px-10 py-4 font-label text-sm font-semibold text-[var(--curated-text)] transition-colors hover:bg-[var(--curated-surface-strong)]"
+                className="border border-[rgba(148,168,210,0.3)] px-10 py-4 font-label text-sm font-semibold text-[var(--curated-text)] transition-colors hover:bg-[var(--curated-surface-strong)]"
               >
                 {copy.common.viewProjects.toUpperCase()}
               </LocalizedLink>
