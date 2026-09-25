@@ -5,6 +5,7 @@ import {
   type PaletteGroup,
   type PaletteLabels,
 } from './commandPalette.model'
+import { pauseScroll, resumeScroll } from '../../experience/motion/runtime'
 
 export type { PaletteCommand } from './commandPalette.model'
 
@@ -33,9 +34,11 @@ const PaletteDialog = ({ onClose, commands, labels }: Omit<CommandPaletteProps, 
     const previouslyFocused = document.activeElement as HTMLElement | null
     const previousOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
+    pauseScroll()
     inputRef.current?.focus()
 
     return () => {
+      resumeScroll()
       document.body.style.overflow = previousOverflow
       previouslyFocused?.focus?.()
     }
@@ -95,6 +98,7 @@ const PaletteDialog = ({ onClose, commands, labels }: Omit<CommandPaletteProps, 
   return (
     <div
       className="palette-backdrop"
+      data-lenis-prevent
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) {
           onClose()
@@ -102,6 +106,10 @@ const PaletteDialog = ({ onClose, commands, labels }: Omit<CommandPaletteProps, 
       }}
     >
       <div className="palette" role="dialog" aria-modal="true" aria-label={labels.title}>
+        <p className="palette-title hud-label" aria-hidden="true">
+          <span>DG-OS // CMD</span>
+          <span className="font-jp">コマンド</span>
+        </p>
         <div className="palette-input-row">
           <span className="palette-prompt" aria-hidden="true">
             &gt;

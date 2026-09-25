@@ -1,0 +1,302 @@
+/* ==========================================================================
+   DG-OS kit: small pieces shared by the home episodes and the inner pages.
+   ========================================================================== */
+
+/* Sections and <main> take programmatic focus (skip link, anchors); they are not controls. */
+html[data-fx] [tabindex='-1']:focus {
+  outline: none;
+}
+
+/* Data the owner still has to provide: a visible "pending" chip, never hidden. */
+.todo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.1rem 0.5rem;
+  border: 1px dashed var(--color-neon-warn);
+  background: rgba(255, 230, 0, 0.06);
+  color: var(--color-neon-warn);
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  font-style: normal;
+}
+
+.todo::before {
+  content: '!' / '';
+  font-weight: 700;
+}
+
+.yk-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.yk-tags li {
+  padding: 0.15rem 0.45rem;
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  color: var(--color-neon-cyan);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+.yk-hud-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.45);
+  color: var(--color-neon-cyan);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 150ms, border-color 150ms, gap 200ms var(--ease-out-expo);
+}
+
+.yk-hud-link:hover {
+  gap: 0.7rem;
+  border-color: var(--color-neon-magenta);
+  color: var(--color-neon-magenta);
+}
+
+.yk-hud-link svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Holographic foil that follows the pointer (fed by useTilt's --glare-* variables). */
+.yk-holo::after {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  background:
+    radial-gradient(circle at var(--glare-x, 50%) var(--glare-y, 50%), rgba(255, 255, 255, 0.16), transparent 42%),
+    linear-gradient(125deg, transparent 20%, rgba(0, 240, 255, 0.16) 36%, rgba(255, 43, 214, 0.16) 50%, rgba(255, 230, 0, 0.1) 62%, transparent 76%);
+  background-position: center, var(--glare-x, 50%) var(--glare-y, 50%);
+  background-size: 100% 100%, 300% 300%;
+  content: '';
+  mix-blend-mode: color-dodge;
+  opacity: var(--glare-o, 0);
+  pointer-events: none;
+  transition: opacity 300ms;
+}
+
+/* ----- Terminal pieces ---------------------------------------------------------- */
+
+.yk-term-bar {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 0.9rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.25);
+  color: var(--color-mute);
+}
+
+.yk-term-body p {
+  margin: 0.35rem 0;
+}
+
+.yk-term-email {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0.9rem 0;
+}
+
+.yk-term-email a {
+  color: var(--color-ink);
+  overflow-wrap: anywhere;
+  text-decoration-color: rgba(0, 240, 255, 0.5);
+  text-underline-offset: 4px;
+}
+
+.yk-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--color-neon-magenta);
+  background: transparent;
+  color: var(--color-neon-magenta);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.yk-copy:hover {
+  background: var(--color-neon-magenta);
+  color: var(--color-on-neon);
+}
+
+.yk-copy svg {
+  width: 14px;
+  height: 14px;
+}
+
+.yk-term-status {
+  min-height: 1.4em;
+}
+
+/* ----- Mascot -------------------------------------------------------------------- */
+
+.dg-mascot {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* ----- Scene change between routes ------------------------------------------------ */
+
+.yk-scene {
+  position: fixed;
+  z-index: 185;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.yk-scene-panel {
+  position: absolute;
+  inset: -5%;
+}
+
+.yk-scene-panel--a {
+  clip-path: polygon(0 0, 100% 0, 100% 35%, 0 70%);
+  color: rgba(7, 6, 15, 0.35);
+  background:
+    radial-gradient(currentColor 1.2px, transparent 1.6px) 0 0 / 8px 8px,
+    var(--color-neon-magenta);
+}
+
+.yk-scene-panel--b {
+  clip-path: polygon(0 70%, 100% 35%, 100% 100%, 0 100%);
+  background: linear-gradient(160deg, var(--color-void-2), var(--color-void));
+  box-shadow: inset 0 3px 0 var(--color-neon-cyan);
+}
+
+.yk-scene-flash {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  mix-blend-mode: overlay;
+  opacity: 0;
+}
+
+/* ----- ED (footer) ---------------------------------------------------------------- */
+
+.yk-ed {
+  position: relative;
+  padding: 4rem 0 7.5rem;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 43, 214, 0.35);
+  background: linear-gradient(to bottom, rgba(19, 16, 41, 0.65), var(--color-void));
+  color: var(--color-mute);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+}
+
+.yk-ed-grid {
+  display: grid;
+  gap: 2.5rem;
+}
+
+@media (min-width: 900px) {
+  .yk-ed-grid {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: end;
+  }
+}
+
+.yk-ed-sign .hud-label {
+  margin: 0;
+}
+
+.yk-ed-stamp {
+  display: block;
+  margin-bottom: 0.6rem;
+  color: var(--color-neon-magenta);
+  font-size: clamp(3rem, 8vw, 4.8rem);
+  font-weight: 700;
+  -webkit-text-stroke: 1px var(--color-void);
+  text-shadow: 3px 3px 0 var(--color-neon-cyan);
+  transform: rotate(-8deg);
+}
+
+.yk-ed-roll {
+  overflow: hidden;
+}
+
+.yk-ed-line {
+  margin: 0 0 0.35rem;
+}
+
+.yk-ed-line strong {
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+
+.yk-ed-sha {
+  color: var(--color-neon-cyan);
+}
+
+.yk-ed-next .hud-label {
+  margin: 0;
+}
+
+.yk-ed-next ul {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0.8rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.yk-ed-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 150ms, gap 200ms var(--ease-out-expo);
+}
+
+.yk-ed-link svg {
+  width: 16px;
+  height: 16px;
+}
+
+.yk-ed-link:hover {
+  gap: 0.9rem;
+  color: var(--color-neon-magenta);
+}
+
+.yk-ed-top {
+  display: inline-flex;
+  grid-column: 1 / -1;
+  justify-self: start;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--color-mute);
+  text-decoration: none;
+}
+
+.yk-ed-top:hover {
+  color: var(--color-neon-cyan);
+}

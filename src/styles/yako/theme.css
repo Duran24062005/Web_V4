@@ -1,0 +1,235 @@
+/* ==========================================================================
+   夜行 YAKŌ // DG-OS — design system
+   Neo-Tokyo terminal: rain, neon and manga panels. Imported by src/index.css
+   right after Tailwind so every token below becomes a utility (bg-void,
+   text-neon-cyan, font-display, shadow-glow-magenta, animate-flicker…).
+   ========================================================================== */
+
+/* ----- Fonts: latin subsets only (ES/EN). Japanese glyphs load on demand. -- */
+
+@font-face {
+  font-family: 'Chakra Petch';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('@fontsource/chakra-petch/files/chakra-petch-latin-400-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Chakra Petch';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src: url('@fontsource/chakra-petch/files/chakra-petch-latin-500-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Chakra Petch';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url('@fontsource/chakra-petch/files/chakra-petch-latin-700-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Metric-matched fallback so the swap does not shift the hero. */
+@font-face {
+  font-family: 'Chakra Petch Fallback';
+  src: local('Arial'), local('ArialMT'), local('Helvetica');
+  size-adjust: 104%;
+  ascent-override: 96%;
+  descent-override: 26%;
+  line-gap-override: 0%;
+}
+
+/* ----- Tokens ------------------------------------------------------------ */
+
+@theme static {
+  /* Surfaces: deep indigo-black, never pure black. */
+  --color-void: #07060f;
+  --color-void-1: #0c0a1a;
+  --color-void-2: #131029;
+  --color-void-3: #1c1838;
+  --color-rule: rgba(123, 47, 247, 0.22);
+
+  /* Neon accents. Cyan = information, magenta = action, violet = depth,
+     warn = alerts and secrets only. */
+  --color-neon-cyan: #00f0ff;
+  --color-neon-magenta: #ff2bd6;
+  --color-neon-violet: #7b2ff7;
+  --color-neon-warn: #ffe600;
+
+  /* Text. ink ≈ 17:1 and mute ≈ 8:1 on void; dim is decoration only. */
+  --color-ink: #ece9ff;
+  --color-mute: #a7a3cc;
+  --color-dim: #6d6899;
+  --color-on-neon: #07060f;
+
+  --font-display: 'Chakra Petch', 'Chakra Petch Fallback', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Chakra Petch', 'Chakra Petch Fallback', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono Fallback', ui-monospace, Menlo, Consolas, monospace;
+  /* System Japanese faces: decorative text only, so no webfont download. */
+  --font-jp: 'Hiragino Kaku Gothic ProN', 'Yu Gothic UI', 'Yu Gothic', Meiryo, 'Noto Sans CJK JP', 'Noto Sans JP', sans-serif;
+  --font-brush: 'japonesa', 'Hiragino Kaku Gothic ProN', 'Yu Gothic UI', 'Yu Gothic', Meiryo, 'Noto Sans CJK JP', sans-serif;
+
+  --text-mega: clamp(3.1rem, 10.5vw, 9.5rem);
+  --text-mega--line-height: 0.86;
+  --text-mega--letter-spacing: -0.035em;
+  --text-hud: 0.6875rem;
+  --text-hud--line-height: 1.2;
+  --text-hud--letter-spacing: 0.18em;
+
+  --shadow-glow-cyan: 0 0 0 1px rgba(0, 240, 255, 0.55), 0 0 18px rgba(0, 240, 255, 0.35),
+    0 0 42px rgba(0, 240, 255, 0.15);
+  --shadow-glow-magenta: 0 0 0 1px rgba(255, 43, 214, 0.6), 0 0 18px rgba(255, 43, 214, 0.4),
+    0 0 46px rgba(255, 43, 214, 0.18);
+  --shadow-glow-violet: 0 0 30px rgba(123, 47, 247, 0.35);
+
+  --ease-snap: cubic-bezier(0.7, 0, 0.2, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-flicker: flicker 5.5s linear infinite;
+  --animate-glitch: glitch-shift 2.8s steps(1) infinite;
+  --animate-scan: scan-sweep 7s linear infinite;
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-blink: blink 1.1s steps(1) infinite;
+  --animate-grain: grain 0.9s steps(6) infinite;
+
+  @keyframes flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+    20%, 24%, 55% { opacity: 0.35; }
+  }
+
+  @keyframes glitch-shift {
+    0%, 86%, 100% { transform: none; clip-path: none; }
+    88% { transform: translate(-3px, 1px); clip-path: inset(12% 0 58% 0); }
+    90% { transform: translate(3px, -1px); clip-path: inset(62% 0 8% 0); }
+    92% { transform: translate(-1px, 0); clip-path: inset(34% 0 40% 0); }
+  }
+
+  @keyframes scan-sweep {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(100vh); }
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  @keyframes grain {
+    0% { transform: translate(0, 0); }
+    20% { transform: translate(-8%, 4%); }
+    40% { transform: translate(6%, -6%); }
+    60% { transform: translate(-4%, 8%); }
+    80% { transform: translate(8%, 2%); }
+    100% { transform: translate(0, 0); }
+  }
+}
+
+/* ----- Utilities --------------------------------------------------------- */
+
+/* HUD panel: two opposite corners cut at 45°. --cut sets the bevel size. */
+@utility clip-hud {
+  clip-path: polygon(
+    var(--cut, 14px) 0,
+    100% 0,
+    100% calc(100% - var(--cut, 14px)),
+    calc(100% - var(--cut, 14px)) 100%,
+    0 100%,
+    0 var(--cut, 14px)
+  );
+}
+
+/* Manga panel: a slanted edge on the left, as if the page was cut with a blade. */
+@utility clip-manga {
+  clip-path: polygon(9% 0, 100% 0, 100% 91%, 91% 100%, 0 100%, 0 14%);
+}
+
+@utility text-glow-cyan {
+  text-shadow: 0 0 6px rgba(0, 240, 255, 0.55), 0 0 22px rgba(0, 240, 255, 0.35);
+}
+
+@utility text-glow-magenta {
+  text-shadow: 0 0 6px rgba(255, 43, 214, 0.6), 0 0 24px rgba(255, 43, 214, 0.35);
+}
+
+/* Screentone (manga halftone) as a background layer. */
+@utility halftone {
+  background-image: radial-gradient(currentColor 1px, transparent 1.4px);
+  background-size: 6px 6px;
+}
+
+/* CRT scanlines. */
+@utility scanlines {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.045) 0,
+    rgba(255, 255, 255, 0.045) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+/* Manga speed lines radiating from --focus (default: center). */
+@utility speedlines {
+  background: repeating-conic-gradient(
+    from 0deg at var(--focus, 50% 50%),
+    currentColor 0deg 0.6deg,
+    transparent 0.6deg 5deg
+  );
+  mask-image: radial-gradient(circle at var(--focus, 50% 50%), transparent 22%, #000 70%);
+}
+
+@utility hud-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-hud);
+  line-height: var(--text-hud--line-height);
+  letter-spacing: var(--text-hud--letter-spacing);
+  text-transform: uppercase;
+}
+
+/* ----- Base -------------------------------------------------------------- */
+
+html {
+  background: var(--color-void);
+  /* Lenis drives smooth scrolling; native smooth scroll would fight it. */
+  scroll-behavior: auto;
+}
+
+body {
+  background: var(--color-void);
+  background-image: none;
+}
+
+::selection {
+  background: var(--color-neon-magenta);
+  color: var(--color-on-neon);
+}
+
+/* Photosensitive-safe mode and reduced motion: nothing flickers, nothing glitches. */
+html[data-fx='safe'] .animate-flicker,
+html[data-fx='safe'] .animate-glitch,
+html[data-fx='safe'] .animate-blink {
+  animation: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-flicker,
+  .animate-glitch,
+  .animate-blink,
+  .animate-scan,
+  .animate-grain,
+  .animate-marquee {
+    animation: none !important;
+  }
+}

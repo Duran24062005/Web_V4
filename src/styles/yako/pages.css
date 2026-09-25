@@ -1,0 +1,773 @@
+/* ==========================================================================
+   Inner pages (services, projects, contact; blog in Phase C).
+   Loaded with the page chunks through CuratedPageShell.
+   ========================================================================== */
+
+.yk-page {
+  padding: calc(var(--nav-height) + clamp(2.5rem, 7vw, 5rem)) 0 clamp(4rem, 9vw, 7rem);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}
+
+/* ----- Page title card ----------------------------------------------------------- */
+
+.yk-page-hero {
+  display: grid;
+  gap: 2.5rem;
+  align-items: end;
+  margin-bottom: clamp(3rem, 7vw, 5rem);
+}
+
+@media (min-width: 1024px) {
+  .yk-page-hero.has-aside {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+  }
+}
+
+.yk-page-code {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin: 0 0 1.1rem;
+}
+
+.yk-page-eyebrow {
+  margin: 0 0 0.9rem;
+  color: var(--color-neon-cyan);
+}
+
+.yk-page-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 7.4vw, 6.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+
+.yk-page-title-lead {
+  display: block;
+  margin: -0.08em -0.1em;
+  padding: 0.08em 0.1em;
+  overflow: hidden;
+}
+
+.yk-page-title-accent {
+  display: block;
+  margin-top: 0.1em;
+  color: var(--color-neon-magenta);
+  font-size: 0.62em;
+  text-shadow: 0 0 18px rgba(255, 43, 214, 0.5);
+  transform-origin: 0 50%;
+}
+
+.yk-page-body {
+  max-width: 42rem;
+  margin: 1.6rem 0 0;
+  clip-path: inset(0% 0% 0% 0%);
+  color: var(--color-mute);
+  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+  line-height: 1.65;
+}
+
+/* ----- Filters -------------------------------------------------------------------- */
+
+.yk-filter {
+  margin-bottom: 2.5rem;
+}
+
+.yk-filter .hud-label {
+  margin: 0 0 0.8rem;
+  color: var(--color-mute);
+}
+
+.yk-filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.yk-chip {
+  padding: 0.5rem 0.85rem;
+  border: 1px solid rgba(123, 47, 247, 0.55);
+  background: rgba(12, 10, 26, 0.7);
+  color: var(--color-mute);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  transition: color 150ms, border-color 150ms, background-color 150ms;
+}
+
+.yk-chip:hover {
+  border-color: var(--color-neon-cyan);
+  color: var(--color-neon-cyan);
+}
+
+.yk-chip[aria-pressed='true'] {
+  border-color: var(--color-neon-magenta);
+  background: var(--color-neon-magenta);
+  color: var(--color-on-neon);
+  font-weight: 700;
+}
+
+.yk-alert {
+  margin: 0 0 2rem;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--color-neon-warn);
+  background: rgba(255, 230, 0, 0.06);
+  color: var(--color-neon-warn);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
+
+/* ----- Archive grid ------------------------------------------------------------------- */
+
+.yk-archive-grid {
+  display: grid;
+  gap: 1.25rem;
+  perspective: 1400px;
+}
+
+@media (min-width: 768px) {
+  .yk-archive-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .yk-archive-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .yk-archive-card.is-featured,
+  .yk-archive-skeleton.is-featured {
+    grid-column: span 2;
+  }
+}
+
+.yk-archive-body {
+  --cut: 18px;
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  clip-path: polygon(var(--cut) 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%, 0 var(--cut));
+  background: linear-gradient(150deg, rgba(0, 240, 255, 0.6), rgba(123, 47, 247, 0.55) 50%, rgba(255, 43, 214, 0.6));
+}
+
+.yk-archive-body::before {
+  position: absolute;
+  z-index: -1;
+  inset: 1px;
+  clip-path: polygon(calc(var(--cut) - 0.5px) 0, 100% 0, 100% calc(100% - var(--cut) + 0.5px), calc(100% - var(--cut) + 0.5px) 100%, 0 100%, 0 calc(var(--cut) - 0.5px));
+  background: var(--color-void-1);
+  content: '';
+}
+
+.yk-archive-media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  margin: 1px 1px 0;
+  overflow: hidden;
+  background: var(--color-void-2);
+}
+
+.yk-archive-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.85);
+  transition: transform 700ms var(--ease-out-expo), filter 300ms;
+}
+
+.yk-archive-card:hover .yk-archive-media img {
+  filter: saturate(1.1);
+  transform: scale(1.04);
+}
+
+.yk-archive-index {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.8rem;
+  padding: 0.2rem 0.45rem;
+  background: var(--color-void);
+  color: var(--color-neon-cyan);
+}
+
+.yk-archive-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 1.3rem 1.4rem 1.5rem;
+}
+
+.yk-archive-copy h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+}
+
+.is-featured .yk-archive-copy h3 {
+  font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+}
+
+.yk-archive-copy p {
+  margin: 0;
+  color: var(--color-mute);
+  line-height: 1.6;
+}
+
+.yk-archive-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-top: auto;
+  padding-top: 0.4rem;
+}
+
+.yk-archive-skeleton {
+  display: grid;
+  gap: 0.8rem;
+  min-height: 320px;
+  padding: 1.25rem;
+  border: 1px solid rgba(123, 47, 247, 0.35);
+  background: var(--color-void-1);
+}
+
+.yk-archive-skeleton span {
+  position: relative;
+  overflow: hidden;
+  background: rgba(123, 47, 247, 0.15);
+}
+
+.yk-archive-skeleton span:first-child {
+  min-height: 160px;
+}
+
+.yk-archive-skeleton span:nth-child(3) {
+  width: 60%;
+}
+
+/* A scan beam sweeps each placeholder. */
+.yk-archive-skeleton span::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.25), transparent);
+  content: '';
+  transform: translateX(-100%);
+  animation: yk-scan-x 1.4s linear infinite;
+}
+
+@keyframes yk-scan-x {
+  to { transform: translateX(100%); }
+}
+
+.yk-empty-panel {
+  padding: 3rem 2rem;
+  border: 1px dashed rgba(255, 230, 0, 0.45);
+  text-align: center;
+}
+
+.yk-empty-panel p {
+  margin: 0;
+}
+
+.yk-empty-panel p + p {
+  margin-top: 0.8rem;
+  color: var(--color-mute);
+  font-size: 1.15rem;
+}
+
+/* ----- Call to action ------------------------------------------------------------------ */
+
+.yk-page-cta {
+  position: relative;
+  margin-top: clamp(4rem, 9vw, 7rem);
+  padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.5rem, 5vw, 4rem);
+  overflow: hidden;
+  border: 1px solid rgba(255, 43, 214, 0.45);
+  background:
+    radial-gradient(ellipse 60% 80% at 50% 120%, rgba(255, 43, 214, 0.22), transparent 70%),
+    var(--color-void-1);
+  text-align: center;
+}
+
+.yk-page-cta::before {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 40%;
+  height: 3px;
+  background: var(--color-neon-magenta);
+  box-shadow: 0 0 16px var(--color-neon-magenta);
+  content: '';
+  transform: translateX(-50%);
+}
+
+.yk-page-cta .hud-label {
+  margin: 0 0 1rem;
+}
+
+.yk-page-cta h2 {
+  max-width: 48rem;
+  margin: 0 auto 1rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4.4vw, 3.4rem);
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+.yk-page-cta > p:not(.hud-label) {
+  max-width: 40rem;
+  margin: 0 auto 2.2rem;
+  color: var(--color-mute);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.yk-page-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* ----- Services ---------------------------------------------------------------------------- */
+
+.yk-service-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .yk-service-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .yk-service-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .yk-service.is-wide {
+    grid-column: span 2;
+  }
+}
+
+.yk-service {
+  position: relative;
+  display: flex;
+  min-height: 380px;
+  overflow: hidden;
+  border: 1px solid rgba(123, 47, 247, 0.5);
+  background: linear-gradient(165deg, rgba(19, 16, 41, 0.95), rgba(7, 6, 15, 0.95));
+  transition: border-color 200ms;
+}
+
+.yk-service::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--color-neon-cyan);
+  box-shadow: 0 0 12px var(--color-neon-cyan);
+  content: '';
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 600ms var(--ease-out-expo);
+}
+
+.yk-service:hover {
+  border-color: rgba(0, 240, 255, 0.6);
+}
+
+.yk-service:hover::after {
+  transform: scaleX(1);
+}
+
+.yk-service-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: 1.75rem;
+}
+
+.yk-service-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 0.5rem;
+  color: var(--color-mute);
+}
+
+.yk-service-icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  background: rgba(0, 240, 255, 0.14);
+  color: var(--color-neon-cyan);
+}
+
+.yk-service-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.yk-service h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+}
+
+.is-wide h3 {
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+}
+
+.yk-service-desc {
+  margin: 0;
+  color: var(--color-mute);
+  line-height: 1.6;
+}
+
+.yk-service-features {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0.4rem 0 1rem;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  list-style: none;
+}
+
+.yk-service-features li {
+  display: grid;
+  grid-template-columns: 1.2rem 1fr;
+}
+
+.yk-service-features li::before {
+  color: var(--color-neon-magenta);
+  content: '▸';
+}
+
+.yk-service-copy .yk-hud-link {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+.yk-service.is-wide {
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .yk-service.is-wide {
+    flex-direction: row;
+  }
+}
+
+.yk-service-media {
+  position: relative;
+  flex: 1;
+  min-height: 240px;
+  clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.yk-service-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.7) contrast(1.1);
+  transition: filter 800ms;
+}
+
+.yk-service-media::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(123, 47, 247, 0.5), rgba(255, 43, 214, 0.35));
+  content: '';
+  mix-blend-mode: color;
+}
+
+.yk-service:hover .yk-service-media img {
+  filter: grayscale(0) contrast(1.05);
+}
+
+/* ----- Contact ----------------------------------------------------------------------------- */
+
+.yk-contact-portrait {
+  position: relative;
+  width: min(80vw, 340px);
+  margin: 0;
+  justify-self: center;
+}
+
+@media (min-width: 1024px) {
+  .yk-contact-portrait {
+    justify-self: end;
+  }
+}
+
+.yk-contact-portrait-frame {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  padding: 2px;
+  clip-path: polygon(0 0, 88% 0, 100% 12%, 100% 100%, 12% 100%, 0 88%);
+  background: linear-gradient(140deg, var(--color-neon-magenta), var(--color-neon-violet), var(--color-neon-cyan));
+}
+
+.yk-contact-portrait-frame img {
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(0 0, 88% 0, 100% 12%, 100% 100%, 12% 100%, 0 88%);
+  object-fit: cover;
+  filter: grayscale(0.4) contrast(1.1);
+}
+
+.yk-contact-portrait-lines {
+  --focus: 50% 40%;
+  position: absolute;
+  inset: 0;
+  color: rgba(255, 255, 255, 0.2);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.yk-contact-portrait figcaption {
+  margin-top: 0.6rem;
+  color: var(--color-neon-cyan);
+  text-align: right;
+}
+
+.yk-contact-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .yk-contact-grid {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    align-items: start;
+  }
+}
+
+.yk-contact-info {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.yk-info-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+}
+
+.yk-info-title svg {
+  width: 20px;
+  height: 20px;
+  color: var(--color-neon-cyan);
+}
+
+.yk-info-big {
+  margin: 0 0 0.3rem;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.yk-info-note {
+  margin: 0;
+  color: var(--color-mute);
+  font-size: 0.9rem;
+}
+
+.yk-channels {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.yk-channel {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+.yk-channel > svg {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  color: var(--color-neon-magenta);
+}
+
+.yk-channel > span {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.yk-channel .hud-label {
+  color: var(--color-mute);
+}
+
+.yk-channel-value {
+  overflow-wrap: anywhere;
+}
+
+a.yk-channel:hover .yk-channel-value {
+  color: var(--color-neon-cyan);
+}
+
+.yk-socials-row {
+  display: flex;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.yk-socials-row svg {
+  width: 18px;
+  height: 18px;
+}
+
+.yk-contact-form {
+  padding: clamp(1.5rem, 4vw, 2.75rem);
+  border: 1px solid rgba(0, 240, 255, 0.45);
+  background:
+    repeating-linear-gradient(to bottom, rgba(0, 240, 255, 0.025) 0 1px, transparent 1px 3px),
+    rgba(12, 10, 26, 0.92);
+  box-shadow: 0 0 40px rgba(0, 240, 255, 0.08);
+}
+
+.yk-contact-form-head h2 {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.4vw, 2.5rem);
+}
+
+.yk-contact-form-head > p:last-child {
+  margin: 0 0 2rem;
+  color: var(--color-mute);
+}
+
+.yk-form-row {
+  display: grid;
+  gap: 1.75rem;
+}
+
+@media (min-width: 768px) {
+  .yk-form-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.yk-contact-form form {
+  display: grid;
+  gap: 1.75rem;
+}
+
+.yk-field {
+  position: relative;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.yk-field label {
+  color: var(--color-mute);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: color 150ms;
+}
+
+.yk-field:focus-within label {
+  color: var(--color-neon-cyan);
+}
+
+.yk-field input,
+.yk-field select,
+.yk-field textarea {
+  width: 100%;
+  padding: 0.6rem 0;
+  border: 0;
+  border-bottom: 1px solid rgba(123, 47, 247, 0.55);
+  border-radius: 0;
+  background: transparent;
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  outline: none;
+}
+
+.yk-field textarea {
+  resize: vertical;
+}
+
+.yk-field select {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--color-neon-cyan) 50%),
+    linear-gradient(135deg, var(--color-neon-cyan) 50%, transparent 50%);
+  background-position: calc(100% - 12px) 55%, calc(100% - 6px) 55%;
+  background-repeat: no-repeat;
+  background-size: 6px 6px;
+  cursor: pointer;
+}
+
+.yk-field option {
+  background: var(--color-void-2);
+  color: var(--color-ink);
+}
+
+.yk-field ::placeholder {
+  color: var(--color-dim);
+}
+
+/* The neon underline that grows under the focused field. */
+.yk-field-line {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-neon-magenta), var(--color-neon-cyan));
+  box-shadow: 0 0 10px var(--color-neon-cyan);
+  transform: scaleX(0.001);
+  transform-origin: left;
+  transition: transform 400ms var(--ease-out-expo);
+}
+
+.yk-field:focus-within .yk-field-line {
+  transform: scaleX(1);
+}
+
+/* The underline is the focus indicator for these fields. */
+html[data-fx] .yk-field :focus-visible {
+  outline: none;
+}
+
+.yk-field input:user-invalid,
+.yk-field textarea:user-invalid {
+  border-bottom-color: var(--color-neon-warn);
+}
+
+.yk-contact-submit {
+  padding-top: 0.5rem;
+}

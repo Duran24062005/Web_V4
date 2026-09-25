@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Home from './home/Home'
+import PublicLayout from './experience/PublicLayout'
 import { LanguageLayout } from './i18n/LanguageLayout'
 import { LocalizedRedirect } from './i18n/LocalizedRedirect'
 import { RequireAuth } from './shared/components/RequireAuth'
@@ -30,12 +31,14 @@ function App() {
       <Routes>
         <Route path="/" element={<LocalizedRedirect />} />
         <Route path="/:lang/*" element={<LanguageLayout />}>
-          <Route index element={<Home />} />
-          <Route path="services" element={<Services />} />
-          <Route path="projects" element={<Projects />} />
-          <Route path="blog" element={<Blogs />} />
-          <Route path="blog/:id" element={<BlogDetail />} />
-          <Route path="contact" element={<Contact />} />
+          <Route element={<PublicLayout />}>
+            <Route index element={<Home />} />
+            <Route path="services" element={<Services />} />
+            <Route path="projects" element={<Projects />} />
+            <Route path="blog" element={<Blogs />} />
+            <Route path="blog/:id" element={<BlogDetail />} />
+            <Route path="contact" element={<Contact />} />
+          </Route>
           <Route element={<AuthLayout />}>
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />

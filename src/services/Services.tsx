@@ -1,187 +1,138 @@
+import { useRef } from 'react'
+import { gsap } from 'gsap'
 import { ArrowRight } from 'lucide-react'
-import { CuratedPageShell } from '../shared/components/CuratedPageShell'
+import { useScene } from '../experience/motion/useScene'
 import { useLanguage } from '../i18n/LanguageContext'
 import { LocalizedLink } from '../i18n/LocalizedLink'
 import { getCopy } from '../i18n/copy'
+import { CuratedPageShell } from '../shared/components/CuratedPageShell'
+import { PageHero } from '../shared/components/PageHero'
+import { NeonRouteLink } from '../shared/neon/NeonRouteLink'
 import { getServicesPageContent } from './services.content'
 
+type ServiceCard = ReturnType<typeof getServicesPageContent>['cards'][number]
+
+const ContractCard = ({
+  card,
+  index,
+  link,
+  wide = false,
+}: {
+  card: ServiceCard
+  index: number
+  link: { to: string; label: string }
+  wide?: boolean
+}) => {
+  const Icon = card.icon
+
+  return (
+    <article className={`yk-service ${wide ? 'is-wide' : ''}`.trim()}>
+      <div className="yk-service-copy">
+        <p className="yk-service-head" aria-hidden="true">
+          <span className="yk-service-icon">
+            <Icon />
+          </span>
+          <span className="hud-label">C-{String(index + 1).padStart(2, '0')}</span>
+        </p>
+        <h3>{card.title}</h3>
+        <p className="yk-service-desc">{card.description}</p>
+        {!wide ? (
+          <ul className="yk-service-features">
+            {card.features.map((feature) => (
+              <li key={feature}>{feature}</li>
+            ))}
+          </ul>
+        ) : null}
+        <LocalizedLink to={link.to} className="yk-hud-link">
+          {link.label}
+          <ArrowRight aria-hidden="true" />
+        </LocalizedLink>
+      </div>
+      {wide ? (
+        <div className="yk-service-media">
+          <img src="/image/setup.jpg" alt="Espacio de trabajo y desarrollo" loading="lazy" decoding="async" />
+        </div>
+      ) : null}
+    </article>
+  )
+}
+
+/**
+ * /services — the contract board. Cards swing open like doors (3D turn on their left edge),
+ * one after another; the closing call to action is stamped in.
+ */
 export const Services = () => {
   const { language } = useLanguage()
   const copy = getCopy(language)
-  const servicesPageContent = getServicesPageContent(language)
-  const FullStackIcon = servicesPageContent.cards[3].icon
-  const OptimizationIcon = servicesPageContent.cards[4].icon
+  const content = getServicesPageContent(language)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useScene(ref, (_root, { onEnter }) => {
+    gsap.from('.yk-service', {
+      rotationY: -85,
+      transformOrigin: '0% 50%',
+      transformPerspective: 1200,
+      autoAlpha: 0,
+      duration: 1,
+      ease: 'expo.out',
+      stagger: 0.12,
+      scrollTrigger: onEnter('.yk-service-grid', 'top 82%'),
+    })
+    gsap.from('.yk-page-cta', {
+      scale: 1.25,
+      rotation: -3,
+      autoAlpha: 0,
+      duration: 0.6,
+      ease: 'back.out(2)',
+      scrollTrigger: onEnter('.yk-page-cta', 'top 80%'),
+    })
+  })
+
+  const exploreLink = { to: '/contact', label: copy.common.exploreCapabilities }
 
   return (
     <CuratedPageShell activePath="/services">
-      <main className="mx-auto max-w-[1440px] overflow-hidden px-4 pb-24 pt-32 md:px-8">
-        <section className="relative mb-24 md:mb-32">
-          <div className="absolute -left-24 top-0 h-72 w-72 bg-[radial-gradient(circle,rgba(77,124,255,0.08),transparent_70%)]" />
+      <main className="yk-page">
+        <div ref={ref} className="wrap">
+          <PageHero
+            code="FILE // CONTRACT BOARD"
+            kana="契約書"
+            eyebrow={content.heroEyebrow}
+            titleLead={content.heroTitleLead}
+            titleAccent={content.heroTitleAccent}
+            body={content.heroBody}
+          />
 
-          <div className="grid items-end gap-12 lg:grid-cols-12">
-            <div className="lg:col-span-8">
-              <span className="mb-4 block font-label text-sm uppercase tracking-[0.3em] text-[var(--curated-accent)]">
-                {servicesPageContent.heroEyebrow}
-              </span>
-              <h1 className="font-headline text-5xl font-extrabold leading-[0.9] tracking-[-0.06em] md:text-7xl xl:text-8xl">
-                {servicesPageContent.heroTitleLead}
-                <br />
-                <span className="font-editorial font-normal italic text-[var(--curated-muted)]">
-                  {servicesPageContent.heroTitleAccent}
-                </span>
-              </h1>
-            </div>
+          <section className="yk-service-grid">
+            {content.cards.slice(0, 3).map((card, index) => (
+              <ContractCard key={card.title} card={card} index={index} link={exploreLink} />
+            ))}
+            <ContractCard
+              card={content.cards[3]}
+              index={3}
+              wide
+              link={{ to: '/projects', label: copy.common.viewRelatedProjects }}
+            />
+            <ContractCard card={content.cards[4]} index={4} link={{ to: '/contact', label: copy.common.letsTalk }} />
+          </section>
 
-            <div className="pb-2 lg:col-span-4">
-              <p className="font-editorial text-xl leading-relaxed text-[var(--curated-muted)] md:text-2xl">
-                {servicesPageContent.heroBody}
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {servicesPageContent.cards.slice(0, 3).map((service) => {
-            const Icon = service.icon
-
-            return (
-              <article
-                key={service.title}
-                className="group relative flex min-h-[420px] flex-col justify-between overflow-hidden bg-[var(--curated-surface)] p-10 transition-all duration-500 hover:bg-[var(--curated-surface-strong)]"
-              >
-                <div className="relative z-10">
-                  <div className="mb-8 inline-flex h-12 w-12 items-center justify-center rounded-full bg-[var(--curated-surface-lowest)] text-[var(--curated-accent)]">
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <h3 className="mb-4 font-headline text-3xl font-bold">{service.title}</h3>
-                  <p className="mb-8 font-editorial text-lg italic text-[var(--curated-muted)]">
-                    {service.description}
-                  </p>
-                  <ul className="mb-12 space-y-3 font-label text-sm text-[var(--curated-muted)]">
-                    {service.features.map((feature) => (
-                      <li key={feature} className="flex items-center gap-2">
-                        <span className="h-1.5 w-1.5 rounded-full bg-[var(--curated-accent)]" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="z-10 mt-auto">
-                  <LocalizedLink
-                    to="/contact"
-                    className="inline-flex items-center gap-2 font-label text-sm font-bold tracking-wide text-[var(--curated-accent)]"
-                  >
-                    {copy.common.exploreCapabilities.toUpperCase()}
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </LocalizedLink>
-                </div>
-
-                <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-[var(--curated-accent)] transition-all duration-700 group-hover:w-full" />
-              </article>
-            )
-          })}
-
-          <article className="group relative flex flex-col gap-12 overflow-hidden bg-[var(--curated-surface)] p-12 transition-all duration-500 hover:bg-[var(--curated-surface-strong)] lg:col-span-2 md:flex-row">
-            <div className="md:w-1/2">
-              <div className="mb-8 inline-flex h-12 w-12 items-center justify-center rounded-full bg-[var(--curated-surface-lowest)] text-[var(--curated-accent)]">
-                <FullStackIcon className="h-5 w-5" />
-              </div>
-              <h3 className="mb-6 font-headline text-4xl font-bold">
-                {servicesPageContent.cards[3].title}
-              </h3>
-              <p className="mb-8 font-editorial text-xl italic text-[var(--curated-muted)]">
-                {servicesPageContent.cards[3].description}
-              </p>
-              <LocalizedLink
-                to="/projects"
-                className="inline-flex items-center gap-2 font-label text-sm font-bold tracking-wide text-[var(--curated-accent)]"
-              >
-                {copy.common.viewRelatedProjects.toUpperCase()}
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </LocalizedLink>
-            </div>
-
-            <div className="relative min-h-[240px] overflow-hidden border border-[rgba(148,168,210,0.12)] md:w-1/2">
-              <img
-                src="/image/setup.jpg"
-                alt="Espacio de trabajo y desarrollo"
-                className="absolute inset-0 h-full w-full object-cover opacity-60 grayscale transition-all duration-1000 hover:grayscale-0"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--curated-surface)] via-transparent to-transparent" />
-            </div>
-
-            <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-[var(--curated-accent)] transition-all duration-700 group-hover:w-full" />
-          </article>
-
-          <article className="group relative flex min-h-[420px] flex-col justify-between overflow-hidden bg-[var(--curated-surface)] p-10 transition-all duration-500 hover:bg-[var(--curated-surface-strong)]">
-            <div className="relative z-10">
-              <div className="mb-8 inline-flex h-12 w-12 items-center justify-center rounded-full bg-[var(--curated-surface-lowest)] text-[var(--curated-accent)]">
-                <OptimizationIcon className="h-5 w-5" />
-              </div>
-              <h3 className="mb-4 font-headline text-3xl font-bold">
-                {servicesPageContent.cards[4].title}
-              </h3>
-              <p className="mb-8 font-editorial text-lg italic text-[var(--curated-muted)]">
-                {servicesPageContent.cards[4].description}
-              </p>
-              <ul className="mb-12 space-y-3 font-label text-sm text-[var(--curated-muted)]">
-                {servicesPageContent.cards[4].features.map((feature) => (
-                  <li key={feature} className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--curated-accent)]" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="z-10 mt-auto">
-              <LocalizedLink
-                to="/contact"
-                className="inline-flex items-center gap-2 font-label text-sm font-bold tracking-wide text-[var(--curated-accent)]"
-              >
-                {copy.common.letsTalk.toUpperCase()}
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </LocalizedLink>
-            </div>
-
-            <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-[var(--curated-accent)] transition-all duration-700 group-hover:w-full" />
-          </article>
-        </section>
-
-        <section className="relative mt-32 overflow-hidden bg-[var(--curated-surface)] px-8 py-20 text-center md:px-12 md:py-24">
-          <div className="absolute inset-0 opacity-40 [background:radial-gradient(circle_at_center,rgba(77,124,255,0.12),transparent_70%)]" />
-
-          <div className="relative z-10 mx-auto max-w-3xl">
-            <span className="mb-6 block font-label text-xs uppercase tracking-[0.3em] text-[var(--curated-muted)]">
-              {copy.common.nextStep}
-            </span>
-            <h2 className="mb-8 font-headline text-5xl font-bold tracking-[-0.05em] md:text-6xl">
-              {servicesPageContent.ctaTitleLead}{' '}
-              <span className="font-editorial font-normal italic text-[var(--curated-accent)]">
-                {servicesPageContent.ctaTitleAccent}
-              </span>{' '}
-              {servicesPageContent.ctaTitleTail}
+          <section className="yk-page-cta" aria-labelledby="services-cta-title">
+            <p className="hud-label text-neon-cyan">{copy.common.nextStep}</p>
+            <h2 id="services-cta-title">
+              {content.ctaTitleLead} <span className="text-neon-magenta">{content.ctaTitleAccent}</span>{' '}
+              {content.ctaTitleTail}
             </h2>
-            <p className="mb-12 font-editorial text-xl leading-relaxed text-[var(--curated-muted)]">
-              {servicesPageContent.ctaBody}
-            </p>
-            <div className="flex flex-col items-center justify-center gap-6 sm:flex-row">
-              <LocalizedLink
-                to="/contact"
-                className="bg-[var(--curated-accent)] px-10 py-4 font-label text-sm font-bold tracking-[0.14em] text-[var(--curated-accent-ink)] transition-all hover:shadow-[0_0_30px_rgba(77,124,255,0.2)]"
-              >
-                {copy.common.startConversation.toUpperCase()}
-              </LocalizedLink>
-              <LocalizedLink
-                to="/projects"
-                className="border border-[rgba(148,168,210,0.3)] px-10 py-4 font-label text-sm font-semibold text-[var(--curated-text)] transition-colors hover:bg-[var(--curated-surface-strong)]"
-              >
-                {copy.common.viewProjects.toUpperCase()}
-              </LocalizedLink>
+            <p>{content.ctaBody}</p>
+            <div className="yk-page-cta-actions">
+              <NeonRouteLink to="/contact" size="lg">
+                {copy.common.startConversation}
+              </NeonRouteLink>
+              <NeonRouteLink to="/projects" variant="ghost" size="lg">
+                {copy.common.viewProjects}
+              </NeonRouteLink>
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
       </main>
     </CuratedPageShell>
   )

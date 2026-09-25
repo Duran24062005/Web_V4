@@ -1,0 +1,1174 @@
+/* ==========================================================================
+   EP.01–EP.06 — home episodes. Shared kit (tags, links, holo, terminal, todo)
+   lives in src/styles/yako/kit.css.
+   ========================================================================== */
+
+.yk-episode {
+  position: relative;
+  padding: clamp(5rem, 11vw, 8.5rem) 0;
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  outline: none;
+}
+
+.yk-episode + .yk-episode::before {
+  position: absolute;
+  top: 0;
+  right: var(--gutter);
+  left: var(--gutter);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(123, 47, 247, 0.5), rgba(255, 43, 214, 0.35), transparent);
+  content: '';
+}
+
+/* ----- Episode title card ---------------------------------------------------- */
+
+.yk-ep-head {
+  position: relative;
+  isolation: isolate;
+  max-width: 64rem;
+  margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.yk-ep-bignum {
+  position: absolute;
+  z-index: -1;
+  top: -0.32em;
+  right: 0;
+  color: transparent;
+  font-family: var(--font-display);
+  font-size: clamp(7rem, 22vw, 15rem);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 0.8;
+  pointer-events: none;
+  -webkit-text-stroke: 1px rgba(123, 47, 247, 0.5);
+}
+
+.yk-ep-eyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0 0 1.2rem;
+  color: var(--color-mute);
+}
+
+.yk-ep-rule {
+  width: 3.5rem;
+  height: 1px;
+  background: var(--color-neon-magenta);
+  box-shadow: 0 0 8px var(--color-neon-magenta);
+  transform-origin: left;
+}
+
+.yk-ep-kana {
+  color: var(--color-neon-magenta);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+}
+
+.yk-ep-title {
+  margin: 0;
+  clip-path: polygon(-5% -20%, 125% -20%, 105% 120%, -25% 120%);
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5.2vw, 4.3rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+.yk-ep-desc {
+  max-width: 40rem;
+  margin: 1.25rem 0 0;
+  clip-path: inset(0% 0% 0% 0%);
+  color: var(--color-mute);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.yk-ep-aside {
+  margin-top: 1.25rem;
+}
+
+/* ----- EP.01 PROFILE: manga page ---------------------------------------------- */
+
+.yk-manga-page {
+  display: grid;
+  gap: 14px;
+}
+
+@media (min-width: 1024px) {
+  .yk-manga-page {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-areas:
+      'lead lead lead lead lead lead lead term term term term term'
+      'body body body body body body body term term term term term'
+      'hw hw hw hw hw mod mod mod mod mod mod mod';
+  }
+
+  .yk-panel-lead { grid-area: lead; }
+  .yk-panel-body { grid-area: body; }
+  .yk-panel-term { grid-area: term; }
+  .yk-panel-hardware { grid-area: hw; }
+  .yk-panel-modules { grid-area: mod; }
+}
+
+/* Each panel: a light ink border that follows its slanted cut (outer fill + inset inner fill). */
+.yk-manga-panel {
+  --shape: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  position: relative;
+  isolation: isolate;
+  padding: clamp(1.4rem, 3vw, 2.3rem);
+  clip-path: var(--shape);
+  background: rgba(236, 233, 255, 0.55);
+}
+
+.yk-manga-panel::before {
+  position: absolute;
+  z-index: -1;
+  inset: 2px;
+  clip-path: var(--shape);
+  background: var(--color-void-1);
+  content: '';
+}
+
+.yk-panel-lead {
+  --shape: polygon(0% 0%, 100% 0%, 97% 100%, 0% 100%);
+  padding-right: clamp(2rem, 5vw, 4rem);
+}
+
+/* Screentone in the lead panel's corner. */
+.yk-panel-lead::after {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  width: 55%;
+  height: 100%;
+  color: rgba(255, 43, 214, 0.35);
+  background-image: radial-gradient(currentColor 1px, transparent 1.5px);
+  background-size: 7px 7px;
+  content: '';
+  mask-image: linear-gradient(225deg, #000, transparent 60%);
+}
+
+.yk-panel-body {
+  --shape: polygon(0% 0%, 97% 0%, 100% 100%, 0% 100%);
+}
+
+.yk-panel-term {
+  --shape: polygon(3% 0%, 100% 0%, 100% 100%, 0% 100%);
+  padding-left: clamp(1.6rem, 3.5vw, 2.6rem);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.yk-panel-term::before {
+  background:
+    repeating-linear-gradient(to bottom, rgba(0, 240, 255, 0.035) 0 1px, transparent 1px 3px),
+    #09081a;
+}
+
+.yk-panel-hardware {
+  --shape: polygon(0% 0%, 100% 0%, 96% 100%, 0% 100%);
+}
+
+.yk-panel-modules {
+  --shape: polygon(4% 0%, 100% 0%, 100% 100%, 0% 100%);
+  padding-left: clamp(1.6rem, 4vw, 3rem);
+}
+
+@media (max-width: 1023px) {
+  .yk-manga-panel {
+    --shape: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+
+  .yk-panel-lead { --shape: polygon(0% 0%, 100% 0%, 100% 92%, 0% 100%); }
+  .yk-panel-body { --shape: polygon(0% 6%, 100% 0%, 100% 100%, 0% 100%); }
+}
+
+.yk-gogogo {
+  position: absolute;
+  top: 0.6rem;
+  right: 1.2rem;
+  color: rgba(123, 47, 247, 0.85);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  letter-spacing: -0.08em;
+  transform: rotate(8deg);
+}
+
+.yk-profile-lead {
+  max-width: 34ch;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.3vw, 1.9rem);
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.yk-panel-body p,
+.yk-panel-hardware > p {
+  margin: 0 0 1em;
+  color: var(--color-mute);
+  line-height: 1.7;
+}
+
+.yk-panel-body p:last-child {
+  margin-bottom: 0;
+}
+
+.yk-panel-hardware h3 {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+}
+
+.yk-neofetch-cmd {
+  margin: 0 0 1rem;
+}
+
+.yk-neofetch-grid {
+  display: grid;
+  gap: 1.1rem;
+}
+
+@media (min-width: 480px) {
+  .yk-neofetch-grid {
+    grid-template-columns: auto 1fr;
+  }
+}
+
+.yk-neofetch-logo {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+  background: linear-gradient(140deg, var(--color-neon-cyan), var(--color-neon-violet));
+  color: var(--color-on-neon);
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.yk-neofetch-info {
+  display: grid;
+  gap: 0.3rem;
+  margin: 0;
+}
+
+.yk-neofetch-info > div {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 0.5rem;
+}
+
+.yk-neofetch-info dt {
+  color: var(--color-neon-cyan);
+  font-weight: 700;
+}
+
+.yk-neofetch-info dt::after {
+  content: ':';
+}
+
+.yk-neofetch-info dd {
+  margin: 0;
+}
+
+.yk-neofetch-user {
+  display: block !important;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px dashed rgba(0, 240, 255, 0.3);
+  color: var(--color-neon-magenta);
+  font-weight: 700;
+}
+
+.yk-neofetch-swatches {
+  display: flex;
+  gap: 4px;
+  margin-top: 1.2rem;
+}
+
+.yk-neofetch-swatches span {
+  width: 1.4rem;
+  height: 0.9rem;
+  box-shadow: inset 0 0 0 1px rgba(236, 233, 255, 0.15);
+}
+
+.yk-spec-list {
+  display: grid;
+  gap: 0;
+  margin: 1rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+
+.yk-spec-list > div {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: 0.75rem;
+  padding: 0.45rem 0;
+  border-top: 1px dashed rgba(123, 47, 247, 0.35);
+}
+
+.yk-spec-list dt {
+  color: var(--color-mute);
+  text-transform: uppercase;
+}
+
+.yk-spec-list dd {
+  margin: 0;
+}
+
+.yk-modules {
+  display: grid;
+  gap: 1rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 768px) {
+  .yk-modules {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.yk-modules li {
+  padding-left: 1rem;
+  border-left: 2px solid var(--color-neon-magenta);
+}
+
+.yk-module-code {
+  margin: 0;
+  color: transparent;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  -webkit-text-stroke: 1px var(--color-neon-cyan);
+}
+
+.yk-modules h3 {
+  margin: 0.6rem 0 0.4rem;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+
+.yk-modules p:last-child {
+  margin: 0;
+  color: var(--color-mute);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+/* ----- EP.02 LOADOUT ------------------------------------------------------------- */
+
+.yk-loadout-grid {
+  display: grid;
+  gap: 1.5rem;
+  perspective: 1400px;
+}
+
+@media (min-width: 1024px) {
+  .yk-loadout-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+}
+
+.yk-loadout-column {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.yk-loadout-card {
+  --cut: 18px;
+  position: relative;
+  isolation: isolate;
+  clip-path: polygon(var(--cut) 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%, 0 var(--cut));
+  background: linear-gradient(150deg, rgba(0, 240, 255, 0.7), rgba(123, 47, 247, 0.6) 55%, rgba(255, 43, 214, 0.6));
+}
+
+.yk-loadout-card::before {
+  position: absolute;
+  z-index: -1;
+  inset: 1px;
+  clip-path: polygon(calc(var(--cut) - 0.5px) 0, 100% 0, 100% calc(100% - var(--cut) + 0.5px), calc(100% - var(--cut) + 0.5px) 100%, 0 100%, 0 calc(var(--cut) - 0.5px));
+  background: linear-gradient(170deg, #110e25, var(--color-void-1));
+  content: '';
+}
+
+.yk-loadout-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.yk-loadout-table caption {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.5rem 0.8rem;
+  padding: 1.15rem 1.25rem 1rem;
+  text-align: left;
+}
+
+.yk-loadout-code {
+  padding: 0.2rem 0.45rem;
+  background: var(--color-neon-cyan);
+  color: var(--color-on-neon);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.yk-loadout-layer {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.yk-loadout-count {
+  color: var(--color-mute);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.yk-xp {
+  position: relative;
+  grid-column: 1 / -1;
+  height: 7px;
+  overflow: hidden;
+  background: rgba(123, 47, 247, 0.25);
+}
+
+.yk-xp-fill {
+  display: block;
+  width: calc(var(--xp) * 100%);
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-neon-magenta), var(--color-neon-cyan));
+  box-shadow: 0 0 10px var(--color-neon-cyan);
+  transform-origin: left;
+}
+
+/* Segment ticks so the bar reads as an XP gauge. */
+.yk-xp::after {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(90deg, transparent 0 calc(10% - 2px), var(--color-void-1) calc(10% - 2px) 10%);
+  content: '';
+}
+
+.yk-loadout-row {
+  border-top: 1px dashed rgba(123, 47, 247, 0.3);
+}
+
+.yk-loadout-row th {
+  padding: 0.6rem 0.75rem 0.6rem 1.25rem;
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.yk-loadout-row th > span:last-child {
+  vertical-align: middle;
+}
+
+.yk-loadout-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  margin-right: 0.7rem;
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  color: var(--color-neon-cyan);
+  vertical-align: middle;
+}
+
+.yk-loadout-icon .brand-glyph {
+  display: inline-grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+.yk-loadout-row td {
+  padding: 0.6rem 1.25rem 0.6rem 0;
+  color: var(--color-mute);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.yk-loadout-ref {
+  display: none;
+  float: right;
+  margin-left: 0.75rem;
+  color: var(--color-dim);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+}
+
+@media (min-width: 640px) {
+  .yk-loadout-ref {
+    display: inline;
+  }
+}
+
+/* Phones: technology on one line, its usage underneath. */
+@media (max-width: 639px) {
+  .yk-loadout-row th,
+  .yk-loadout-row td {
+    display: block;
+  }
+
+  .yk-loadout-row th {
+    padding-bottom: 0.2rem;
+  }
+
+  .yk-loadout-row td {
+    padding: 0 1.25rem 0.7rem calc(1.25rem + 30px + 0.7rem);
+  }
+}
+
+.yk-loadout-row:hover th {
+  color: var(--color-neon-cyan);
+}
+
+/* ----- EP.03 MISSIONS -------------------------------------------------------------- */
+
+.yk-missions {
+  padding-bottom: clamp(3rem, 8vw, 5rem);
+}
+
+.yk-missions-track {
+  display: flex;
+  gap: 1.25rem;
+  padding: 0.5rem var(--gutter) 1.5rem;
+  overflow-x: auto;
+  scroll-padding-inline: var(--gutter);
+  scroll-snap-type: x mandatory;
+  scrollbar-color: var(--color-neon-violet) transparent;
+  scrollbar-width: thin;
+}
+
+.yk-mission {
+  flex: 0 0 min(86vw, 440px);
+  scroll-snap-align: start;
+}
+
+.yk-missions-progress {
+  display: none;
+}
+
+/* Desktop with motion: the stage pins and the track is driven by the scroll. */
+.yk-missions.is-pinned {
+  padding-bottom: 0;
+}
+
+.yk-missions.is-pinned .yk-missions-stage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  /* Top: HUD bar. Bottom: room for the episode dock. */
+  padding-top: var(--nav-height);
+  padding-bottom: 4.5rem;
+  overflow: hidden;
+}
+
+.yk-missions.is-pinned .yk-ep-head {
+  margin-bottom: 1.75rem;
+}
+
+.yk-missions.is-pinned .yk-ep-title {
+  font-size: clamp(2rem, 3.4vw, 3.1rem);
+}
+
+.yk-missions.is-pinned .yk-missions-track {
+  padding-right: 35vw;
+  padding-left: max(var(--gutter), calc((100vw - var(--max-width)) / 2));
+  overflow: visible;
+  will-change: transform;
+}
+
+.yk-missions.is-pinned .yk-mission {
+  flex-basis: 420px;
+}
+
+.yk-missions.is-pinned .yk-missions-progress {
+  display: block;
+  height: 2px;
+  margin: 0.5rem 0 0;
+  background: rgba(123, 47, 247, 0.3);
+}
+
+.yk-missions-progress span {
+  display: block;
+  height: 100%;
+  background: var(--color-neon-cyan);
+  box-shadow: 0 0 10px var(--color-neon-cyan);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.yk-mission-body {
+  --cut: 20px;
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  height: 100%;
+  padding: 1.3rem;
+  clip-path: polygon(var(--cut) 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%, 0 var(--cut));
+  background: linear-gradient(160deg, rgba(255, 43, 214, 0.75), rgba(123, 47, 247, 0.6) 50%, rgba(0, 240, 255, 0.6));
+}
+
+.yk-mission-body::before {
+  position: absolute;
+  z-index: -1;
+  inset: 1px;
+  clip-path: polygon(calc(var(--cut) - 0.5px) 0, 100% 0, 100% calc(100% - var(--cut) + 0.5px), calc(100% - var(--cut) + 0.5px) 100%, 0 100%, 0 calc(var(--cut) - 0.5px));
+  background: linear-gradient(175deg, #120f27, var(--color-void-1));
+  content: '';
+}
+
+.yk-mission-top {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  color: var(--color-mute);
+}
+
+.yk-mission-preview {
+  position: relative;
+  aspect-ratio: 16 / 8;
+  overflow: hidden;
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  background:
+    linear-gradient(rgba(123, 47, 247, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(123, 47, 247, 0.12) 1px, transparent 1px),
+    var(--color-void);
+  background-size: 18px 18px;
+}
+
+.yk-mission-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.yk-mission-preview-label {
+  position: absolute;
+  bottom: 0.45rem;
+  left: 0.6rem;
+  color: var(--color-dim);
+}
+
+@media (max-height: 900px) and (min-width: 1024px) {
+  .yk-missions.is-pinned .yk-mission-preview {
+    aspect-ratio: 16 / 5;
+  }
+
+  .yk-missions.is-pinned .yk-ep-desc {
+    display: none;
+  }
+}
+
+.yk-circuit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.8rem;
+  height: 100%;
+  padding: 1rem 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.yk-circuit-path {
+  margin: 0;
+  color: var(--color-neon-cyan);
+}
+
+.yk-circuit-chain {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.yk-circuit-chain li {
+  position: relative;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--color-neon-magenta);
+  box-shadow: 0 0 10px rgba(255, 43, 214, 0.3);
+  color: var(--color-ink);
+}
+
+/* Trace between nodes. */
+.yk-circuit-chain li + li::before {
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  width: 1.4rem;
+  height: 1px;
+  background: var(--color-neon-cyan);
+  box-shadow: 0 0 6px var(--color-neon-cyan);
+  content: '';
+}
+
+.yk-circuit-meta {
+  margin: 0;
+  color: var(--color-mute);
+}
+
+.yk-mission-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.yk-mission-spec {
+  margin: 0;
+}
+
+.yk-mission-spec > div {
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  gap: 0.6rem;
+  padding: 0.45rem 0;
+  border-top: 1px dashed rgba(123, 47, 247, 0.3);
+}
+
+.yk-mission-spec dt {
+  color: var(--color-mute);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  line-height: 1.9;
+  text-transform: uppercase;
+}
+
+.yk-mission-spec dd {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.yk-mission-links {
+  display: flex;
+  gap: 1.25rem;
+  margin-top: auto;
+  padding-top: 0.4rem;
+}
+
+.yk-missions-empty {
+  display: grid;
+  gap: 2rem;
+  padding: 2rem;
+  border: 1px dashed rgba(255, 230, 0, 0.45);
+}
+
+@media (min-width: 768px) {
+  .yk-missions-empty {
+    grid-template-columns: 1fr 1.4fr;
+    align-items: center;
+  }
+}
+
+.yk-empty-slots {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  list-style: none;
+}
+
+.yk-empty-slots li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.7rem 0.9rem;
+  border: 1px dashed rgba(123, 47, 247, 0.5);
+  color: var(--color-mute);
+}
+
+.yk-missions-empty h3 {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+}
+
+.yk-missions-empty p {
+  margin: 0 0 1.5rem;
+  color: var(--color-mute);
+}
+
+/* ----- EP.04 LOG ------------------------------------------------------------------------- */
+
+.yk-log-console {
+  position: relative;
+  padding: clamp(1.25rem, 3vw, 2.25rem);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  background:
+    repeating-linear-gradient(to bottom, rgba(0, 240, 255, 0.025) 0 1px, transparent 1px 3px),
+    rgba(12, 10, 26, 0.85);
+}
+
+.yk-log-cmd {
+  margin: 0 0 2.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
+
+.yk-log-cmd-text {
+  display: inline-block;
+}
+
+.yk-log-timeline {
+  position: relative;
+  padding-left: 2.5rem;
+}
+
+.yk-log-rail {
+  position: absolute;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  left: 0.7rem;
+  width: 2px;
+  background: rgba(123, 47, 247, 0.3);
+}
+
+.yk-log-rail-fill {
+  display: block;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--color-neon-cyan), var(--color-neon-magenta));
+  box-shadow: 0 0 10px var(--color-neon-cyan);
+  transform-origin: top;
+}
+
+.yk-log-list {
+  display: grid;
+  gap: 3rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.yk-log-entry {
+  position: relative;
+  display: grid;
+  gap: 0.8rem 2rem;
+}
+
+@media (min-width: 768px) {
+  .yk-log-entry {
+    grid-template-columns: 11rem minmax(0, 1fr);
+  }
+}
+
+.yk-log-node {
+  position: absolute;
+  top: 0.3rem;
+  left: calc(-2.5rem + 0.7rem - 6px);
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--color-neon-cyan);
+  background: var(--color-neon-cyan);
+  box-shadow: 0 0 12px var(--color-neon-cyan);
+  transform: rotate(45deg);
+  transition: background-color 300ms, border-color 300ms, box-shadow 300ms;
+}
+
+.yk-log-entry.is-dim .yk-log-node {
+  border-color: var(--color-neon-violet);
+  background: var(--color-void);
+  box-shadow: none;
+}
+
+.yk-log-meta {
+  color: var(--color-neon-cyan);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+
+.yk-log-meta p {
+  margin: 0;
+}
+
+.yk-log-months {
+  margin-top: 0.25rem !important;
+  color: var(--color-mute);
+}
+
+.yk-log-body h3 {
+  margin: 0 0 0.9rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.yk-log-at {
+  color: var(--color-neon-magenta);
+  font-weight: 500;
+}
+
+.yk-log-diff {
+  display: grid;
+  gap: 0.3rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.yk-log-diff li {
+  display: grid;
+  grid-template-columns: 1.4rem 1fr;
+  padding: 0.35rem 0.5rem;
+  color: var(--color-mute);
+  line-height: 1.55;
+}
+
+.yk-log-plus {
+  color: var(--color-neon-cyan);
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+/* ----- EP.05 CONTRACTS ------------------------------------------------------------------- */
+
+.yk-contracts {
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: 1024px) {
+  .yk-contracts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.yk-contract {
+  --rgb: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(123, 47, 247, 0.55);
+  background: linear-gradient(170deg, rgba(19, 16, 41, 0.95), rgba(7, 6, 15, 0.95));
+  text-shadow:
+    calc(var(--rgb) * -4px) 0 rgba(0, 240, 255, 0.75),
+    calc(var(--rgb) * 4px) 0 rgba(255, 43, 214, 0.75);
+}
+
+.yk-contract::before {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 38%;
+  height: 3px;
+  background: var(--color-neon-magenta);
+  box-shadow: 0 0 12px var(--color-neon-magenta);
+  content: '';
+}
+
+.yk-contract-req {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px dashed rgba(0, 240, 255, 0.3);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.yk-contract-method {
+  padding: 0.15rem 0.45rem;
+  background: var(--color-neon-magenta);
+  color: var(--color-on-neon);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.yk-contract-path {
+  color: var(--color-neon-cyan);
+}
+
+.yk-contract-status {
+  margin-left: auto;
+  color: var(--color-mute);
+  font-size: 0.72rem;
+}
+
+.yk-contract h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 700;
+}
+
+.yk-contract-desc {
+  margin: 0;
+  color: var(--color-mute);
+  line-height: 1.6;
+}
+
+.yk-contract-io {
+  display: grid;
+  gap: 0.8rem;
+  margin: auto 0 0;
+  padding-top: 0.6rem;
+}
+
+.yk-contract-io dt {
+  color: var(--color-neon-cyan);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.yk-contract-io dd {
+  margin: 0.25rem 0 0;
+  font-size: 0.92rem;
+}
+
+/* ----- EP.06 UPLINK ---------------------------------------------------------------------- */
+
+.yk-uplink {
+  padding-bottom: clamp(4rem, 9vw, 7rem);
+}
+
+.yk-uplink-stage {
+  position: relative;
+  padding: 1rem 0;
+  clip-path: circle(150% at 78% 42%);
+  background:
+    radial-gradient(ellipse 45% 55% at 78% 42%, rgba(255, 43, 214, 0.18), transparent 70%),
+    radial-gradient(ellipse 60% 60% at 20% 80%, rgba(123, 47, 247, 0.16), transparent 70%);
+}
+
+.yk-uplink-grid {
+  display: grid;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .yk-uplink-grid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  }
+}
+
+.yk-uplink .yk-ep-title {
+  font-size: clamp(2.4rem, 5.6vw, 4.8rem);
+}
+
+.yk-uplink-accent {
+  color: var(--color-neon-magenta);
+  text-shadow: 0 0 18px rgba(255, 43, 214, 0.55);
+}
+
+.yk-uplink .yk-ep-head {
+  margin-bottom: 1.5rem;
+}
+
+.yk-uplink-desc {
+  max-width: 36rem;
+  margin: 0 0 2rem;
+  color: var(--color-mute);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.yk-uplink-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.yk-socials {
+  margin-top: 2.5rem;
+}
+
+.yk-socials .hud-label {
+  margin: 0 0 0.8rem;
+  color: var(--color-mute);
+}
+
+.yk-socials ul {
+  display: flex;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.yk-social {
+  --cut: 8px;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  clip-path: polygon(var(--cut) 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%, 0 var(--cut));
+  background: rgba(123, 47, 247, 0.22);
+  color: var(--color-ink);
+  transition: background-color 150ms, color 150ms;
+}
+
+.yk-social:hover {
+  background: var(--color-neon-cyan);
+  color: var(--color-on-neon);
+}
+
+.yk-uplink-visual {
+  position: relative;
+  display: grid;
+  justify-items: center;
+}
+
+.yk-uplink-mascot {
+  position: relative;
+  z-index: 2;
+  width: min(52vw, 220px);
+  margin-bottom: -22px;
+}
+
+.yk-uplink-bubble {
+  position: absolute;
+  top: 2%;
+  right: -38%;
+  margin: 0;
+  padding: 0.45rem 0.8rem;
+  border-radius: 1rem 1rem 1rem 0.2rem;
+  background: var(--color-ink);
+  color: var(--color-void);
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.yk-uplink-terminal {
+  width: 100%;
+  max-width: 470px;
+  padding: 1rem 1.2rem 1.3rem;
+  border: 1px solid var(--color-neon-cyan);
+  background: rgba(12, 10, 26, 0.94);
+  box-shadow: var(--shadow-glow-cyan);
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+}

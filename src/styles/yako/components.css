@@ -1,0 +1,1317 @@
+/* ==========================================================================
+   DG-OS components: atmosphere, intro, cursor, HUD, dock, menu, palette,
+   buttons, panels, glitch. Tokens come from theme.css.
+   ========================================================================== */
+
+/* ----- Pre-hydration intro cover (see the inline script in index.html) --- */
+
+html[data-boot]::after {
+  position: fixed;
+  z-index: 190;
+  inset: 0;
+  background: var(--color-void);
+  content: '';
+  /* Failsafe: if the app never boots, the page shows up anyway. */
+  animation: yk-cover-failsafe 0s 15s forwards;
+}
+
+html[data-boot] body,
+html[data-scroll-lock] body {
+  overflow: hidden;
+}
+
+/* Hero title waits for its intro; visibility (not opacity) so GSAP owns opacity. */
+html[data-intro='pending'] .yk-hero-copy,
+html[data-intro='pending'] .yk-hero-visual,
+html[data-intro='pending'] .yk-metrics,
+html[data-intro='pending'] .yk-hero-marquee {
+  visibility: hidden;
+  animation: yk-reveal-failsafe 0s 15s forwards;
+}
+
+@keyframes yk-cover-failsafe {
+  to { visibility: hidden; }
+}
+
+@keyframes yk-reveal-failsafe {
+  to { visibility: visible; }
+}
+
+/* ----- Atmosphere ------------------------------------------------------- */
+
+.yk-atmos {
+  position: fixed;
+  z-index: 70;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.yk-atmos-grain {
+  position: absolute;
+  inset: -50%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+  opacity: 0.07;
+}
+
+.yk-atmos-scan {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.028) 0 1px, transparent 1px 3px);
+}
+
+.yk-atmos-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(7, 6, 15, 0.55) 100%);
+}
+
+html[data-fx='safe'] .yk-atmos-grain,
+html[data-motion='reduce'] .yk-atmos-grain {
+  animation: none;
+}
+
+/* ----- Skip link & focus ------------------------------------------------ */
+
+.skip-link {
+  z-index: 210;
+  background: var(--color-neon-cyan);
+  color: var(--color-on-neon);
+  font-family: var(--font-mono);
+  border-radius: 0;
+}
+
+/* data-fx is only set on public routes (ExperienceRuntime), so private pages keep their focus style. */
+html[data-fx] :focus-visible {
+  outline: 2px solid var(--color-neon-warn);
+  outline-offset: 3px;
+  border-radius: 0;
+}
+
+/* ----- Buttons -------------------------------------------------------------- */
+
+.yk-btn-shell {
+  display: inline-flex;
+  --glow: rgba(255, 43, 214, 0);
+  filter: drop-shadow(0 0 0 var(--glow)) drop-shadow(0 0 18px var(--glow));
+  transition: filter 250ms var(--ease-out-expo);
+  will-change: transform;
+}
+
+.yk-btn-shell:hover,
+.yk-btn-shell:focus-within {
+  --glow: rgba(255, 43, 214, 0.55);
+}
+
+.yk-btn-shell--ghost:hover,
+.yk-btn-shell--ghost:focus-within {
+  --glow: rgba(0, 240, 255, 0.45);
+}
+
+.yk-btn {
+  --cut: 12px;
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  min-height: 48px;
+  padding: 0 1.4rem;
+  border: 0;
+  clip-path: polygon(var(--cut) 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%, 0 var(--cut));
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 160ms var(--ease-out-expo), background-color 200ms, color 200ms;
+}
+
+.yk-btn:active {
+  transform: scale(0.96);
+}
+
+.yk-btn svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+
+.yk-btn--lg {
+  min-height: 56px;
+  padding: 0 1.8rem;
+  font-size: 0.9rem;
+}
+
+.yk-btn--sm {
+  --cut: 8px;
+  min-height: 36px;
+  padding: 0 0.9rem;
+  font-size: 0.72rem;
+}
+
+.yk-btn--primary {
+  background: var(--color-neon-magenta);
+  color: var(--color-on-neon);
+}
+
+.yk-btn--primary:hover {
+  background: #ff5fe0;
+}
+
+.yk-btn--warn {
+  background: var(--color-neon-warn);
+  color: var(--color-on-neon);
+}
+
+/* Ghost: a 1px edge that follows the bevel, drawn as an outer fill + inset inner fill. */
+.yk-btn--ghost {
+  background: var(--color-neon-cyan);
+  color: var(--color-neon-cyan);
+}
+
+.yk-btn--ghost::before {
+  position: absolute;
+  z-index: -1;
+  inset: 1px;
+  clip-path: polygon(calc(var(--cut) - 0.5px) 0, 100% 0, 100% calc(100% - var(--cut) + 0.5px), calc(100% - var(--cut) + 0.5px) 100%, 0 100%, 0 calc(var(--cut) - 0.5px));
+  background: var(--color-void-1);
+  content: '';
+  transition: background-color 200ms;
+}
+
+.yk-btn--ghost:hover::before {
+  background: rgba(0, 240, 255, 0.12);
+}
+
+.yk-btn--ghost:hover {
+  color: var(--color-ink);
+}
+
+/* Label with RGB-split ghosts on hover. */
+.yk-btn-label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.yk-btn-label::before,
+.yk-btn-label::after {
+  position: absolute;
+  inset: 0;
+  content: attr(data-text);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.yk-btn-label::before {
+  color: var(--color-neon-cyan);
+}
+
+.yk-btn-label::after {
+  color: var(--color-neon-warn);
+}
+
+.yk-btn--ghost .yk-btn-label::after {
+  color: var(--color-neon-magenta);
+}
+
+.yk-btn:hover .yk-btn-label::before {
+  opacity: 0.9;
+  animation: yk-rgb-a 420ms steps(2) 1;
+}
+
+.yk-btn:hover .yk-btn-label::after {
+  opacity: 0.9;
+  animation: yk-rgb-b 420ms steps(2) 1;
+}
+
+.yk-btn:hover .yk-btn-label::before,
+.yk-btn:hover .yk-btn-label::after {
+  animation-fill-mode: forwards;
+}
+
+@keyframes yk-rgb-a {
+  0% { transform: translate(-3px, -1px); clip-path: inset(0 0 55% 0); }
+  50% { transform: translate(2px, 1px); clip-path: inset(45% 0 0 0); }
+  100% { transform: none; opacity: 0; }
+}
+
+@keyframes yk-rgb-b {
+  0% { transform: translate(3px, 1px); clip-path: inset(50% 0 0 0); }
+  50% { transform: translate(-2px, 0); clip-path: inset(0 0 60% 0); }
+  100% { transform: none; opacity: 0; }
+}
+
+/* ----- HUD panel ------------------------------------------------------------ */
+
+.yk-panel {
+  --cut: 16px;
+  --edge: var(--color-neon-cyan);
+  position: relative;
+  isolation: isolate;
+  padding: 1.25rem;
+  background: color-mix(in srgb, var(--edge) 55%, transparent);
+  clip-path: polygon(var(--cut) 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%, 0 var(--cut));
+}
+
+.yk-panel::before {
+  position: absolute;
+  z-index: -1;
+  inset: 1px;
+  clip-path: polygon(calc(var(--cut) - 0.5px) 0, 100% 0, 100% calc(100% - var(--cut) + 0.5px), calc(100% - var(--cut) + 0.5px) 100%, 0 100%, 0 calc(var(--cut) - 0.5px));
+  background: linear-gradient(160deg, rgba(19, 16, 41, 0.92), rgba(7, 6, 15, 0.94));
+  content: '';
+}
+
+.yk-panel--magenta {
+  --edge: var(--color-neon-magenta);
+}
+
+.yk-panel--violet {
+  --edge: var(--color-neon-violet);
+}
+
+.yk-panel-tab {
+  display: inline-block;
+  margin: -0.35rem 0 0.9rem;
+  color: var(--edge);
+}
+
+/* ----- Glitch text (hover, or idle with .yk-glitch--idle) --------------------- */
+
+.yk-glitch {
+  position: relative;
+  display: inline-block;
+}
+
+.yk-glitch::before,
+.yk-glitch::after {
+  position: absolute;
+  inset: 0;
+  content: attr(data-text);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.yk-glitch::before {
+  color: var(--color-neon-cyan);
+  transform: translate(-0.04em, 0);
+  mix-blend-mode: screen;
+}
+
+.yk-glitch::after {
+  color: var(--color-neon-violet);
+  transform: translate(0.04em, 0);
+  mix-blend-mode: screen;
+}
+
+.yk-glitch:hover::before,
+.yk-glitch--idle::before {
+  opacity: 0.75;
+  animation: glitch-shift 3.1s steps(1) infinite;
+}
+
+.yk-glitch:hover::after,
+.yk-glitch--idle::after {
+  opacity: 0.75;
+  animation: glitch-shift 2.6s steps(1) infinite reverse;
+}
+
+html[data-fx='safe'] .yk-glitch::before,
+html[data-fx='safe'] .yk-glitch::after,
+html[data-fx='safe'] .yk-btn-label::before,
+html[data-fx='safe'] .yk-btn-label::after {
+  display: none;
+}
+
+.yk-vertical {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+}
+
+.yk-sfx-text {
+  display: inline-block;
+  font-family: var(--font-brush);
+  line-height: 1;
+  pointer-events: none;
+}
+
+/* ----- Intro ------------------------------------------------------------------ */
+
+.yk-boot {
+  position: fixed;
+  z-index: 200;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  color: var(--color-ink);
+  outline: none;
+}
+
+.yk-boot-half {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 60%, rgba(123, 47, 247, 0.22), transparent 60%),
+    var(--color-void);
+}
+
+.yk-boot-half--a {
+  clip-path: polygon(0 0, 100% 0, 100% 38%, 0 62%);
+}
+
+.yk-boot-half--b {
+  clip-path: polygon(0 62%, 100% 38%, 100% 100%, 0 100%);
+}
+
+.yk-boot-slash {
+  position: absolute;
+  top: 50%;
+  left: -10%;
+  width: 120%;
+  height: 3px;
+  background: var(--color-neon-magenta);
+  box-shadow: 0 0 24px var(--color-neon-magenta);
+  transform: rotate(-9deg) scaleX(0);
+  transform-origin: left center;
+}
+
+.yk-boot-content {
+  position: relative;
+  width: min(92vw, 760px);
+}
+
+.yk-boot-skip {
+  position: absolute;
+  z-index: 2;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid rgba(167, 163, 204, 0.35);
+  background: transparent;
+  color: var(--color-mute);
+  cursor: pointer;
+}
+
+.yk-boot-skip:hover {
+  border-color: var(--color-neon-cyan);
+  color: var(--color-neon-cyan);
+}
+
+.yk-boot-log {
+  font-family: var(--font-mono);
+  font-size: clamp(0.75rem, 2.4vw, 0.95rem);
+  color: var(--color-mute);
+}
+
+.yk-boot-log ol {
+  display: grid;
+  gap: 0.35rem;
+  min-height: 11em;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  list-style: none;
+}
+
+.yk-boot-log li:first-child {
+  color: var(--color-neon-cyan);
+}
+
+.yk-boot-progress {
+  display: block;
+  height: 4px;
+  background: rgba(123, 47, 247, 0.25);
+}
+
+.yk-boot-progress span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-neon-violet), var(--color-neon-cyan));
+  box-shadow: 0 0 12px var(--color-neon-cyan);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.yk-boot-card {
+  text-align: center;
+}
+
+.yk-boot-title {
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 14vw, 8.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+  perspective: 600px;
+}
+
+.yk-boot-letter {
+  position: relative;
+  display: inline-block;
+  text-shadow: 0 0 22px rgba(0, 240, 255, 0.45);
+}
+
+.yk-boot-letter::before,
+.yk-boot-letter::after {
+  position: absolute;
+  inset: 0;
+  content: attr(data-text);
+  mix-blend-mode: screen;
+}
+
+.yk-boot-letter::before {
+  color: var(--color-neon-magenta);
+  transform: translateX(-0.035em);
+}
+
+.yk-boot-letter::after {
+  color: var(--color-neon-cyan);
+  transform: translateX(0.035em);
+}
+
+html[data-fx='safe'] .yk-boot-letter::before,
+html[data-fx='safe'] .yk-boot-letter::after {
+  display: none;
+}
+
+.yk-boot-sub {
+  margin: 1rem 0 0;
+  color: var(--color-mute);
+}
+
+.yk-boot-ready {
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+.yk-boot-start {
+  padding: 0.9rem 2.2rem;
+  border: 0;
+  background: transparent;
+  color: var(--color-neon-warn);
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 5vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-shadow: 0 0 18px rgba(255, 230, 0, 0.55);
+}
+
+.yk-boot-start-label {
+  animation: yk-start-pulse 1.2s ease-in-out infinite;
+}
+
+html[data-fx='safe'] .yk-boot-start-label {
+  animation: none;
+}
+
+@keyframes yk-start-pulse {
+  50% { opacity: 0.35; }
+}
+
+.yk-boot-continue {
+  margin: 0;
+  color: var(--color-mute);
+}
+
+.yk-boot-options {
+  display: grid;
+  justify-items: center;
+  gap: 0.9rem;
+  margin-top: 0.75rem;
+}
+
+.yk-boot-toggle {
+  display: inline-flex;
+  border: 1px solid rgba(0, 240, 255, 0.4);
+}
+
+.yk-boot-toggle button,
+.yk-boot-warning button {
+  padding: 0.55rem 0.9rem;
+  border: 0;
+  background: transparent;
+  color: var(--color-mute);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.yk-boot-toggle button[aria-pressed='true'] {
+  background: var(--color-neon-cyan);
+  color: var(--color-on-neon);
+}
+
+.yk-boot-warning {
+  max-width: 34rem;
+  margin: 0;
+  color: var(--color-mute);
+  font-size: 0.85rem;
+}
+
+.yk-boot-warning button {
+  padding: 0.2rem 0.4rem;
+  border-bottom: 1px solid var(--color-neon-warn);
+  color: var(--color-neon-warn);
+}
+
+.yk-boot-warning button[aria-pressed='true'] {
+  background: var(--color-neon-warn);
+  color: var(--color-on-neon);
+}
+
+/* ----- Cursor -------------------------------------------------------------------- */
+
+html[data-cursor='on'],
+html[data-cursor='on'] body,
+html[data-cursor='on'] a,
+html[data-cursor='on'] button,
+html[data-cursor='on'] [role='option'] {
+  cursor: none;
+}
+
+html[data-cursor='on'] :is(input, textarea, select) {
+  cursor: auto;
+}
+
+.yk-cursor {
+  position: fixed;
+  z-index: 220;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+.yk-cursor.is-visible {
+  opacity: 1;
+}
+
+.yk-cursor.is-text {
+  opacity: 0;
+}
+
+.yk-cursor > span {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.yk-cursor-dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  background: var(--color-neon-cyan);
+  box-shadow: 0 0 10px var(--color-neon-cyan);
+}
+
+.yk-cursor-ring {
+  --c: var(--color-neon-cyan);
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  /* Four HUD corner brackets. */
+  background:
+    linear-gradient(var(--c) 0 0) top left / 10px 2px no-repeat,
+    linear-gradient(var(--c) 0 0) top left / 2px 10px no-repeat,
+    linear-gradient(var(--c) 0 0) top right / 10px 2px no-repeat,
+    linear-gradient(var(--c) 0 0) top right / 2px 10px no-repeat,
+    linear-gradient(var(--c) 0 0) bottom left / 10px 2px no-repeat,
+    linear-gradient(var(--c) 0 0) bottom left / 2px 10px no-repeat,
+    linear-gradient(var(--c) 0 0) bottom right / 10px 2px no-repeat,
+    linear-gradient(var(--c) 0 0) bottom right / 2px 10px no-repeat;
+  filter: drop-shadow(0 0 4px var(--c));
+  transition: width 220ms var(--ease-out-expo), height 220ms var(--ease-out-expo), margin 220ms var(--ease-out-expo);
+}
+
+.yk-cursor.is-hover .yk-cursor-ring {
+  --c: var(--color-neon-magenta);
+  width: 52px;
+  height: 52px;
+  margin: -26px 0 0 -26px;
+}
+
+.yk-cursor.is-press .yk-cursor-ring {
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
+}
+
+.yk-cursor-trail {
+  width: 4px;
+  height: 4px;
+  margin: -2px 0 0 -2px;
+  background: var(--color-neon-magenta);
+  opacity: calc(0.55 - var(--i) * 0.07);
+  box-shadow: 0 0 8px var(--color-neon-magenta);
+}
+
+/* ----- HUD top bar -------------------------------------------------------------- */
+
+.yk-hud {
+  position: fixed;
+  z-index: 80;
+  inset: 0 0 auto;
+  pointer-events: none;
+}
+
+.yk-hud-progress {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  background: rgba(123, 47, 247, 0.25);
+}
+
+.yk-hud-progress span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-neon-magenta), var(--color-neon-cyan));
+  box-shadow: 0 0 10px var(--color-neon-cyan);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.yk-hud-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  height: var(--nav-height);
+  padding: 0 var(--gutter);
+  background: linear-gradient(to bottom, rgba(7, 6, 15, 0.92), rgba(7, 6, 15, 0.55) 70%, transparent);
+  pointer-events: auto;
+}
+
+.yk-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.yk-brand-mark {
+  --cut: 7px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  clip-path: polygon(var(--cut) 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%, 0 var(--cut));
+  background: var(--color-neon-cyan);
+  color: var(--color-on-neon);
+  font-size: 0.8rem;
+  letter-spacing: 0;
+  transition: background-color 200ms;
+}
+
+.yk-brand:hover .yk-brand-mark {
+  background: var(--color-neon-magenta);
+}
+
+.yk-brand-kana {
+  color: var(--color-neon-magenta);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+}
+
+.yk-hud-episode {
+  display: none;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 auto;
+  color: var(--color-mute);
+}
+
+.yk-hud-episode-code {
+  color: var(--color-ink);
+}
+
+.yk-hud-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.yk-hud-episode + .yk-hud-actions {
+  margin-left: 0;
+}
+
+.yk-hud-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 0.7rem;
+  border: 1px solid rgba(123, 47, 247, 0.55);
+  background: rgba(12, 10, 26, 0.75);
+  color: var(--color-mute);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-decoration: none;
+  transition: border-color 150ms, color 150ms, background-color 150ms;
+}
+
+.yk-hud-button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.yk-hud-button:hover,
+.yk-hud-button[aria-expanded='true'] {
+  border-color: var(--color-neon-cyan);
+  color: var(--color-neon-cyan);
+}
+
+.yk-hud-button .kbd {
+  border-color: rgba(123, 47, 247, 0.6);
+  background: transparent;
+  color: var(--color-mute);
+}
+
+.yk-lang {
+  display: inline-flex;
+  height: 40px;
+  border: 1px solid rgba(123, 47, 247, 0.55);
+}
+
+.yk-lang-button {
+  padding: 0 0.6rem;
+  border: 0;
+  background: transparent;
+  color: var(--color-dim);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.yk-lang-button.is-active {
+  background: var(--color-neon-violet);
+  color: var(--color-ink);
+}
+
+.yk-menu-toggle {
+  display: inline-flex;
+}
+
+/* Utilities from Tailwind sit in a cascade layer, so responsive display rules for these
+   unlayered components live here. */
+@media (max-width: 767px) {
+  .yk-hud-dashboard {
+    display: none;
+  }
+}
+
+/* Touch screens get a search icon; keyboards get the shortcut. */
+.yk-palette-trigger .kbd {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .yk-palette-trigger .kbd {
+    display: inline-flex;
+  }
+
+  .yk-palette-trigger > svg {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .yk-menu-toggle {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .yk-hud-episode {
+    display: inline-flex;
+  }
+}
+
+@media (max-width: 479px) {
+  .yk-brand-name,
+  .yk-brand-kana {
+    display: none;
+  }
+}
+
+/* Sound toggle with a 4-bar visualizer. */
+.yk-sound[aria-pressed='true'] {
+  border-color: var(--color-neon-magenta);
+  color: var(--color-neon-magenta);
+}
+
+.yk-sound-bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+}
+
+.yk-sound-bars span {
+  width: 3px;
+  height: 30%;
+  background: currentColor;
+  transform-origin: bottom;
+}
+
+.yk-sound[aria-pressed='true'] .yk-sound-bars span {
+  height: 100%;
+  animation: yk-eq 0.9s ease-in-out infinite alternate;
+}
+
+.yk-sound-bars span:nth-child(2) { animation-delay: -0.3s !important; }
+.yk-sound-bars span:nth-child(3) { animation-delay: -0.6s !important; }
+.yk-sound-bars span:nth-child(4) { animation-delay: -0.15s !important; }
+
+@keyframes yk-eq {
+  0% { transform: scaleY(0.2); }
+  100% { transform: scaleY(1); }
+}
+
+html[data-motion='reduce'] .yk-sound-bars span {
+  animation: none !important;
+  transform: scaleY(0.6);
+}
+
+.yk-sound-state {
+  min-width: 3ch;
+}
+
+@media (max-width: 479px) {
+  .yk-sound-state {
+    display: none;
+  }
+}
+
+/* System panel. */
+.yk-sys {
+  position: relative;
+}
+
+.yk-sys-panel {
+  --cut: 14px;
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  display: grid;
+  gap: 0.9rem;
+  width: min(320px, calc(100vw - 2 * var(--gutter)));
+  padding: 1.1rem;
+  border: 1px solid var(--color-neon-cyan);
+  background: rgba(12, 10, 26, 0.97);
+  box-shadow: var(--shadow-glow-cyan);
+  color: var(--color-ink);
+  font-size: 0.9rem;
+}
+
+.yk-sys-panel .hud-label {
+  margin: 0;
+}
+
+.yk-switch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.yk-switch-track {
+  position: relative;
+  flex: none;
+  width: 40px;
+  height: 20px;
+  border: 1px solid var(--color-dim);
+  transition: border-color 150ms, background-color 150ms;
+}
+
+.yk-switch-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 12px;
+  height: 12px;
+  background: var(--color-dim);
+  transition: transform 180ms var(--ease-out-expo), background-color 150ms;
+}
+
+.yk-switch[aria-checked='true'] .yk-switch-track {
+  border-color: var(--color-neon-cyan);
+  background: rgba(0, 240, 255, 0.12);
+}
+
+.yk-switch[aria-checked='true'] .yk-switch-thumb {
+  background: var(--color-neon-cyan);
+  transform: translateX(20px);
+}
+
+.yk-range {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.yk-range span {
+  display: flex;
+  justify-content: space-between;
+}
+
+.yk-range input {
+  width: 100%;
+  accent-color: var(--color-neon-magenta);
+}
+
+.yk-range input:disabled {
+  opacity: 0.4;
+}
+
+.yk-sys-replay {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-self: start;
+  padding: 0.5rem 0.75rem;
+  border: 1px dashed var(--color-neon-violet);
+  background: none;
+  color: var(--color-mute);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.yk-sys-replay:hover {
+  color: var(--color-neon-cyan);
+}
+
+.yk-sys-replay svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ----- Episode dock (primary nav, ≥768px) ------------------------------------------------ */
+
+.yk-dock {
+  position: fixed;
+  z-index: 80;
+  bottom: 1.1rem;
+  left: 50%;
+  display: none;
+  transform: translateX(-50%);
+}
+
+@media (min-width: 768px) {
+  .yk-dock {
+    display: block;
+  }
+}
+
+.yk-dock ul {
+  --cut: 14px;
+  display: flex;
+  gap: 2px;
+  margin: 0;
+  padding: 5px;
+  list-style: none;
+  clip-path: polygon(var(--cut) 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%, 0 var(--cut));
+  background: rgba(12, 10, 26, 0.85);
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 0 0 1px rgba(123, 47, 247, 0.5);
+}
+
+.yk-dock-link {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  padding: 0.6rem 0.85rem;
+  color: var(--color-mute);
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 150ms, background-color 150ms;
+}
+
+.yk-dock-link .yk-ep-num {
+  color: var(--color-dim);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+}
+
+.yk-dock-link:hover {
+  background: rgba(123, 47, 247, 0.2);
+  color: var(--color-ink);
+}
+
+.yk-dock-link[aria-current='true'] {
+  background: rgba(0, 240, 255, 0.1);
+  color: var(--color-neon-cyan);
+}
+
+.yk-dock-link[aria-current='true'] .yk-ep-num {
+  color: var(--color-neon-magenta);
+}
+
+.yk-dock-link[aria-current='true']::after {
+  position: absolute;
+  right: 0.85rem;
+  bottom: 0.3rem;
+  left: 0.85rem;
+  height: 2px;
+  background: var(--color-neon-cyan);
+  box-shadow: 0 0 10px var(--color-neon-cyan);
+  content: '';
+}
+
+/* ----- Fullscreen menu (<768px) ---------------------------------------------------------------- */
+
+.yk-menu {
+  position: fixed;
+  z-index: 75;
+  inset: 0;
+  display: grid;
+  align-items: center;
+  padding: calc(var(--nav-height) + 1rem) var(--gutter) 2rem;
+  overflow: auto;
+  background: var(--color-void);
+}
+
+.yk-menu-slash {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(115deg, transparent 0 58%, var(--color-neon-magenta) 58% 60%, transparent 60%),
+    linear-gradient(115deg, transparent 0 63%, rgba(123, 47, 247, 0.35) 63% 100%);
+  pointer-events: none;
+}
+
+.yk-menu-nav {
+  position: relative;
+}
+
+.yk-menu-nav ul {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.yk-menu-link {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr auto;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid rgba(123, 47, 247, 0.3);
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 9vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.05;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.yk-menu-link .yk-ep-num {
+  color: var(--color-neon-cyan);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.yk-menu-link .yk-ep-kana {
+  color: var(--color-neon-magenta);
+  font-size: 0.8rem;
+}
+
+.yk-menu-link[aria-current='true'] {
+  color: var(--color-neon-cyan);
+}
+
+/* ----- Command palette ------------------------------------------------------------------ */
+
+.palette-backdrop {
+  position: fixed;
+  z-index: 190;
+  inset: 0;
+  display: grid;
+  align-items: start;
+  justify-items: center;
+  padding: 12vh var(--gutter) 2rem;
+  background: rgba(7, 6, 15, 0.72);
+  backdrop-filter: blur(6px);
+}
+
+.palette {
+  --cut: 18px;
+  width: min(640px, 100%);
+  overflow: hidden;
+  clip-path: polygon(var(--cut) 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%, 0 var(--cut));
+  background:
+    repeating-linear-gradient(to bottom, rgba(0, 240, 255, 0.035) 0 1px, transparent 1px 3px),
+    rgba(12, 10, 26, 0.97);
+  box-shadow: inset 0 0 0 1px var(--color-neon-cyan);
+  color: var(--color-ink);
+  animation: yk-palette-in 280ms var(--ease-out-expo);
+}
+
+@keyframes yk-palette-in {
+  from { opacity: 0; transform: translateY(-10px) scaleY(0.92); }
+}
+
+.palette-title {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0.6rem 1rem;
+  background: var(--color-neon-cyan);
+  color: var(--color-on-neon);
+}
+
+.palette-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.25);
+}
+
+.palette-prompt {
+  color: var(--color-neon-magenta);
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+.palette-input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  outline: none;
+}
+
+/* The row already reads as the focused field; a second ring would be noise. */
+html[data-fx] .palette-input:focus-visible {
+  outline: none;
+}
+
+.palette-input::placeholder {
+  color: var(--color-dim);
+}
+
+.palette-list {
+  max-height: min(56vh, 420px);
+  margin: 0;
+  padding: 0.4rem;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.palette-group {
+  padding: 0.7rem 0.6rem 0.35rem;
+  color: var(--color-neon-violet);
+  font-family: var(--font-mono);
+  font-size: var(--text-hud);
+  letter-spacing: var(--text-hud--letter-spacing);
+  text-transform: uppercase;
+  filter: brightness(1.5);
+}
+
+.palette-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.7rem;
+  color: var(--color-mute);
+  cursor: pointer;
+}
+
+.palette-item svg {
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+
+.palette-item[aria-selected='true'] {
+  background: linear-gradient(90deg, rgba(255, 43, 214, 0.22), transparent);
+  box-shadow: inset 2px 0 0 var(--color-neon-magenta);
+  color: var(--color-ink);
+}
+
+.palette-item-hint {
+  margin-left: auto;
+  color: var(--color-dim);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+
+.palette-item[aria-selected='true'] .palette-item-hint {
+  color: var(--color-neon-cyan);
+}
+
+.palette-empty {
+  padding: 1.5rem 1rem;
+  color: var(--color-mute);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
+
+.palette-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0.6rem 1rem;
+  border-top: 1px solid rgba(0, 240, 255, 0.2);
+  color: var(--color-dim);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+
+.palette-footer span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.palette .kbd {
+  border-color: rgba(0, 240, 255, 0.35);
+  background: transparent;
+  color: var(--color-mute);
+}
+
+/* Grid overlay recoloured for the neon palette. */
+.grid-overlay span {
+  background: rgba(0, 240, 255, 0.05);
+  box-shadow: inset 1px 0 0 rgba(0, 240, 255, 0.25), inset -1px 0 0 rgba(0, 240, 255, 0.25);
+}
