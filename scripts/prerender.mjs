@@ -24,7 +24,7 @@ const setAttr = (html, pattern, value) => {
 
 const assets = await readdir(path.join(dist, 'assets'))
 const fontPreloads = assets
-  .filter((file) => /^(geist|jetbrains-mono)-latin-wght-normal-.*\.woff2$/.test(file))
+  .filter((file) => /^(chakra-petch-latin-700-normal|jetbrains-mono-latin-wght-normal)-.*\.woff2$/.test(file))
   .map((file) => `<link rel="preload" href="/assets/${file}" as="font" type="font/woff2" crossorigin />`)
   .join('\n    ')
 

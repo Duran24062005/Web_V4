@@ -6,6 +6,7 @@ import { stripLanguageFromPath } from '../../i18n/utils'
 import { useDocumentMeta } from '../hooks/useDocumentMeta'
 import { SiteFooter } from './SiteFooter'
 import { SiteNav } from './SiteNav'
+import '../../styles/yako/pages.css'
 
 interface CuratedPageShellProps {
   /** Kept for the existing call sites; the shared nav links to home sections. */
